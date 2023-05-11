@@ -12,7 +12,7 @@ public class Test extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ed_Scene.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 600);
-        stage.setTitle("Hello!");
+        stage.setTitle("Test What you what");
         stage.setScene(scene);
         stage.show();
     }
