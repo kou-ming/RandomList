@@ -178,7 +178,7 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fileChooser.setInitialDirectory(new File("C:"));
+        fileChooser.setInitialDirectory(new File("C:\\Users\\user\\Downloads"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         channel.setCellValueFactory(new PropertyValueFactory<>("channel"));
         duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
