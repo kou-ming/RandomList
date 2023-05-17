@@ -30,7 +30,7 @@ import java.util.Scanner;
 public class HelloController implements Initializable {
 
 
-    static public ArrayList<Song> songslist = new ArrayList<>();
+    static public ArrayList<Song> songslist = new ArrayList<>();    //儲存歌曲的arraylist
     static public ObservableList<Song> List = FXCollections.observableArrayList();
 
     public String path = "C:";
@@ -142,10 +142,10 @@ public class HelloController implements Initializable {
     void chscene_ediror(ActionEvent event) throws IOException{
         System.out.println("change");
         Parent root = FXMLLoader.load(getClass().getResource("ed_Scene.fxml"));
-        Stage stage2 = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene2 = new Scene(root);
-        stage2.setScene(scene2);
-        stage2.show();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 

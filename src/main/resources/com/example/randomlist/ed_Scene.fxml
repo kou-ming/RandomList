@@ -37,7 +37,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.EditController">
+<AnchorPane fx:id="bt_" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.EditController">
    <children>
       <Text layoutX="48.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="編輯各項資訊">
          <font>
@@ -45,6 +45,11 @@
          </font>
       </Text>
       <Button fx:id="bt_random" layoutX="48.0" layoutY="99.0" mnemonicParsing="false" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="隨機">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="chscene_main" layoutX="48.0" layoutY="219.0" mnemonicParsing="false" onAction="#chscene_main" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="回首頁">
          <font>
             <Font size="18.0" />
          </font>
