@@ -101,6 +101,7 @@ public class EditController {
             }
         }
 
+        
         int temp_size = temp.size();
         songlist.clear();
         for(int i = 0 ; i < temp_size ; i++){
