@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.*;
+
 import java.io.IOException;
 
 public class Test extends Application {
@@ -18,6 +20,31 @@ public class Test extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        int num;
+        ArrayList<Integer> temp = new ArrayList<>();
+        Random random = new Random();
+        Scanner input = new Scanner(System.in);
+        num = input.nextInt();
+
+        while (true) {
+            boolean repeat = false;
+            int rand_num = random.nextInt(num);
+            for (int i = 0; i < temp.size(); i++) {
+                if (temp.get(i) == rand_num) {
+                    repeat = true;
+                    break;
+                }
+            }
+            if (!repeat) {
+                temp.add(rand_num);
+            }
+            if (temp.size() == num) {
+                break;
+            }
+        }
+
+        for (int i = 0; i < temp.size(); i++) {
+            System.out.println(temp.get(i));
+        }
     }
 }
