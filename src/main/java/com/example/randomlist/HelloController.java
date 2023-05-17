@@ -70,7 +70,7 @@ public class HelloController implements Initializable {
     private TableColumn<Song, String> songname;
 
     @FXML
-    private Button chscene_ediror;
+    private Button chscene_editor;
 
     @FXML
     void getTxt(MouseEvent event){
@@ -139,7 +139,7 @@ public class HelloController implements Initializable {
 
 
     @FXML
-    void chscene_ediror(ActionEvent event) throws IOException{
+    void chscene_editor(ActionEvent event) throws IOException{
         System.out.println("change");
         Parent root = FXMLLoader.load(getClass().getResource("ed_Scene.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

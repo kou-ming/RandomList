@@ -47,6 +47,6 @@
             <Font size="15.0" />
          </font>
       </TextArea>
-      <Button fx:id="chscene_ediror" layoutX="97.0" layoutY="353.0" mnemonicParsing="false" onAction="#chscene_ediror" prefHeight="47.0" prefWidth="97.0" text="編輯" />
+      <Button fx:id="chscene_editor" layoutX="97.0" layoutY="353.0" mnemonicParsing="false" onAction="#chscene_editor" prefHeight="47.0" prefWidth="97.0" text="編輯" />
    </children>
 </AnchorPane>
