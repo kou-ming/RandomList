@@ -30,8 +30,8 @@ import java.util.Scanner;
 public class HelloController implements Initializable {
 
 
-    public ArrayList<Song> songslist = new ArrayList<>();
-    ObservableList<Song> List = FXCollections.observableArrayList();
+    static public ArrayList<Song> songslist = new ArrayList<>();
+    static public ObservableList<Song> List = FXCollections.observableArrayList();
 
     public String path = "C:";
     private int string_len = 0;
