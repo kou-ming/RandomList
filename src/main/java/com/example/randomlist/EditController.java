@@ -29,7 +29,7 @@ public class EditController {
     private Button chscene_main;
 
     //public ArrayList <Song> songlist = HelloController.songslist;
-    public ObservableList<Song> songlist = HelloController.List;
+    public ObservableList<Song> songlist = FileController.List;
 
     @FXML
     void random_playlist(MouseEvent event) {
