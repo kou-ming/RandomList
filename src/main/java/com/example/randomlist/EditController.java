@@ -8,21 +8,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class EditController {
+public class EditController implements Initializable{
     @FXML
     private Button bt_random;
 
@@ -37,6 +40,15 @@ public class EditController {
 
     @FXML
     private Slider sld_song_amount;
+
+    @FXML
+    private TableColumn<Song, String> SongName;
+
+    @FXML
+    private TableView<Song> SongTableView;
+
+    @FXML
+    private TextArea Song_Info;
 
     public ObservableList<Song> songlist = FileController.List;
 
@@ -138,5 +150,24 @@ public class EditController {
         txt_song_amount.setText(String.valueOf(song_amount));
     }
 
+    @FXML
+    void get_Info(MouseEvent event) {
+        Song songinfo = SongTableView.getSelectionModel().getSelectedItem();    //取得哥死資訊
+        Song_Info.clear();
+        Song_Info.appendText(songinfo.getName() + "\n");
+        Song_Info.appendText(songinfo.getChannel() + "\n");
+        Song_Info.appendText(songinfo.getDuration() + "\n");
+        Song_Info.appendText(songinfo.getLink() + "\n");
+        Song_Info.appendText("標籤：");
+        for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
+            Song_Info.appendText(" " + songinfo.getLabel(i));
+        }
+    }
 
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //初始化表格
+        SongName.setSortable(false);
+        SongName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        SongTableView.setItems(songlist);
+    }
 }

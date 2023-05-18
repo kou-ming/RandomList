@@ -10,7 +10,7 @@ public class Main extends Application{
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("file_Scene.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 810, 540);
+        Scene scene = new Scene(fxmlLoader.load(), 1152, 648);
         stage.setTitle("RandomList");
         stage.setScene(scene);
         stage.show();
