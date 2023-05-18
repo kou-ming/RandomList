@@ -42,33 +42,33 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.EditController">
    <children>
-      <Text layoutX="33.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="編輯各項資訊">
+      <Text layoutX="48.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="編輯各項資訊">
          <font>
             <Font size="30.0" />
          </font>
       </Text>
-      <Button fx:id="bt_random" layoutX="33.0" layoutY="99.0" mnemonicParsing="false" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="隨機">
+      <Button fx:id="bt_random" layoutX="48.0" layoutY="99.0" mnemonicParsing="false" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="隨機">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="chscene_main" layoutX="32.0" layoutY="301.0" mnemonicParsing="false" onAction="#chscene_main" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="回首頁">
+      <Button fx:id="chscene_main" layoutX="47.0" layoutY="301.0" mnemonicParsing="false" onAction="#chscene_main" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="回首頁">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="bt_pick10" layoutX="32.0" layoutY="184.0" mnemonicParsing="false" onMouseClicked="#pick10_playlist" prefHeight="60.0" prefWidth="118.0" text="建立子歌單">
+      <Button fx:id="bt_pick10" layoutX="47.0" layoutY="184.0" mnemonicParsing="false" onMouseClicked="#pick10_playlist" prefHeight="60.0" prefWidth="118.0" text="建立子歌單">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <TextField fx:id="txt_song_amount" alignment="CENTER" layoutX="173.0" layoutY="195.0" onKeyReleased="#sld_song_amount_change" prefHeight="38.0" prefWidth="52.0" text="10">
+      <TextField fx:id="txt_song_amount" alignment="CENTER" layoutX="188.0" layoutY="195.0" onKeyReleased="#sld_song_amount_change" prefHeight="38.0" prefWidth="52.0" text="10">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <Slider fx:id="sld_song_amount" layoutX="271.0" layoutY="207.0" onKeyReleased="#txt_song_amount_change_key" onMouseReleased="#txt_song_amount_change_mouse" prefHeight="14.0" prefWidth="246.0" value="10.0" />
-      <Label layoutX="235.0" layoutY="194.0" prefHeight="40.0" prefWidth="19.0" text="首">
+      <Slider fx:id="sld_song_amount" layoutX="286.0" layoutY="207.0" onKeyReleased="#txt_song_amount_change_key" onMouseReleased="#txt_song_amount_change_mouse" prefHeight="14.0" prefWidth="246.0" value="10.0" />
+      <Label layoutX="250.0" layoutY="194.0" prefHeight="40.0" prefWidth="19.0" text="首">
          <font>
             <Font size="16.0" />
          </font>
