@@ -9,10 +9,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,7 +32,12 @@ public class EditController {
     @FXML
     private Button chscene_main;
 
-    //public ArrayList <Song> songlist = HelloController.songslist;
+    @FXML
+    private TextField txt_song_amount;
+
+    @FXML
+    private Slider sld_song_amount;
+
     public ObservableList<Song> songlist = HelloController.List;
 
     @FXML
@@ -38,6 +47,7 @@ public class EditController {
         Random random = new Random();
         Scanner input = new Scanner(System.in);
 
+        //隨機排序不重複歌曲
         while (true) {
             boolean repeat = false;
             int rand_num = random.nextInt(num);
@@ -55,10 +65,7 @@ public class EditController {
             }
         }
 
-        for (int i = 0; i < temp.size(); i++) {
-            //System.out.println(temp.get(i).getName());
-        }
-
+        //清理原歌單，將修改過後的歌單內容放進原歌單中
         int size = temp.size();
         songlist.clear();
         for(int i = 0 ;i < size ; i++){
@@ -80,11 +87,12 @@ public class EditController {
     void pick10_playlist(MouseEvent event) {
         ObservableList<Song> temp = FXCollections.observableArrayList();
         int num = songlist.size();
+        int song_amount = Integer.parseInt(txt_song_amount.getText());
+        System.out.println(song_amount);
         Random random = new Random();
         Scanner input = new Scanner(System.in);
 
         while (true) {
-            System.out.println("wow");
             boolean repeat = false;
             int rand_num = random.nextInt(num);
             for (int i = 0; i < temp.size(); i++) {
@@ -96,16 +104,38 @@ public class EditController {
             if (!repeat) {
                 temp.add(songlist.get(rand_num));
             }
-            if (temp.size() == 10) {
+            if (temp.size() == song_amount) {
                 break;
             }
         }
 
-        
         int temp_size = temp.size();
         songlist.clear();
         for(int i = 0 ; i < temp_size ; i++){
             songlist.add(temp.get(i));
         }
     }
+
+    @FXML
+    void sld_song_amount_change(KeyEvent event) {
+        System.out.println("wow");
+        int song_amount = Integer.parseInt(txt_song_amount.getText());
+        sld_song_amount.setValue(song_amount);
+    }
+
+    @FXML
+    void txt_song_amount_change_mouse(MouseEvent event) {
+        System.out.println("hello");
+        int song_amount = (int) sld_song_amount.getValue();
+        txt_song_amount.setText(String.valueOf(song_amount));
+    }
+
+    @FXML
+    void txt_song_amount_change_key(KeyEvent event) {
+        System.out.println("hello");
+        int song_amount = (int) sld_song_amount.getValue();
+        txt_song_amount.setText(String.valueOf(song_amount));
+    }
+
+
 }
