@@ -2,6 +2,7 @@ package com.example.randomlist;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -68,7 +69,11 @@ public class FileController implements Initializable {
         Song_Info.appendText(songinfo.getName() + "\n");
         Song_Info.appendText(songinfo.getChannel() + "\n");
         Song_Info.appendText(songinfo.getDuration() + "\n");
-        Song_Info.appendText(songinfo.getLink());
+        Song_Info.appendText(songinfo.getLink() + "\n");
+        Song_Info.appendText("標籤：");
+        for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
+            Song_Info.appendText(" " + songinfo.getLabel(i));
+        }
     }
     
     //初始化
@@ -91,17 +96,21 @@ public class FileController implements Initializable {
         try{
             BufferedReader reader = null;
             String line = "";
-            int index_line = 0; //目前讀到第幾列
+            int index_line = -1; //目前讀到第幾列
             try{
                 reader = new BufferedReader(new FileReader(path));
 
                 //一次讀一列
                 while((line = reader.readLine()) != null){
-                    index_line += 1;
+
                     String[] row = line.split("\t");
-                    if(index_line > 1){
+                    if(index_line >= 0){
                         List.add(new Song(row[0], row[1],row[2],row[3]));
                     }
+                    for (int i = 4 ; i < row.length ; i++){
+                        List.get(index_line).addLabel(row[i]);
+                    }
+                    index_line += 1;
                 }
             }
             catch (Exception e) {

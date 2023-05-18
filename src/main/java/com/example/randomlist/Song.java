@@ -1,10 +1,15 @@
 package com.example.randomlist;
 
+
+import java.util.ArrayList;
+
 public class Song {
     private String name;
     private String channel;
     private String duration;
     private String link;
+
+    ArrayList<String> SongLabels = new ArrayList<>();
 
     public Song(String name, String channel, String duration, String link){
         this.name = name;
@@ -27,5 +32,17 @@ public class Song {
 
     public String getLink() {
         return link;
+    }
+
+    public int getLabelsize(){
+        return SongLabels.size();
+    }
+
+    public void addLabel(String label){
+        SongLabels.add(label);
+    }
+
+    public String getLabel(int index){
+        return SongLabels.get(index);
     }
 }
