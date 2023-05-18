@@ -54,5 +54,10 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Button fx:id="bt_pick10" layoutX="200.0" layoutY="99.0" mnemonicParsing="false" onMouseClicked="#pick10_playlist" prefHeight="60.0" prefWidth="118.0" text="取10首">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
