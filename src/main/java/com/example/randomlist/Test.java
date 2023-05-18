@@ -12,15 +12,14 @@ import java.io.IOException;
 public class Test extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("file_Scene.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 810, 540);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ed_Scene.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 700, 600);
         stage.setTitle("Test What you what");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-        launch();
         int num;
         ArrayList<Integer> temp = new ArrayList<>();
         Random random = new Random();
