@@ -38,7 +38,8 @@ public class EditController {
     @FXML
     private Slider sld_song_amount;
 
-    public ObservableList<Song> songlist = HelloController.List;
+    public ObservableList<Song> songlist = FileController.List;
+
 
     @FXML
     void random_playlist(MouseEvent event) {
@@ -75,8 +76,8 @@ public class EditController {
 
     @FXML
     void chscene_main(ActionEvent event) throws IOException {
-        //System.out.println("change");
-        Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        System.out.println("change");
+        Parent root = FXMLLoader.load(getClass().getResource("file_Scene.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
