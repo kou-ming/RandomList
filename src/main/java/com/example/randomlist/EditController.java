@@ -75,7 +75,7 @@ public class EditController {
     @FXML
     void chscene_main(ActionEvent event) throws IOException {
         System.out.println("change");
-        Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("file_Scene.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

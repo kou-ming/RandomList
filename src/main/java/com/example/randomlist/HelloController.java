@@ -137,7 +137,6 @@ public class HelloController implements Initializable {
 
     }
 
-
     @FXML
     void chscene_editor(ActionEvent event) throws IOException{
         System.out.println("change");
