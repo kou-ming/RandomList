@@ -37,8 +37,9 @@ public class EditController {
 
     @FXML
     private Slider sld_song_amount;
-
+    
     public ObservableList<Song> songlist = FileController.List;
+
 
     @FXML
     void random_playlist(MouseEvent event) {
