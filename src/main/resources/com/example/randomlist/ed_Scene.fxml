@@ -40,47 +40,102 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.EditController">
    <children>
-      <Text layoutX="33.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="編輯各項資訊">
+      <Text layoutX="33.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="編輯各項資訊">
          <font>
             <Font size="30.0" />
          </font>
       </Text>
-      <Button fx:id="bt_random" layoutX="33.0" layoutY="99.0" mnemonicParsing="false" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="隨機">
+      <Button fx:id="bt_random" layoutX="33.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="隨機">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="chscene_main" layoutX="32.0" layoutY="301.0" mnemonicParsing="false" onAction="#chscene_main" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="回首頁">
+      <Button fx:id="chscene_main" layoutX="33.0" layoutY="488.0" mnemonicParsing="false" onAction="#chscene_main" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="回首頁">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="bt_pick10" layoutX="32.0" layoutY="184.0" mnemonicParsing="false" onMouseClicked="#pick10_playlist" prefHeight="60.0" prefWidth="118.0" text="建立子歌單">
+      <Button fx:id="bt_pick10" layoutX="33.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#create_subplaylist" prefHeight="60.0" prefWidth="118.0" text="建立子歌單">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <TextField fx:id="txt_song_amount" alignment="CENTER" layoutX="173.0" layoutY="195.0" onKeyReleased="#sld_song_amount_change" prefHeight="38.0" prefWidth="52.0" text="10">
+      <TextField fx:id="txt_song_amount" alignment="CENTER" layoutX="168.0" layoutY="167.0" onKeyReleased="#sld_song_amount_change" prefHeight="38.0" prefWidth="52.0" text="10">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <Slider fx:id="sld_song_amount" layoutX="271.0" layoutY="207.0" onKeyReleased="#txt_song_amount_change_key" onMouseReleased="#txt_song_amount_change_mouse" prefHeight="14.0" prefWidth="246.0" value="10.0" />
-      <Label layoutX="235.0" layoutY="194.0" prefHeight="40.0" prefWidth="19.0" text="首">
+      <Slider fx:id="sld_song_amount" layoutX="252.0" layoutY="179.0" onKeyReleased="#txt_song_amount_change_key" onMouseReleased="#txt_song_amount_change_mouse" prefHeight="14.0" prefWidth="260.0" value="10.0" />
+      <Label layoutX="225.0" layoutY="166.0" prefHeight="40.0" prefWidth="19.0" text="首">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TableView fx:id="SongTableView" layoutX="573.0" layoutY="52.0" onMouseClicked="#get_Info" prefHeight="371.0" prefWidth="509.0">
+      <TableView fx:id="SongTableView" layoutX="570.0" layoutY="50.0" onMouseClicked="#get_Info" prefHeight="371.0" prefWidth="509.0">
          <columns>
             <TableColumn fx:id="SongName" prefWidth="492.6666564941406" text="歌名" />
          </columns>
       </TableView>
-      <TextArea fx:id="Song_Info" editable="false" layoutX="375.0" layoutY="440.0" prefHeight="108.0" prefWidth="761.0" />
+      <TextArea fx:id="Song_Info" editable="false" layoutX="375.0" layoutY="440.0" prefHeight="108.0" prefWidth="761.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextArea>
+      <VBox fx:id="song_buttons" layoutY="1.0" prefHeight="196.0" prefWidth="76.0" visible="false">
+         <children>
+            <Button fx:id="bt_delete_song" mnemonicParsing="false" onMouseClicked="#delete_song" prefHeight="30.0" prefWidth="75.0" text="刪除歌曲" />
+            <Button fx:id="bt_add_tag" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="加入標籤" />
+         </children>
+      </VBox>
+      <Button layoutX="33.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#add_song" prefHeight="80.0" prefWidth="118.0" text="加入歌曲">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="168.0" layoutY="241.0" prefHeight="30.0" prefWidth="75.0" text="歌曲名稱">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="168.0" layoutY="280.0" prefHeight="30.0" prefWidth="75.0" text="連結">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txt_add_song_name" layoutX="264.0" layoutY="240.0" prefHeight="32.0" prefWidth="250.0" promptText="必填">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txt_add_song_link" layoutX="264.0" layoutY="279.0" prefHeight="32.0" prefWidth="250.0" promptText="必填">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="168.0" layoutY="320.0" prefHeight="30.0" prefWidth="95.0" text="歌手/創作者">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txt_add_song_artist" layoutX="264.0" layoutY="319.0" prefHeight="32.0" prefWidth="250.0" promptText="非必填">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="168.0" layoutY="360.0" prefHeight="30.0" prefWidth="95.0" text="歌曲長度">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txt_add_song_length" layoutX="264.0" layoutY="359.0" prefHeight="32.0" prefWidth="250.0" promptText="非必填">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

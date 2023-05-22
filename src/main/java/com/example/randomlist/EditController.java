@@ -10,13 +10,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.event.ActionEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -36,7 +33,28 @@ public class EditController implements Initializable{
     private Button chscene_main;
 
     @FXML
+    private Button bt_delete_song;
+
+    @FXML
+    private Button bt_add_tag;
+
+    @FXML
+    private VBox song_buttons;
+
+    @FXML
     private TextField txt_song_amount;
+
+    @FXML
+    private TextField txt_add_song_link;
+
+    @FXML
+    private TextField txt_add_song_name;
+
+    @FXML
+    private TextField txt_add_song_artist;
+
+    @FXML
+    private TextField txt_add_song_length;
 
     @FXML
     private Slider sld_song_amount;
@@ -51,7 +69,6 @@ public class EditController implements Initializable{
     private TextArea Song_Info;
 
     public ObservableList<Song> songlist = FileController.List;
-
 
     @FXML
     void random_playlist(MouseEvent event) {
@@ -97,7 +114,7 @@ public class EditController implements Initializable{
     }
 
     @FXML
-    void pick10_playlist(MouseEvent event) {
+    void create_subplaylist(MouseEvent event) {
         ObservableList<Song> temp = FXCollections.observableArrayList();
         int num = songlist.size();
         int song_amount = Integer.parseInt(txt_song_amount.getText());
@@ -127,6 +144,8 @@ public class EditController implements Initializable{
         for(int i = 0 ; i < temp_size ; i++){
             songlist.add(temp.get(i));
         }
+
+        sld_song_amount.setMax(songlist.size());
     }
 
     @FXML
@@ -150,17 +169,61 @@ public class EditController implements Initializable{
         txt_song_amount.setText(String.valueOf(song_amount));
     }
 
+    private Song song_to_delete;
     @FXML
     void get_Info(MouseEvent event) {
-        Song songinfo = SongTableView.getSelectionModel().getSelectedItem();    //取得哥死資訊
-        Song_Info.clear();
-        Song_Info.appendText(songinfo.getName() + "\n");
-        Song_Info.appendText(songinfo.getChannel() + "\n");
-        Song_Info.appendText(songinfo.getDuration() + "\n");
-        Song_Info.appendText(songinfo.getLink() + "\n");
-        Song_Info.appendText("標籤：");
-        for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
-            Song_Info.appendText(" " + songinfo.getLabel(i));
+        if (event.getButton() == MouseButton.PRIMARY) {
+            Song songinfo = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
+            Song_Info.clear();
+            Song_Info.appendText(songinfo.getName() + "\n");
+            Song_Info.appendText(songinfo.getChannel() + "\n");
+            Song_Info.appendText(songinfo.getDuration() + "\n");
+            Song_Info.appendText(songinfo.getLink() + "\n");
+            Song_Info.appendText("標籤：");
+            for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
+                Song_Info.appendText(" " + songinfo.getLabel(i));
+            }
+        }
+        else if (event.getButton() == MouseButton.SECONDARY) {
+            song_to_delete = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
+            double x = event.getX();
+            double y = event.getY();
+            System.out.print(x + " ");
+            System.out.println(y);
+            song_buttons.setTranslateX(x + 570);
+            song_buttons.setTranslateY(y + 50);
+            song_buttons.setVisible(true);
+        }
+    }
+
+    @FXML
+    void add_song(MouseEvent event) {
+        if (!txt_add_song_name.getText().equals("") && !txt_add_song_link.getText().equals("")){
+            String song_name = txt_add_song_name.getText();
+            String song_link = txt_add_song_link.getText();
+            String song_artist = txt_add_song_artist.getText();
+            String song_length = txt_add_song_length.getText();
+            songlist.add(new Song(song_name,song_artist, song_length,song_link));
+            txt_add_song_name.setText("");
+            txt_add_song_link.setText("");
+            txt_add_song_artist.setText("");
+            txt_add_song_length.setText("");
+        }
+    }
+
+    @FXML
+    void delete_song(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            for (int i = 0; i < songlist.size(); i++) {
+                if (songlist.get(i).equals(song_to_delete)) {
+                    songlist.remove(i);
+                    break;
+                }
+            }
+            sld_song_amount.setMax(songlist.size());
+            int song_amount = (int) sld_song_amount.getValue();
+            txt_song_amount.setText(String.valueOf(song_amount));
+            song_buttons.setVisible(false);
         }
     }
 
@@ -169,5 +232,7 @@ public class EditController implements Initializable{
         SongName.setSortable(false);
         SongName.setCellValueFactory(new PropertyValueFactory<>("name"));
         SongTableView.setItems(songlist);
+
+        sld_song_amount.setMax(songlist.size());
     }
 }

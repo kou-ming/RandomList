@@ -16,7 +16,10 @@
           <TableColumn fx:id="SongName" prefWidth="492.6666564941406" text="歌名" />
         </columns>
       </TableView>
-      <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="404.0" prefHeight="108.0" prefWidth="759.0" />
+      <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="404.0" prefHeight="108.0" prefWidth="759.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextArea>
       <FlowPane layoutX="26.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0">
          <children>
             <Button fx:id="bt_OpenList" mnemonicParsing="false" onMouseClicked="#openList" prefHeight="50.0" prefWidth="100.0" text="開啟歌單" textFill="#6064d9">
