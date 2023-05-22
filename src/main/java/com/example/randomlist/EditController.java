@@ -24,6 +24,15 @@ import java.util.Scanner;
 
 public class EditController implements Initializable{
     @FXML
+    private ToggleGroup Editor;
+
+    @FXML
+    private RadioButton Editor1;
+
+    @FXML
+    private RadioButton Editor2;
+
+    @FXML
     private Button bt_random;
 
     @FXML
@@ -69,6 +78,8 @@ public class EditController implements Initializable{
     private TextArea Song_Info;
 
     public ObservableList<Song> songlist = FileController.List;
+
+    private String editor = "薛耀智";
 
     @FXML
     void random_playlist(MouseEvent event) {
@@ -203,7 +214,13 @@ public class EditController implements Initializable{
             String song_link = txt_add_song_link.getText();
             String song_artist = txt_add_song_artist.getText();
             String song_length = txt_add_song_length.getText();
-            songlist.add(new Song(song_name,song_artist, song_length,song_link));
+
+            //songlist.add(new Song(song_name, song_artist, song_length, song_link));
+            Song song = new Song(song_name, song_artist, song_length, song_link);
+            song.setOwner(editor);
+            System.out.println(editor);
+            songlist.add(song);
+
             txt_add_song_name.setText("");
             txt_add_song_link.setText("");
             txt_add_song_artist.setText("");
@@ -225,6 +242,18 @@ public class EditController implements Initializable{
             txt_song_amount.setText(String.valueOf(song_amount));
             song_buttons.setVisible(false);
         }
+    }
+
+    @FXML
+    void bt_editor1(MouseEvent event) {
+        editor = "薛耀智";
+        System.out.println(editor);
+    }
+
+    @FXML
+    void bt_editor2(MouseEvent event) {
+        editor = "許高銘";
+        System.out.println(editor);
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
