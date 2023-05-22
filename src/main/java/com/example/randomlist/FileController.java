@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -64,15 +65,17 @@ public class FileController implements Initializable {
     //點擊表格時顯示詳細資訊
     @FXML
     void get_Info(MouseEvent event) {
-        Song songinfo = SongTableView.getSelectionModel().getSelectedItem();    //取得哥死資訊
-        Song_Info.clear();
-        Song_Info.appendText(songinfo.getName() + "\n");
-        Song_Info.appendText(songinfo.getChannel() + "\n");
-        Song_Info.appendText(songinfo.getDuration() + "\n");
-        Song_Info.appendText(songinfo.getLink() + "\n");
-        Song_Info.appendText("標籤：");
-        for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
-            Song_Info.appendText(" " + songinfo.getLabel(i));
+        if (event.getButton() == MouseButton.PRIMARY) {
+            Song songinfo = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
+            Song_Info.clear();
+            Song_Info.appendText(songinfo.getName() + "\n");
+            Song_Info.appendText(songinfo.getChannel() + "\n");
+            Song_Info.appendText(songinfo.getDuration() + "\n");
+            Song_Info.appendText(songinfo.getLink() + "\n");
+            Song_Info.appendText("標籤：");
+            for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
+                Song_Info.appendText(" " + songinfo.getLabel(i));
+            }
         }
     }
     

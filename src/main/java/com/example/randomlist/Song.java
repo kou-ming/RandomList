@@ -8,6 +8,7 @@ public class Song {
     private String channel;
     private String duration;
     private String link;
+    private String owner;
 
     ArrayList<String> SongLabels = new ArrayList<>();
 
@@ -44,5 +45,9 @@ public class Song {
 
     public String getLabel(int index){
         return SongLabels.get(index);
+    }
+
+    public void setOwner(String owner){
+        this.owner = owner;
     }
 }
