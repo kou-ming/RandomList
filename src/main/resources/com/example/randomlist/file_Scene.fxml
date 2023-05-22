@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -49,5 +50,6 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
+      <VBox fx:id="SongList_view" layoutX="917.0" layoutY="27.0" prefHeight="500.0" prefWidth="125.0" />
    </children>
 </AnchorPane>
