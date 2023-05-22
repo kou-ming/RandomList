@@ -1,8 +1,6 @@
 package com.example.randomlist;
 
 import java.io.*;
-import java.util.Scanner;
-
 public class CsvReader {
     public static void main(String[] args) throws FileNotFoundException {
         String file_path = "src\\main\\java\\csvfile\\input.csv";
