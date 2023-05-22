@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.*;
 import javafx.event.ActionEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.File;
@@ -23,6 +24,10 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class EditController implements Initializable{
+
+    @FXML
+    private AnchorPane main_pane;
+
     @FXML
     private ToggleGroup Editor;
 
@@ -124,6 +129,7 @@ public class EditController implements Initializable{
         stage.show();
     }
 
+    //創建子歌單
     @FXML
     void create_subplaylist(MouseEvent event) {
         ObservableList<Song> temp = FXCollections.observableArrayList();
@@ -156,9 +162,11 @@ public class EditController implements Initializable{
             songlist.add(temp.get(i));
         }
 
+        //設定拉桿長度最大值為歌單長度
         sld_song_amount.setMax(songlist.size());
     }
 
+    //拉桿的值配合文字的值改變
     @FXML
     void sld_song_amount_change(KeyEvent event) {
         System.out.println("wow");
@@ -166,6 +174,7 @@ public class EditController implements Initializable{
         sld_song_amount.setValue(song_amount);
     }
 
+    //文字的值配合拉桿的值改變(滑鼠點擊)
     @FXML
     void txt_song_amount_change_mouse(MouseEvent event) {
         System.out.println("hello");
@@ -173,6 +182,7 @@ public class EditController implements Initializable{
         txt_song_amount.setText(String.valueOf(song_amount));
     }
 
+    //文字的值配合拉桿的值改變(左右鍵點擊)
     @FXML
     void txt_song_amount_change_key(KeyEvent event) {
         System.out.println("hello");
@@ -183,6 +193,7 @@ public class EditController implements Initializable{
     private Song song_to_delete;
     @FXML
     void get_Info(MouseEvent event) {
+        //左鍵顯示已選取的歌曲的資訊
         if (event.getButton() == MouseButton.PRIMARY) {
             Song songinfo = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
             Song_Info.clear();
@@ -194,7 +205,9 @@ public class EditController implements Initializable{
             for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
                 Song_Info.appendText(" " + songinfo.getLabel(i));
             }
+            song_buttons.setVisible(false);
         }
+        //右鍵顯示按鈕列
         else if (event.getButton() == MouseButton.SECONDARY) {
             song_to_delete = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
             double x = event.getX();
@@ -207,6 +220,7 @@ public class EditController implements Initializable{
         }
     }
 
+    //左鍵點擊按鈕加入歌曲
     @FXML
     void add_song(MouseEvent event) {
         if (!txt_add_song_name.getText().equals("") && !txt_add_song_link.getText().equals("")){
@@ -228,6 +242,7 @@ public class EditController implements Initializable{
         }
     }
 
+    //左鍵點擊按鈕刪除以選取的歌曲
     @FXML
     void delete_song(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
@@ -254,6 +269,11 @@ public class EditController implements Initializable{
     void bt_editor2(MouseEvent event) {
         editor = "許高銘";
         System.out.println(editor);
+    }
+
+    @FXML
+    void main_plane_clicked(MouseEvent event) {
+        song_buttons.setVisible(false);
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
