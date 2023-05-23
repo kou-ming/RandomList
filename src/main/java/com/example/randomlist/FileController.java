@@ -168,14 +168,14 @@ public class FileController implements Initializable {
             String line = "";
             int index_line = 0; //目前讀到第幾列
             try{
-                reader = new BufferedReader(new FileReader("C:\\Javafx_homework\\RandomList\\src\\main\\java\\SongList_File\\File_name.txt"));
+                reader = new BufferedReader(new FileReader("src\\main\\java\\SongList_File\\File_name.txt"));
 
                 //一次讀一列
                 while((line = reader.readLine()) != null){
 
                     String[] row = line.split("\t");
                     if(index_line >= 0){
-                        path = "C:\\Javafx_homework\\RandomList\\src\\main\\java\\SongList_File\\" + row[0];
+                        path = "src\\main\\java\\SongList_File\\SongList_File\\" + row[0];
                         create_listInfo(row[0]);
                     }
                     for (int i = 4 ; i < row.length ; i++){
