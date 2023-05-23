@@ -9,20 +9,26 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FileController implements Initializable {
+
+    @FXML
+    private VBox SongList_view;
 
     @FXML
     private TableColumn<Song, String> SongName;
@@ -43,7 +49,11 @@ public class FileController implements Initializable {
     void openList(MouseEvent event) {
         List.clear();
         System.out.println("openList");
-        readFile();
+        File file = fileChooser.showOpenDialog(new Stage());    //可以在頁面選擇檔案位置
+        if (file != null) {
+            path = file.getAbsolutePath();  //若檔案不為空則重設路徑
+        }
+        readFile(path);
 
     }
 
@@ -51,7 +61,11 @@ public class FileController implements Initializable {
     @FXML
     void AddList(MouseEvent event) {
         System.out.println("addList");
-        readFile();
+        File file = fileChooser.showOpenDialog(new Stage());    //可以在頁面選擇檔案位置
+        if (file != null) {
+            path = file.getAbsolutePath();  //若檔案不為空則重設路徑
+        }
+        readFile(path);
     }
 
     //輸出歌單
@@ -87,15 +101,12 @@ public class FileController implements Initializable {
         SongName.setSortable(false);
         SongName.setCellValueFactory(new PropertyValueFactory<>("name"));
         SongTableView.setItems(List);
+
+        loadFile();
     }
 
     //讀取檔案
-    void readFile(){
-        File file = fileChooser.showOpenDialog(new Stage());    //可以在頁面選擇檔案位置
-        if (file != null) {
-            path = file.getAbsolutePath();  //若檔案不為空則重設路徑
-        }
-
+    void readFile(String path){
         try{
             BufferedReader reader = null;
             String line = "";
@@ -140,11 +151,69 @@ public class FileController implements Initializable {
             for(int i = 0; i < List.size() ; i++){
                 printWriter.write(List.get(i).getName() + "\t" + List.get(i).getChannel() + "\t" + List.get(i).getDuration() + "\t" + List.get(i).getLink() + "\n");
             }
+
+            System.out.println(file.getName());
+            System.out.println(file.getPath());
             printWriter.close();
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    void loadFile(){
+        try{
+            BufferedReader reader = null;
+            String line = "";
+            int index_line = 0; //目前讀到第幾列
+            try{
+                reader = new BufferedReader(new FileReader("C:\\Javafx_homework\\RandomList\\src\\main\\java\\SongList_File\\File_name.txt"));
+
+                //一次讀一列
+                while((line = reader.readLine()) != null){
+
+                    String[] row = line.split("\t");
+                    if(index_line >= 0){
+                        path = "C:\\Javafx_homework\\RandomList\\src\\main\\java\\SongList_File\\" + row[0];
+                        create_listInfo(row[0]);
+                    }
+                    for (int i = 4 ; i < row.length ; i++){
+//                        List.get(index_line).addLabel(row[i]);
+                    }
+                    index_line += 1;
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally{
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void create_listInfo(String list_name) throws IOException {
+        list_name = list_name.replace(".txt", "");
+        Button songlist_name = new Button(list_name);
+        songlist_name.setPrefSize(125, 50);
+        songlist_name.setOnAction(event -> {
+            System.out.println("Button clicked!");
+            List.clear();
+            path = "C:\\Javafx_homework\\RandomList\\src\\main\\java\\SongList_File\\" + songlist_name.getText() + ".txt";
+            readFile(path);
+        });
+        System.out.println(songlist_name.getText());
+        SongList_view.getChildren().add(songlist_name);
+        SongList_view.layout();
+
     }
 
     //替轉至編輯頁面
