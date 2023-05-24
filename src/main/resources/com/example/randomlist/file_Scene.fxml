@@ -5,24 +5,42 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.FileController">
    <children>
-      <TableView fx:id="SongTableView" layoutX="187.0" layoutY="14.0" onMouseClicked="#get_Info" prefHeight="371.0" prefWidth="509.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#454545" height="798.0" layoutX="1117.0" layoutY="-84.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="250.0" />
+      <TableView fx:id="SongTableView" layoutX="204.0" layoutY="54.0" onMouseClicked="#get_Info" prefHeight="395.0" prefWidth="591.0">
         <columns>
-          <TableColumn fx:id="SongName" prefWidth="492.6666564941406" text="歌名" />
+          <TableColumn fx:id="ListName" prefWidth="590.0000050862631" text="未選取歌單" />
         </columns>
       </TableView>
-      <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="404.0" prefHeight="120.0" prefWidth="759.0">
+      <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="468.0" prefHeight="150.0" prefWidth="851.0">
          <font>
             <Font size="14.0" />
          </font></TextArea>
-      <FlowPane layoutX="26.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0">
+      <Text layoutX="26.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="詳細資訊" wrappingWidth="107.72460556030273">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </Text>
+      <Button fx:id="bt_chscene_editor" layoutX="797.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#chscene_editor" prefHeight="40.0" prefWidth="80.0" text="編輯歌單" textFill="#6cb7ad">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <VBox fx:id="SongList_view" layoutX="32.0" layoutY="54.0" prefHeight="332.0" prefWidth="125.0" />
+      <HBox layoutX="689.0" layoutY="14.0" prefHeight="36.0" prefWidth="499.0">
          <children>
+            <Button fx:id="bt_Call_newlistPopup" mnemonicParsing="false" onMouseClicked="#call_newlistPopup" prefHeight="36.0" prefWidth="133.0" text="建立空白歌單" textFill="#6064d9">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Button>
             <Button fx:id="bt_OpenList" mnemonicParsing="false" onMouseClicked="#openList" prefHeight="50.0" prefWidth="100.0" text="開啟歌單" textFill="#6064d9">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
@@ -39,17 +57,6 @@
                </font>
             </Button>
          </children>
-      </FlowPane>
-      <Text layoutX="28.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="詳細資訊" wrappingWidth="107.72460556030273">
-         <font>
-            <Font name="System Bold Italic" size="25.0" />
-         </font>
-      </Text>
-      <Button fx:id="bt_chscene_editor" layoutX="696.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#chscene_editor" prefHeight="40.0" prefWidth="85.0" text="編輯歌單" textFill="#6cb7ad">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <VBox fx:id="SongList_view" layoutX="917.0" layoutY="27.0" prefHeight="500.0" prefWidth="125.0" />
+      </HBox>
    </children>
 </AnchorPane>
