@@ -6,13 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +21,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.*;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class FileController implements Initializable {
@@ -31,7 +30,7 @@ public class FileController implements Initializable {
     private VBox SongList_view;
 
     @FXML
-    private TableColumn<Song, String> SongName;
+    private TableColumn<Song, String> ListName;
 
     @FXML
     private TableView<Song> SongTableView;
@@ -39,11 +38,13 @@ public class FileController implements Initializable {
     @FXML
     private TextArea Song_Info;
 
+
     FileChooser fileChooser = new FileChooser();    //建立檔案選擇器
     public String path = "C:";  //預設檔案路徑
 
+    public String File_path = "c:";
     static public ObservableList<Song> List = FXCollections.observableArrayList();  //儲存歌曲的List
-
+    static public ObservableList<List_Info> ALL_List = FXCollections.observableArrayList();  //儲存本地歌單
     //開啟歌單(清除上一個歌單紀錄)
     @FXML
     void openList(MouseEvent event) {
@@ -92,14 +93,73 @@ public class FileController implements Initializable {
             }
         }
     }
-    
+
+    //建立新歌單
+
+    @FXML
+    void call_newlistPopup(MouseEvent event) throws IOException {
+        System.out.println("call a popupScene");
+        for(int i = 0 ; i < ALL_List.size() ; i++) {
+            System.out.println(ALL_List.get(i).getName());
+        }
+        Stage popupStage = new Stage();
+        Pane popupRoot = FXMLLoader.load(getClass().getResource("new_list_popupScene.fxml"));
+
+
+
+
+//        TextField textField2 = new TextField();
+//        textField2.setPrefWidth(200);
+
+        TextField textfield = new TextField();
+        textfield.setPrefWidth(200);
+//        textfield.setLayoutX(26);
+
+
+        VBox.setMargin(textfield, new Insets(50, 0, 0, 0)); // 设置上边距为50
+
+        TextField textField1 = new TextField();
+        textfield.setPrefSize(300, 40);
+
+        VBox.setMargin(textfield, new Insets(100, 0, 0, 0)); // 设置上边距为50
+
+
+        Button button = new Button("建立");
+        button.setPrefSize(97, 41);
+        button.setLayoutX(132);
+        button.setLayoutY(200);
+
+        button.setOnAction(e -> {
+            String temp_path = File_path + textfield.getText() + ".txt";
+            if(create_file(temp_path)){
+                ALL_List.add(new List_Info(textfield.getText() + ".txt"));
+                create_List();
+            }
+            SongList_view.getChildren().clear();
+            loadFile();
+            closeWindow(popupStage);
+
+
+        });
+
+        VBox root = new VBox(textfield);
+        root.setLayoutX(40);
+        root.setLayoutY(10);
+
+        popupRoot.getChildren().add(root);
+        popupRoot.getChildren().add(button);
+        Scene popupScene = new Scene(popupRoot, 400, 300);
+        popupStage.setScene(popupScene);
+        popupStage.show();
+
+    }
     //初始化
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fileChooser.setInitialDirectory(new File("C:\\Users\\user\\Downloads"));    //將初始路徑設為"下載"
 
         //初始化表格
-        SongName.setSortable(false);
-        SongName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ListName.setSortable(false);
+        ListName.setCellValueFactory(new PropertyValueFactory<>("name"));
         SongTableView.setItems(List);
 
         loadFile();
@@ -162,13 +222,18 @@ public class FileController implements Initializable {
     }
 
 
-    void loadFile(){
+    public void loadFile(){
+        ALL_List.clear();
         try{
             BufferedReader reader = null;
             String line = "";
             int index_line = 0; //目前讀到第幾列
             try{
-                reader = new BufferedReader(new FileReader("src\\main\\java\\SongList_File\\File_name.txt"));
+
+                File file = new File("src\\main\\java\\SongList_File\\File_name.txt");
+                reader = new BufferedReader(new FileReader(file));
+                File_path = file.getAbsolutePath().replace("File_name.txt", "");
+                System.out.println(File_path);
 
                 //一次讀一列
                 while((line = reader.readLine()) != null){
@@ -176,6 +241,7 @@ public class FileController implements Initializable {
                     String[] row = line.split("\t");
                     if(index_line >= 0){
                         path = "src\\main\\java\\SongList_File\\SongList_File\\" + row[0];
+                        ALL_List.add(new List_Info(row[0]));
                         create_listInfo(row[0]);
                     }
                     for (int i = 4 ; i < row.length ; i++){
@@ -200,14 +266,16 @@ public class FileController implements Initializable {
         }
     }
 
+    //建立歌單預覽按鈕
     void create_listInfo(String list_name) throws IOException {
         list_name = list_name.replace(".txt", "");
         Button songlist_name = new Button(list_name);
         songlist_name.setPrefSize(125, 50);
         songlist_name.setOnAction(event -> {
             System.out.println("Button clicked!");
+            ListName.setText(songlist_name.getText());
             List.clear();
-            path = "C:\\Javafx_homework\\RandomList\\src\\main\\java\\SongList_File\\" + songlist_name.getText() + ".txt";
+            path = "src\\main\\java\\SongList_File\\" + songlist_name.getText() + ".txt";
             readFile(path);
         });
         System.out.println(songlist_name.getText());
@@ -216,6 +284,47 @@ public class FileController implements Initializable {
 
     }
 
+    void closeWindow(Stage stage) {
+        // 关闭窗口
+        stage.close();
+    }
+
+    //創立新的歌單文件
+    boolean create_file(String path){
+        File file = new File(path);
+
+        try {
+            if (file.createNewFile()) {
+                System.out.println("文件创建成功！");
+                return true;
+            } else {
+                System.out.println("文件已存在！");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
+    //將目前有的本地檔案以文件儲存
+    void create_List() {
+        File file = new File("src\\main\\java\\SongList_File\\File_name.txt");
+        try {
+            PrintWriter printWriter = new PrintWriter(file);
+            for(int i = 0 ; i < ALL_List.size() ; i++) {
+                if (i == ALL_List.size() - 1){
+                    printWriter.write(ALL_List.get(i).getName());
+                }
+                else{
+                    printWriter.write(ALL_List.get(i).getName() + "\n");
+                }
+            }
+            printWriter.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
     //替轉至編輯頁面
     @FXML
     void chscene_editor(MouseEvent event) throws IOException {

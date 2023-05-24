@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Test extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("file_Scene.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("new_list_popupScene.fxml"));
         Pane rootpane = fxmlLoader.load();
         Button button = new Button("Click me");
         button.setLayoutX(100);
