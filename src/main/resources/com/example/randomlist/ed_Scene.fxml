@@ -90,10 +90,17 @@
          </font></TextArea>
       <VBox fx:id="song_buttons" layoutY="1.0" prefHeight="196.0" prefWidth="76.0" visible="false">
          <children>
-            <Button fx:id="bt_delete_song" mnemonicParsing="false" onMouseClicked="#delete_song" prefHeight="30.0" prefWidth="75.0" text="刪除歌曲" />
+            <Button fx:id="bt_delete_song" mnemonicParsing="false" onMouseClicked="#delete_song" prefHeight="30.0" prefWidth="80.0" text="刪除歌曲" />
             <Button fx:id="bt_add_tag" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="加入標籤" />
+            <Button fx:id="bt_song_preference" mnemonicParsing="false" onMouseClicked="#song_preference" prefHeight="30.0" prefWidth="80.0" text="歌曲偏好＞" />
          </children>
       </VBox>
+      <VBox fx:id="song_preference_buttons" layoutX="76.0" layoutY="61.0" prefHeight="200.0" prefWidth="82.0" visible="false">
+         <children>
+            <Button fx:id="bt_song_preference3" mnemonicParsing="false" onMouseClicked="#song_preference3_selected" prefHeight="30.0" prefWidth="50.0" text="3" />
+            <Button fx:id="bt_song_preference2" mnemonicParsing="false" onMouseClicked="#song_preference2_selected" prefHeight="30.0" prefWidth="50.0" text="2" />
+            <Button fx:id="bt_song_preference1" mnemonicParsing="false" onMouseClicked="#song_preference1_selected" prefHeight="30.0" prefWidth="50.0" text="1" />
+         </children></VBox>
       <Button layoutX="26.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#add_song" prefHeight="60.0" prefWidth="118.0" text="加入歌曲">
          <font>
             <Font size="18.0" />

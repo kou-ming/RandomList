@@ -8,6 +8,7 @@ public class Song {
     private String channel;
     private String duration;
     private String link;
+    private int preference = 1;
     private String owner;
 
     ArrayList<String> SongLabels = new ArrayList<>();
@@ -49,5 +50,13 @@ public class Song {
 
     public void setOwner(String owner){
         this.owner = owner;
+    }
+
+    public void setPreference(int preference){
+        this.preference = preference;
+    }
+
+    public int getPreference(){
+        return preference;
     }
 }

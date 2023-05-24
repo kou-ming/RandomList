@@ -45,7 +45,7 @@
             <Font name="System Bold Italic" size="25.0" />
          </font>
       </Text>
-      <Button fx:id="bt_chscene_editor" layoutX="696.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#chscene_editor" prefHeight="40.0" prefWidth="80.0" text="編輯歌單" textFill="#6cb7ad">
+      <Button fx:id="bt_chscene_editor" layoutX="696.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#chscene_editor" prefHeight="40.0" prefWidth="85.0" text="編輯歌單" textFill="#6cb7ad">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

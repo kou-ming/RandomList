@@ -15,10 +15,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.io.File;
+
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -53,7 +52,22 @@ public class EditController implements Initializable{
     private Button bt_add_tag;
 
     @FXML
+    private Button bt_song_preference;
+
+    @FXML
+    private Button bt_song_preference1;
+
+    @FXML
+    private Button bt_song_preference2;
+
+    @FXML
+    private Button bt_song_preference3;
+
+    @FXML
     private VBox song_buttons;
+
+    @FXML
+    private VBox song_preference_buttons;
 
     @FXML
     private TextField txt_song_amount;
@@ -190,7 +204,8 @@ public class EditController implements Initializable{
         txt_song_amount.setText(String.valueOf(song_amount));
     }
 
-    private Song song_to_delete;
+    private Song song_selected;
+    private double mouse_x, mouse_y;
     @FXML
     void get_Info(MouseEvent event) {
         //左鍵顯示已選取的歌曲的資訊
@@ -206,17 +221,17 @@ public class EditController implements Initializable{
                 Song_Info.appendText(" " + songinfo.getLabel(i));
             }
             song_buttons.setVisible(false);
-        }
+            song_preference_buttons.setVisible(false);
+       }
         //右鍵顯示按鈕列
         else if (event.getButton() == MouseButton.SECONDARY) {
-            song_to_delete = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
-            double x = event.getX();
-            double y = event.getY();
-            System.out.print(x + " ");
-            System.out.println(y);
-            song_buttons.setTranslateX(x + 570);
-            song_buttons.setTranslateY(y + 50);
+            song_selected = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
+            mouse_x = event.getX();
+            mouse_y = event.getY();
+            song_buttons.setTranslateX(mouse_x + 570);
+            song_buttons.setTranslateY(mouse_y + 50);
             song_buttons.setVisible(true);
+            song_preference_buttons.setVisible(false);
         }
     }
 
@@ -247,7 +262,7 @@ public class EditController implements Initializable{
     void delete_song(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
             for (int i = 0; i < songlist.size(); i++) {
-                if (songlist.get(i).equals(song_to_delete)) {
+                if (songlist.get(i).equals(song_selected)) {
                     songlist.remove(i);
                     break;
                 }
@@ -256,6 +271,54 @@ public class EditController implements Initializable{
             int song_amount = (int) sld_song_amount.getValue();
             txt_song_amount.setText(String.valueOf(song_amount));
             song_buttons.setVisible(false);
+            song_preference_buttons.setVisible(false);
+        }
+    }
+
+    //左鍵點擊按鈕展開歌曲偏好按鈕列
+    @FXML
+    void song_preference(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY){
+            song_preference_buttons.setTranslateX(mouse_x + 570);
+            song_preference_buttons.setTranslateY(mouse_y + 50);
+            song_preference_buttons.setVisible(true);
+        }
+    }
+
+
+    @FXML
+    void song_preference1_selected(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            song_selected.setPreference(1);
+            song_preference_buttons.setVisible(false);
+
+            for (int i = 0; i < songlist.size(); i++) {
+                System.out.println(songlist.get(i).getPreference());
+            }
+        }
+    }
+
+    @FXML
+    void song_preference2_selected(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            song_selected.setPreference(2);
+            song_preference_buttons.setVisible(false);
+
+            for (int i = 0; i < songlist.size(); i++) {
+                System.out.println(songlist.get(i).getPreference());
+            }
+        }
+    }
+
+    @FXML
+    void song_preference3_selected(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            song_selected.setPreference(3);
+            song_preference_buttons.setVisible(false);
+
+            for (int i = 0; i < songlist.size(); i++) {
+                System.out.println(songlist.get(i).getPreference());
+            }
         }
     }
 
@@ -274,6 +337,7 @@ public class EditController implements Initializable{
     @FXML
     void main_plane_clicked(MouseEvent event) {
         song_buttons.setVisible(false);
+        song_preference_buttons.setVisible(false);
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
