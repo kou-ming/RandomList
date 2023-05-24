@@ -53,7 +53,7 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <Button fx:id="bt_random" layoutX="26.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="隨機">
+      <Button fx:id="bt_random" layoutX="26.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#random_playlist" prefHeight="60.0" prefWidth="117.0" text="隨機排序">
          <font>
             <Font size="18.0" />
          </font>
@@ -84,7 +84,7 @@
             <TableColumn fx:id="SongName" prefWidth="492.6666564941406" text="歌名" />
          </columns>
       </TableView>
-      <TextArea fx:id="Song_Info" editable="false" layoutX="375.0" layoutY="440.0" prefHeight="120.0" prefWidth="761.0">
+      <TextArea fx:id="Song_Info" editable="false" layoutX="375.0" layoutY="440.0" prefHeight="130.0" prefWidth="761.0">
          <font>
             <Font size="14.0" />
          </font></TextArea>
@@ -92,7 +92,7 @@
          <children>
             <Button fx:id="bt_delete_song" mnemonicParsing="false" onMouseClicked="#delete_song" prefHeight="30.0" prefWidth="80.0" text="刪除歌曲" />
             <Button fx:id="bt_add_tag" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="加入標籤" />
-            <Button fx:id="bt_song_preference" mnemonicParsing="false" onMouseClicked="#song_preference" prefHeight="30.0" prefWidth="80.0" text="歌曲偏好＞" />
+            <Button fx:id="bt_song_preference" mnemonicParsing="false" onMouseEntered="#song_preference" onMouseExited="#hide_song_preference" prefHeight="30.0" prefWidth="80.0" text="歌曲偏好＞" />
          </children>
       </VBox>
       <VBox fx:id="song_preference_buttons" layoutX="76.0" layoutY="61.0" prefHeight="200.0" prefWidth="82.0" visible="false">
@@ -157,7 +157,7 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="Editor2" layoutX="375.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#bt_editor2" text="許高銘" toggleGroup="$Editor" />
-      <RadioButton fx:id="bt_only_random" layoutX="170.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#only_random" selected="true" text="純隨機">
+      <RadioButton fx:id="bt_only_random" layoutX="217.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#only_random" selected="true" text="純隨機">
          <font>
             <Font size="16.0" />
          </font>
@@ -165,10 +165,15 @@
             <ToggleGroup fx:id="random_type" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="bt_random_and_preference" layoutX="258.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#random_and_preference" text="隨機 +偏好加權" toggleGroup="$random_type">
+      <RadioButton fx:id="bt_random_and_preference" layoutX="305.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#random_and_preference" text="隨機 +偏好加權" toggleGroup="$random_type">
          <font>
             <Font size="16.0" />
          </font>
       </RadioButton>
+      <Label layoutX="171.0" layoutY="214.0" text="排序:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
