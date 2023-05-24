@@ -64,6 +64,12 @@ public class EditController implements Initializable{
     private Button bt_song_preference3;
 
     @FXML
+    private RadioButton bt_only_random;
+
+    @FXML
+    private RadioButton bt_random_and_preference;
+
+    @FXML
     private VBox song_buttons;
 
     @FXML
@@ -100,12 +106,13 @@ public class EditController implements Initializable{
 
     private String editor = "薛耀智";
 
+    private String create_sublist_mode= "純隨機";
+
     @FXML
     void random_playlist(MouseEvent event) {
         ObservableList<Song> temp = FXCollections.observableArrayList();
         int num = songlist.size();
         Random random = new Random();
-        Scanner input = new Scanner(System.in);
 
         //隨機排序不重複歌曲
         while (true) {
@@ -146,38 +153,115 @@ public class EditController implements Initializable{
     //創建子歌單
     @FXML
     void create_subplaylist(MouseEvent event) {
-        ObservableList<Song> temp = FXCollections.observableArrayList();
-        int num = songlist.size();
-        int song_amount = Integer.parseInt(txt_song_amount.getText());
-        System.out.println(song_amount);
-        Random random = new Random();
-        Scanner input = new Scanner(System.in);
+        if (bt_only_random.isSelected()){
+            Random random = new Random();
+            ObservableList<Song> temp = FXCollections.observableArrayList();
+            int num = songlist.size();
+            int song_amount = Integer.parseInt(txt_song_amount.getText());
 
-        while (true) {
-            boolean repeat = false;
-            int rand_num = random.nextInt(num);
-            for (int i = 0; i < temp.size(); i++) {
-                if (temp.get(i).equals(songlist.get(rand_num))) {
-                    repeat = true;
+            while (true) {
+                boolean repeat = false;
+                int rand_num = random.nextInt(num);
+                for (int i = 0; i < temp.size(); i++) {
+                    if (temp.get(i).equals(songlist.get(rand_num))) {
+                        repeat = true;
+                        break;
+                    }
+                }
+                if (!repeat) {
+                    temp.add(songlist.get(rand_num));
+                }
+                if (temp.size() == song_amount) {
                     break;
                 }
             }
-            if (!repeat) {
-                temp.add(songlist.get(rand_num));
-            }
-            if (temp.size() == song_amount) {
-                break;
+
+            int temp_size = temp.size();
+            songlist.clear();
+            for(int i = 0 ; i < temp_size ; i++){
+                songlist.add(temp.get(i));
             }
         }
+        else if (bt_random_and_preference.isSelected()) {
+            Random random = new Random();
+            ObservableList<Song> temp_final = FXCollections.observableArrayList();
+            ObservableList<Song> temp_1 = FXCollections.observableArrayList();
+            ObservableList<Song> temp_2 = FXCollections.observableArrayList();
+            ObservableList<Song> temp_3 = FXCollections.observableArrayList();
+            int num = songlist.size();
+            int song_amount = Integer.parseInt(txt_song_amount.getText());
+            int x = song_amount / 10 + 1;
+            int y = song_amount % 10;
 
-        int temp_size = temp.size();
-        songlist.clear();
-        for(int i = 0 ; i < temp_size ; i++){
-            songlist.add(temp.get(i));
+            for (int i = 0; i < songlist.size(); i++) {
+                if (songlist.get(i).getPreference() == 1){
+                    temp_1.add(songlist.get(i));
+                }
+                else if (songlist.get(i).getPreference() == 2){
+                    temp_2.add(songlist.get(i));
+                }
+                else if (songlist.get(i).getPreference() == 3){
+                    temp_3.add(songlist.get(i));
+                }
+            }
+
+            for (int i = 0; i < x; i++) {
+                int temp = 10;
+                if (i == x - 1){
+                    temp = y;
+                }
+
+                for (int j = 0; j < temp; j++) {
+                    if (j >= 8){
+                        temp_final.add(temp_1.get(0));
+                        temp_1.remove(0);
+                    }
+                    else if (j >= 5) {
+                        if (temp_2.size() != 0) {
+                            temp_final.add(temp_2.get(0));
+                            temp_2.remove(0);
+                        }
+                        else {
+                            temp_final.add(temp_1.get(0));
+                            temp_1.remove(0);
+                        }
+                    }
+                    else if (j >= 0) {
+                        if (temp_3.size() != 0){
+                            temp_final.add(temp_3.get(0));
+                            temp_3.remove(0);
+                        }
+                        else if (temp_2.size() != 0) {
+                            temp_final.add(temp_2.get(0));
+                            temp_2.remove(0);
+                        }
+                        else {
+                            temp_final.add(temp_1.get(0));
+                            temp_1.remove(0);
+                        }
+                    }
+                }
+            }
+
+            int temp_final_size = temp_final.size();
+            songlist.clear();
+            for(int i = 0 ; i < temp_final_size ; i++){
+                songlist.add(temp_final.get(i));
+            }
         }
 
         //設定拉桿長度最大值為歌單長度
         sld_song_amount.setMax(songlist.size());
+    }
+
+    @FXML
+    void only_random(MouseEvent event) {
+
+    }
+
+    @FXML
+    void random_and_preference(MouseEvent event) {
+
     }
 
     //拉桿的值配合文字的值改變
@@ -216,6 +300,7 @@ public class EditController implements Initializable{
             Song_Info.appendText(songinfo.getChannel() + "\n");
             Song_Info.appendText(songinfo.getDuration() + "\n");
             Song_Info.appendText(songinfo.getLink() + "\n");
+            Song_Info.appendText("偏好: " + songinfo.getPreference() + "\n");
             Song_Info.appendText("標籤：");
             for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
                 Song_Info.appendText(" " + songinfo.getLabel(i));

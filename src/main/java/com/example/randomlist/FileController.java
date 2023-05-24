@@ -86,6 +86,7 @@ public class FileController implements Initializable {
             Song_Info.appendText(songinfo.getChannel() + "\n");
             Song_Info.appendText(songinfo.getDuration() + "\n");
             Song_Info.appendText(songinfo.getLink() + "\n");
+            Song_Info.appendText("偏好: " + songinfo.getPreference() + "\n");
             Song_Info.appendText("標籤：");
             for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
                 Song_Info.appendText(" " + songinfo.getLabel(i));

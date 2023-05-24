@@ -17,7 +17,7 @@
           <TableColumn fx:id="SongName" prefWidth="492.6666564941406" text="歌名" />
         </columns>
       </TableView>
-      <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="404.0" prefHeight="108.0" prefWidth="759.0">
+      <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="404.0" prefHeight="120.0" prefWidth="759.0">
          <font>
             <Font size="14.0" />
          </font></TextArea>

@@ -63,18 +63,18 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="bt_pick10" layoutX="9.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#create_subplaylist" prefHeight="60.0" prefWidth="151.0" text="隨機建立子歌單">
+      <Button fx:id="bt_pick10" layoutX="26.0" layoutY="164.0" mnemonicParsing="false" onMouseClicked="#create_subplaylist" prefHeight="60.0" prefWidth="117.0" text="建立子歌單">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <TextField fx:id="txt_song_amount" alignment="CENTER" layoutX="171.0" layoutY="167.0" onKeyReleased="#sld_song_amount_change" prefHeight="38.0" prefWidth="52.0" text="10">
+      <TextField fx:id="txt_song_amount" alignment="CENTER" layoutX="171.0" layoutY="156.0" onKeyReleased="#sld_song_amount_change" prefHeight="38.0" prefWidth="52.0" text="10">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <Slider fx:id="sld_song_amount" layoutX="258.0" layoutY="179.0" onKeyReleased="#txt_song_amount_change_key" onMouseReleased="#txt_song_amount_change_mouse" prefHeight="14.0" prefWidth="260.0" value="10.0" />
-      <Label layoutX="228.0" layoutY="166.0" prefHeight="40.0" prefWidth="19.0" text="首">
+      <Slider fx:id="sld_song_amount" layoutX="258.0" layoutY="168.0" onKeyReleased="#txt_song_amount_change_key" onMouseReleased="#txt_song_amount_change_mouse" prefHeight="14.0" prefWidth="260.0" value="10.0" />
+      <Label layoutX="228.0" layoutY="155.0" prefHeight="40.0" prefWidth="19.0" text="首">
          <font>
             <Font size="16.0" />
          </font>
@@ -84,7 +84,7 @@
             <TableColumn fx:id="SongName" prefWidth="492.6666564941406" text="歌名" />
          </columns>
       </TableView>
-      <TextArea fx:id="Song_Info" editable="false" layoutX="375.0" layoutY="440.0" prefHeight="108.0" prefWidth="761.0">
+      <TextArea fx:id="Song_Info" editable="false" layoutX="375.0" layoutY="440.0" prefHeight="120.0" prefWidth="761.0">
          <font>
             <Font size="14.0" />
          </font></TextArea>
@@ -101,47 +101,47 @@
             <Button fx:id="bt_song_preference2" mnemonicParsing="false" onMouseClicked="#song_preference2_selected" prefHeight="30.0" prefWidth="50.0" text="2" />
             <Button fx:id="bt_song_preference1" mnemonicParsing="false" onMouseClicked="#song_preference1_selected" prefHeight="30.0" prefWidth="50.0" text="1" />
          </children></VBox>
-      <Button layoutX="26.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#add_song" prefHeight="60.0" prefWidth="118.0" text="加入歌曲">
+      <Button layoutX="26.0" layoutY="313.0" mnemonicParsing="false" onMouseClicked="#add_song" prefHeight="60.0" prefWidth="118.0" text="加入歌曲">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label layoutX="168.0" layoutY="241.0" prefHeight="30.0" prefWidth="75.0" text="歌曲名稱">
+      <Label layoutX="168.0" layoutY="270.0" prefHeight="30.0" prefWidth="75.0" text="歌曲名稱">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="168.0" layoutY="280.0" prefHeight="30.0" prefWidth="75.0" text="連結">
+      <Label layoutX="168.0" layoutY="309.0" prefHeight="30.0" prefWidth="75.0" text="連結">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txt_add_song_name" layoutX="264.0" layoutY="240.0" prefHeight="32.0" prefWidth="250.0" promptText="必填">
+      <TextField fx:id="txt_add_song_name" layoutX="264.0" layoutY="269.0" prefHeight="32.0" prefWidth="250.0" promptText="必填">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="txt_add_song_link" layoutX="264.0" layoutY="279.0" prefHeight="32.0" prefWidth="250.0" promptText="必填">
+      <TextField fx:id="txt_add_song_link" layoutX="264.0" layoutY="308.0" prefHeight="32.0" prefWidth="250.0" promptText="必填">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <Label layoutX="168.0" layoutY="320.0" prefHeight="30.0" prefWidth="95.0" text="歌手/創作者">
+      <Label layoutX="168.0" layoutY="349.0" prefHeight="30.0" prefWidth="95.0" text="歌手/創作者">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txt_add_song_artist" layoutX="264.0" layoutY="319.0" prefHeight="32.0" prefWidth="250.0" promptText="非必填">
+      <TextField fx:id="txt_add_song_artist" layoutX="264.0" layoutY="348.0" prefHeight="32.0" prefWidth="250.0" promptText="非必填">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <Label layoutX="168.0" layoutY="360.0" prefHeight="30.0" prefWidth="95.0" text="歌曲長度">
+      <Label layoutX="168.0" layoutY="389.0" prefHeight="30.0" prefWidth="95.0" text="歌曲長度">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txt_add_song_length" layoutX="264.0" layoutY="359.0" prefHeight="32.0" prefWidth="250.0" promptText="非必填">
+      <TextField fx:id="txt_add_song_length" layoutX="264.0" layoutY="388.0" prefHeight="32.0" prefWidth="250.0" promptText="非必填">
          <font>
             <Font size="16.0" />
          </font>
@@ -157,5 +157,18 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="Editor2" layoutX="375.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#bt_editor2" text="許高銘" toggleGroup="$Editor" />
+      <RadioButton fx:id="bt_only_random" layoutX="170.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#only_random" selected="true" text="純隨機">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="random_type" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="bt_random_and_preference" layoutX="258.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#random_and_preference" text="隨機 +偏好加權" toggleGroup="$random_type">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </RadioButton>
    </children>
 </AnchorPane>
