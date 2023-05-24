@@ -185,6 +185,7 @@ public class EditController implements Initializable{
             ObservableList<Song> temp_3 = FXCollections.observableArrayList();
             int song_amount = Integer.parseInt(txt_song_amount.getText());
             int x, y;
+            //計算有幾輪的十首歌
             if (song_amount % 10 == 0){
                 x = song_amount / 10;
                 y = 10;
@@ -194,7 +195,7 @@ public class EditController implements Initializable{
                 y = song_amount % 10;
             }
 
-
+            //將不同偏好值的歌分類
             for (int i = 0; i < songlist.size(); i++) {
                 if (songlist.get(i).getPreference() == 1){
                     temp_1.add(songlist.get(i));
@@ -214,6 +215,7 @@ public class EditController implements Initializable{
                     range = y;
                 }
 
+                //根據不同偏好值調整控制歌曲數量和優先度
                 for (int j = 0; j < range; j++) {
                     if (j >= 8){
                         temp.add(temp_1.get(0));
@@ -245,8 +247,7 @@ public class EditController implements Initializable{
                     }
                 }
 
-                System.out.println(temp.size());
-
+                //隨機排序不重複歌曲
                 int count = 0;
                 int num = temp.size();
                 while (true){
@@ -266,13 +267,9 @@ public class EditController implements Initializable{
                         break;
                     }
                 }
-
-                //暫時
-//                for (int m = 0; m < temp.size(); m++) {
-//                    temp_final.add(temp.get(m));
-//                }
             }
 
+            //清理原歌單，將修改過後的歌單內容放進原歌單中
             int temp_final_size = temp_final.size();
             songlist.clear();
             for(int i = 0 ; i < temp_final_size ; i++){
