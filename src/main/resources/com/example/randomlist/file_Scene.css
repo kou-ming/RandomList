@@ -1,0 +1,76 @@
+@font-face {
+    font-family: "Iansui094-Regular";
+    src: url("Iansui094-Regular.ttf");
+}
+
+.button {
+    -fx-background-color: rgb(0, 0, 0);
+    -fx-text-fill: rgb(17, 235, 210);
+    -fx-font-size: 16px;
+    /*-fx-font-family: "setofont";*/
+    -fx-font-family: "Iansui094-Regular";
+    -fx-font-weight: bold;
+}
+.button:hover {
+    -fx-background-color: rgb(50, 50, 50); /* 设置鼠标悬停时的背景颜色 */
+}
+
+.list_button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+.pane {
+    -fx-background-color: rgb(44, 46, 46); /* 使用十六进制颜色代码 */
+}
+
+
+/*表格設置*/
+
+.table-row-cell {
+    -fx-background-color: rgb(20, 20, 20); /* 设置背景颜色 */
+}
+
+.table-row-cell:hover {
+    -fx-background-color: rgb(50, 50, 50); /* 设置鼠标悬停时的背景颜色 */
+}
+
+.table-view .column-header {
+    -fx-background-color: rgb(180, 180, 180); /* 设置表头的背景颜色 */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgb(50, 50, 50); /* 设置选中行的背景颜色 */
+     -fx-text-fill: black;
+}
+
+.table-cell {
+    -fx-text-fill: white; /* 设置文本颜色 */
+}
+
+.table-view .scroll-bar:horizontal {
+    -fx-background-color: rgb(50, 50, 50); /* 设置水平滚动条的背景颜色 */
+}
+
+.table-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: rgb(80, 80, 80); /* 设置水平滚动条拖动块的背景颜色 */
+}
+
+/* 垂直滚动条 */
+.table-view .scroll-bar:vertical {
+    -fx-background-color: rgb(50, 50, 50); /* 设置垂直滚动条的背景颜色 */
+}
+
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color: rgb(80, 80, 80); /* 设置垂直滚动条拖动块的背景颜色 */
+}
+
+.text-area {
+    -fx-background-color: rgb(17, 235, 210);
+    -fx-text-fill: rgb(255, 255, 255);
+}
+
+.text-area .content {
+    -fx-control-inner-background: black;
+}

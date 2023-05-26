@@ -271,6 +271,8 @@ public class FileController implements Initializable {
     void create_listInfo(String list_name) throws IOException {
         list_name = list_name.replace(".txt", "");
         Button songlist_name = new Button(list_name);
+//        songlist_name.getStylesheets().add(String.valueOf(getClass().getResource("file_Scene.css")));
+        songlist_name.getStyleClass().add("list_button");
         songlist_name.setPrefSize(125, 50);
         songlist_name.setOnAction(event -> {
             System.out.println("Button clicked!");

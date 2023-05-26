@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -11,24 +12,29 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.FileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1152.0" styleClass="pane" stylesheets="@file_Scene.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.FileController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#454545" height="798.0" layoutX="1117.0" layoutY="-84.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="250.0" />
       <TableView fx:id="SongTableView" layoutX="204.0" layoutY="54.0" onMouseClicked="#get_Info" prefHeight="395.0" prefWidth="591.0">
         <columns>
           <TableColumn fx:id="ListName" prefWidth="590.0000050862631" text="未選取歌單" />
         </columns>
+         <styleClass>
+            <String fx:value="table-row-cell" />
+            <String fx:value="column-header" />
+            <String fx:value="scroll-bar" />
+         </styleClass>
       </TableView>
       <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="468.0" prefHeight="150.0" prefWidth="851.0">
          <font>
             <Font size="14.0" />
          </font></TextArea>
-      <Text layoutX="26.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="詳細資訊" wrappingWidth="107.72460556030273">
+      <Text fill="WHITE" layoutX="26.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="詳細資訊" wrappingWidth="107.72460556030273">
          <font>
             <Font name="System Bold Italic" size="25.0" />
          </font>
       </Text>
-      <Button fx:id="bt_chscene_editor" layoutX="797.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#chscene_editor" prefHeight="40.0" prefWidth="80.0" text="編輯歌單" textFill="#6cb7ad">
+      <Button fx:id="bt_chscene_editor" layoutX="797.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#chscene_editor" prefHeight="40.0" prefWidth="108.0" text="編輯歌單" textFill="#6cb7ad">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
