@@ -269,6 +269,12 @@ public class EditController implements Initializable{
                 }
             }
 
+
+
+
+
+
+
             //清理原歌單，將修改過後的歌單內容放進原歌單中
             int temp_final_size = temp_final.size();
             songlist.clear();
@@ -389,7 +395,7 @@ public class EditController implements Initializable{
     @FXML
     void hide_song_preference(MouseEvent event) {
 
-        //song_preference_buttons.setVisible(false);
+        song_preference_buttons.setVisible(false);
     }
 
     @FXML
@@ -453,6 +459,7 @@ public class EditController implements Initializable{
         //初始化表格
         SongName.setSortable(false);
         SongName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        SongName.setText(FileController.listname);
         SongTableView.setItems(songlist);
 
         sld_song_amount.setMax(songlist.size());

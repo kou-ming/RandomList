@@ -92,10 +92,10 @@
          <children>
             <Button fx:id="bt_delete_song" mnemonicParsing="false" onMouseClicked="#delete_song" prefHeight="30.0" prefWidth="80.0" text="刪除歌曲" />
             <Button fx:id="bt_add_tag" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="加入標籤" />
-            <Button fx:id="bt_song_preference" mnemonicParsing="false" onMouseEntered="#song_preference" onMouseExited="#hide_song_preference" prefHeight="30.0" prefWidth="80.0" text="歌曲偏好＞" />
+            <Button fx:id="bt_song_preference" mnemonicParsing="false" onMouseEntered="#song_preference" prefHeight="30.0" prefWidth="80.0" text="歌曲偏好＞" />
          </children>
       </VBox>
-      <VBox fx:id="song_preference_buttons" layoutX="76.0" layoutY="61.0" prefHeight="200.0" prefWidth="82.0" visible="false">
+      <VBox fx:id="song_preference_buttons" layoutX="76.0" layoutY="61.0" onMouseExited="#hide_song_preference" prefHeight="200.0" prefWidth="82.0" visible="false">
          <children>
             <Button fx:id="bt_song_preference3" mnemonicParsing="false" onMouseClicked="#song_preference3_selected" prefHeight="30.0" prefWidth="50.0" text="3" />
             <Button fx:id="bt_song_preference2" mnemonicParsing="false" onMouseClicked="#song_preference2_selected" prefHeight="30.0" prefWidth="50.0" text="2" />

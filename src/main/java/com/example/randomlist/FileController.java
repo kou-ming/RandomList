@@ -45,6 +45,9 @@ public class FileController implements Initializable {
     public String File_path = "c:";
     static public ObservableList<Song> List = FXCollections.observableArrayList();  //儲存歌曲的List
     static public ObservableList<List_Info> ALL_List = FXCollections.observableArrayList();  //儲存本地歌單
+    static public String listname;
+
+
     //開啟歌單(清除上一個歌單紀錄)
     @FXML
     void openList(MouseEvent event) {
@@ -275,6 +278,7 @@ public class FileController implements Initializable {
         songlist_name.setOnAction(event -> {
             System.out.println("Button clicked!");
             ListName.setText(songlist_name.getText());
+            listname = songlist_name.getText();
             List.clear();
             path = "src\\main\\java\\SongList_File\\" + songlist_name.getText() + ".txt";
             readFile(path);
