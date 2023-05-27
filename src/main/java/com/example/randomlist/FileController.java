@@ -21,7 +21,9 @@ import javafx.scene.layout.VBox;
 
 import java.io.*;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class FileController implements Initializable {
@@ -45,6 +47,12 @@ public class FileController implements Initializable {
     public String File_path = "c:";
     static public ObservableList<Song> List = FXCollections.observableArrayList();  //儲存歌曲的List
     static public ObservableList<List_Info> ALL_List = FXCollections.observableArrayList();  //儲存本地歌單
+
+    public String[] Youtubename = {"George","Inventor 發明家 697","Wang wen-ho","evan"};
+    public String[] Username = {"薛耀智", "許高銘", "王文和", "鍾君逸"};
+
+    public Map<String, String> User_Map = new HashMap<>();
+
     //開啟歌單(清除上一個歌單紀錄)
     @FXML
     void openList(MouseEvent event) {
@@ -157,6 +165,9 @@ public class FileController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fileChooser.setInitialDirectory(new File("C:\\Users\\user\\Downloads"));    //將初始路徑設為"下載"
 
+        for(int i = 0 ; i < Username.length ; i++){
+            User_Map.put(Youtubename[i], Username[i]);
+        }
         //初始化表格
         ListName.setSortable(false);
         ListName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -179,7 +190,15 @@ public class FileController implements Initializable {
 
                     String[] row = line.split("\t");
                     if(index_line >= 0){
-                        List.add(new Song(row[0], row[1],row[2],row[3]));
+                        String ownerlname = check_owner(row[1]);
+                        if(!ownerlname.equals("")){
+                            Song song = new Song(row[0], row[1].replace(ownerlname, ""),row[2],row[3]);
+                            song.setOwner(User_Map.get(ownerlname));
+                            List.add(song);
+                        }
+                        else{
+                            List.add(new Song(row[0], row[1],row[2],row[3]));
+                        }
                     }
                     for (int i = 4 ; i < row.length ; i++){
                         List.get(index_line).addLabel(row[i]);
@@ -203,6 +222,15 @@ public class FileController implements Initializable {
         }
     }
 
+    String check_owner(String name){
+        for(String user : User_Map.keySet()){
+            if(name.matches("(.*)" + user)){
+                System.out.println(user);
+                return user;
+            }
+        }
+        return "";
+    }
     //將List資料編寫成檔案
     void saveSystem(File file, ObservableList<Song> List){
         try {
