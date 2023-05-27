@@ -24,6 +24,9 @@
             <String fx:value="column-header" />
             <String fx:value="scroll-bar" />
          </styleClass>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="468.0" prefHeight="150.0" prefWidth="851.0">
          <font>
