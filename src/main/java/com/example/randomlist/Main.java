@@ -7,8 +7,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application{
+
+    public static Stage  primaryStage;
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("file_Scene.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1152, 648);
         stage.setTitle("RandomList");

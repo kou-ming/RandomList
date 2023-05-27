@@ -20,7 +20,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#454545" height="798.0" layoutX="1117.0" layoutY="-84.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="250.0" />
       <TableView fx:id="SongTableView" layoutX="204.0" layoutY="54.0" onMouseClicked="#get_Info" prefHeight="395.0" prefWidth="591.0">
         <columns>
-          <TableColumn fx:id="ListName" prefWidth="590.0000050862631" text="未選取歌單" />
+          <TableColumn fx:id="ListName" prefWidth="-1.0" sortable="false" text="未選取歌單" />
         </columns>
          <styleClass>
             <String fx:value="table-row-cell" />
@@ -31,11 +31,11 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="468.0" prefHeight="150.0" prefWidth="851.0">
+      <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="468.0" prefHeight="150.0" prefWidth="880.0">
          <font>
             <Font size="14.0" />
          </font></TextArea>
-      <Text fill="WHITE" layoutX="26.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="詳細資訊" wrappingWidth="107.72460556030273">
+      <Text fill="#ff6f6f" layoutX="26.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="詳細資訊" wrappingWidth="107.72460556030273">
          <font>
             <Font name="System Bold Italic" size="25.0" />
          </font>
@@ -46,23 +46,26 @@
          </font>
       </Button>
       <VBox fx:id="SongList_view" layoutX="32.0" layoutY="54.0" prefHeight="332.0" prefWidth="125.0" />
-      <HBox layoutX="689.0" layoutY="14.0" prefHeight="36.0" prefWidth="499.0">
+      <HBox layoutX="655.0" layoutY="13.0" prefHeight="36.0" prefWidth="499.0">
          <children>
-            <Button fx:id="bt_Call_newlistPopup" mnemonicParsing="false" onMouseClicked="#call_newlistPopup" prefHeight="36.0" prefWidth="133.0" text="建立空白歌單" textFill="#6064d9">
+            <Button fx:id="bt_Call_newlistPopup" mnemonicParsing="false" onMouseClicked="#call_newlistPopup" prefHeight="36.0" prefWidth="133.0" styleClass="toggle-button" text="建立空白歌單" textFill="#6064d9">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
             <Button fx:id="bt_OpenList" mnemonicParsing="false" onMouseClicked="#openList" prefHeight="50.0" prefWidth="100.0" text="開啟歌單" textFill="#6064d9">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" width="15.0" />
             <Button fx:id="bt_AddList" mnemonicParsing="false" onMouseClicked="#AddList" prefHeight="50.0" prefWidth="100.0" text="導入歌單" textFill="#2e9641">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" width="15.0" />
             <Button fx:id="bt_ExportList" mnemonicParsing="false" onMouseClicked="#exportList" prefHeight="50.0" prefWidth="100.0" text="輸出歌單" textFill="#d25e5e">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -70,23 +73,28 @@
             </Button>
          </children>
       </HBox>
-      <Label layoutX="204.0" layoutY="20.0" prefHeight="22.0" prefWidth="60.0" text="編輯者:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <RadioButton fx:id="Editor1" layoutX="261.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#bt_editor1" text="薛耀智">
-         <toggleGroup>
-            <ToggleGroup fx:id="Editor" />
-         </toggleGroup>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="Editor2" layoutX="346.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#bt_editor2" text="許高銘" toggleGroup="$Editor">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </RadioButton>
+      <HBox layoutX="216.0" layoutY="12.0" prefHeight="37.0" prefWidth="311.0">
+         <children>
+            <Label prefHeight="32.0" prefWidth="73.0" text="編輯者：" textFill="#d9d9d9">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="Editor1" mnemonicParsing="false" onMouseClicked="#bt_editor1" text="薛耀智">
+               <toggleGroup>
+                  <ToggleGroup fx:id="Editor" />
+               </toggleGroup>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
+            <RadioButton fx:id="Editor2" mnemonicParsing="false" onMouseClicked="#bt_editor2" text="許高銘" toggleGroup="$Editor">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

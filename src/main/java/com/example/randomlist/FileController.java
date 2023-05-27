@@ -16,6 +16,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 
@@ -61,7 +62,7 @@ public class FileController implements Initializable {
 
     static public String editor = "";
 
-    static public String listname;
+    static public String listname = "未選取歌單";
 
     //開啟歌單(清除上一個歌單紀錄)
     @FXML
@@ -123,19 +124,13 @@ public class FileController implements Initializable {
             System.out.println(ALL_List.get(i).getName());
         }
         Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(Main. primaryStage);
+
         Pane popupRoot = FXMLLoader.load(getClass().getResource("new_list_popupScene.fxml"));
-
-//        TextField textField2 = new TextField();
-//        textField2.setPrefWidth(200);
-
         TextField textfield = new TextField();
         textfield.setPrefWidth(200);
-//        textfield.setLayoutX(26);
-
-
         VBox.setMargin(textfield, new Insets(50, 0, 0, 0)); // 设置上边距为50
-
-        TextField textField1 = new TextField();
         textfield.setPrefSize(300, 40);
 
         VBox.setMargin(textfield, new Insets(100, 0, 0, 0)); // 设置上边距为50
@@ -167,7 +162,7 @@ public class FileController implements Initializable {
         popupRoot.getChildren().add(button);
         Scene popupScene = new Scene(popupRoot, 400, 300);
         popupStage.setScene(popupScene);
-        popupStage.show();
+        popupStage.showAndWait();
 
     }
     //初始化
@@ -180,6 +175,7 @@ public class FileController implements Initializable {
         //初始化表格
         ListName.setSortable(false);
         ListName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ListName.setText(listname);
         SongTableView.setItems(List);
 
         loadFile();
@@ -241,7 +237,6 @@ public class FileController implements Initializable {
     String check_owner(String name){
         for(String user : User_Map.keySet()){
             if(name.matches("(.*)" + user)){
-                System.out.println(user);
                 return user;
             }
         }
@@ -285,6 +280,7 @@ public class FileController implements Initializable {
                     String[] row = line.split("\t");
                     if(index_line >= 0){
                         path = "src\\main\\java\\SongList_File\\SongList_File\\" + row[0];
+
                         ALL_List.add(new List_Info(row[0]));
                         create_listInfo(row[0]);
                     }
@@ -319,8 +315,8 @@ public class FileController implements Initializable {
         songlist_name.setPrefSize(125, 50);
         songlist_name.setOnAction(event -> {
             System.out.println("Button clicked!");
-            ListName.setText(songlist_name.getText());
             listname = songlist_name.getText();
+            ListName.setText(listname);
             List.clear();
             path = "src\\main\\java\\SongList_File\\" + songlist_name.getText() + ".txt";
             readFile(path);
@@ -342,7 +338,7 @@ public class FileController implements Initializable {
 
         try {
             if (file.createNewFile()) {
-                System.out.println("文件创建成功！");
+                System.out.println("文件創建成功！");
                 return true;
             } else {
                 System.out.println("文件已存在！");
