@@ -59,9 +59,9 @@ public class FileController implements Initializable {
 
     public Map<String, String> User_Map = new HashMap<>();
 
-    public String editor = "";
+    static public String editor = "";
 
-    public String listname;
+    static public String listname;
 
     //開啟歌單(清除上一個歌單紀錄)
     @FXML
