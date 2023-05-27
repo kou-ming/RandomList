@@ -117,9 +117,6 @@ public class FileController implements Initializable {
         Stage popupStage = new Stage();
         Pane popupRoot = FXMLLoader.load(getClass().getResource("new_list_popupScene.fxml"));
 
-
-
-
 //        TextField textField2 = new TextField();
 //        textField2.setPrefWidth(200);
 

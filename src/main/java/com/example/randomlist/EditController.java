@@ -106,8 +106,6 @@ public class EditController implements Initializable{
 
     private String editor;
 
-    private String create_sublist_mode= "純隨機";
-
     private Song songinfo;
 
     private void nonrepeat_random_sublist(int sublist_size){
@@ -269,12 +267,6 @@ public class EditController implements Initializable{
                     }
                 }
             }
-
-
-
-
-
-
 
             //清理原歌單，將修改過後的歌單內容放進原歌單中
             int temp_final_size = temp_final.size();
