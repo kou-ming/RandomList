@@ -9,7 +9,7 @@ public class Song {
     private String duration;
     private String link;
     private int preference = 1;
-    private String owner;
+    private String owner = "";
 
     ArrayList<String> SongLabels = new ArrayList<>();
 
@@ -48,6 +48,14 @@ public class Song {
         return SongLabels.get(index);
     }
 
+    public int getPreference(){
+        return preference;
+    }
+
+    public String getOwner(){
+        return owner;
+    }
+
     public void setOwner(String owner){
         this.owner = owner;
     }
@@ -56,7 +64,5 @@ public class Song {
         this.preference = preference;
     }
 
-    public int getPreference(){
-        return preference;
-    }
+
 }

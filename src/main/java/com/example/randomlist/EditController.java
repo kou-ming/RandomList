@@ -104,9 +104,7 @@ public class EditController implements Initializable{
 
     public ObservableList<Song> songlist = FileController.List;
 
-    private String editor = "薛耀智";
-
-    private String create_sublist_mode= "純隨機";
+    private String editor;
 
     private Song songinfo;
 
@@ -143,10 +141,11 @@ public class EditController implements Initializable{
 
     private void show_song_detail(){
         Song_Info.clear();
-        Song_Info.appendText(songinfo.getName() + "\n");
-        Song_Info.appendText(songinfo.getChannel() + "\n");
-        Song_Info.appendText(songinfo.getDuration() + "\n");
-        Song_Info.appendText(songinfo.getLink() + "\n");
+        Song_Info.appendText("歌名: " + songinfo.getName() + "\n");
+        Song_Info.appendText("歌曲連結: " + songinfo.getLink() + "\n");
+        Song_Info.appendText("頻道名稱: " + songinfo.getChannel() + "\n");
+        Song_Info.appendText("歌曲長度: " + songinfo.getDuration() + "\n");
+        Song_Info.appendText("添加者: " + songinfo.getOwner() + "\n");
         Song_Info.appendText("偏好: " + songinfo.getPreference() + "\n");
         Song_Info.appendText("標籤：");
         for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
@@ -389,7 +388,7 @@ public class EditController implements Initializable{
     @FXML
     void hide_song_preference(MouseEvent event) {
 
-        //song_preference_buttons.setVisible(false);
+        song_preference_buttons.setVisible(false);
     }
 
     @FXML
@@ -434,13 +433,13 @@ public class EditController implements Initializable{
     @FXML
     void bt_editor1(MouseEvent event) {
         editor = "薛耀智";
-        System.out.println(editor);
+        FileController.editor = editor;
     }
 
     @FXML
     void bt_editor2(MouseEvent event) {
         editor = "許高銘";
-        System.out.println(editor);
+        FileController.editor = editor;
     }
 
     @FXML
@@ -450,11 +449,28 @@ public class EditController implements Initializable{
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        editor = FileController.editor;
+        if (editor.equals("薛耀智")){
+            Editor1.setSelected(true);
+        }
+        else if (editor.equals("許高銘")){
+            Editor2.setSelected(true);
+        }
+
+        for (int i = 0; i < songlist.size(); i++) {
+            if (songlist.get(i).getOwner().equals("")){
+                songlist.get(i).setOwner(editor);
+            }
+        }
+
         //初始化表格
         SongName.setSortable(false);
         SongName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        SongName.setText(FileController.listname);
         SongTableView.setItems(songlist);
 
         sld_song_amount.setMax(songlist.size());
+
+
     }
 }

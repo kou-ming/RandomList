@@ -40,6 +40,12 @@ public class FileController implements Initializable {
     @FXML
     private TextArea Song_Info;
 
+    @FXML
+    private RadioButton Editor1;
+
+    @FXML
+    private RadioButton Editor2;
+
 
     FileChooser fileChooser = new FileChooser();    //建立檔案選擇器
     public String path = "C:";  //預設檔案路徑
@@ -52,6 +58,10 @@ public class FileController implements Initializable {
     public String[] Username = {"薛耀智", "許高銘", "王文和", "鍾君逸"};
 
     public Map<String, String> User_Map = new HashMap<>();
+
+    public String editor = "";
+
+    public String listname;
 
     //開啟歌單(清除上一個歌單紀錄)
     @FXML
@@ -91,10 +101,11 @@ public class FileController implements Initializable {
         if (event.getButton() == MouseButton.PRIMARY) {
             Song songinfo = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
             Song_Info.clear();
-            Song_Info.appendText(songinfo.getName() + "\n");
-            Song_Info.appendText(songinfo.getChannel() + "\n");
-            Song_Info.appendText(songinfo.getDuration() + "\n");
-            Song_Info.appendText(songinfo.getLink() + "\n");
+            Song_Info.appendText("歌名: " + songinfo.getName() + "\n");
+            Song_Info.appendText("歌曲連結: " + songinfo.getLink() + "\n");
+            Song_Info.appendText("頻道名稱: " + songinfo.getChannel() + "\n");
+            Song_Info.appendText("歌曲長度: " + songinfo.getDuration() + "\n");
+            Song_Info.appendText("添加者: " + songinfo.getOwner() + "\n");
             Song_Info.appendText("偏好: " + songinfo.getPreference() + "\n");
             Song_Info.appendText("標籤：");
             for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
@@ -113,9 +124,6 @@ public class FileController implements Initializable {
         }
         Stage popupStage = new Stage();
         Pane popupRoot = FXMLLoader.load(getClass().getResource("new_list_popupScene.fxml"));
-
-
-
 
 //        TextField textField2 = new TextField();
 //        textField2.setPrefWidth(200);
@@ -175,6 +183,13 @@ public class FileController implements Initializable {
         SongTableView.setItems(List);
 
         loadFile();
+
+        if (editor.equals("薛耀智")){
+            Editor1.setSelected(true);
+        }
+        else if (editor.equals("許高銘")){
+            Editor2.setSelected(true);
+        }
     }
 
     //讀取檔案
@@ -305,6 +320,7 @@ public class FileController implements Initializable {
         songlist_name.setOnAction(event -> {
             System.out.println("Button clicked!");
             ListName.setText(songlist_name.getText());
+            listname = songlist_name.getText();
             List.clear();
             path = "src\\main\\java\\SongList_File\\" + songlist_name.getText() + ".txt";
             readFile(path);
@@ -359,11 +375,28 @@ public class FileController implements Initializable {
     //替轉至編輯頁面
     @FXML
     void chscene_editor(MouseEvent event) throws IOException {
-        System.out.println("change");
-        Parent root = FXMLLoader.load(getClass().getResource("ed_Scene.fxml"));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        if (Editor1.isSelected() || Editor2.isSelected()){
+            System.out.println("change");
+            Parent root = FXMLLoader.load(getClass().getResource("ed_Scene.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        else{
+            System.out.println("未選取編輯者");
+        }
+
     }
+
+    @FXML
+    void bt_editor1(MouseEvent event) {
+        editor = "薛耀智";
+    }
+
+    @FXML
+    void bt_editor2(MouseEvent event) {
+        editor = "許高銘";
+    }
+
 }

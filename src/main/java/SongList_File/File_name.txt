@@ -6,3 +6,4 @@ final.txt
 OMG.txt
 無敵.txt
 無敵蛋餅.txt
+sup.txt
