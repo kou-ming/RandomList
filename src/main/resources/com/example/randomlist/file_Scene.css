@@ -2,12 +2,14 @@
     font-family: "Iansui094-Regular";
     src: url("Iansui094-Regular.ttf");
 }
-* {
+/** {
         -fx-text-fill: rgb(17, 235, 210);
         -fx-base: rgb(50, 50, 50);
         -fx-font-weight: bold;
+        -fx-font-size: 14px;
         -fx-font-family: "Iansui094-Regular";
 }
+*/
 
 .label{
     -fx-text-fill: #d9d9d9;
@@ -41,6 +43,11 @@
 
 
 .pane {
+    -fx-text-fill: rgb(17, 235, 210);
+    -fx-base: rgb(50, 50, 50);
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-font-family: "Iansui094-Regular";
     -fx-background-color: rgb(44, 46, 46); /* 使用十六进制颜色代码 */
 }
 
@@ -68,8 +75,6 @@
 }
 
 .table-cell {
-    -fx-border-color: #94CFA3;
-    -fx-border-width: 1px;
     -fx-text-fill: white;
 }
 
@@ -97,13 +102,16 @@
 .text-area {
     -fx-background-color: #FA000A;
     -fx-text-fill: #D9D9D9;
+    -fx-text-size: 14px;
     -fx-background-radius: 5;
     -fx-border-radius: 5;
     -fx-border-width: 5px;
+
 }
 
 .text-area .content {
     -fx-control-inner-background: black;
+    -fx-text-size: 14px;
 }
 
 .radio-button {

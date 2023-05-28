@@ -16,12 +16,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class EditController implements Initializable{
 
@@ -113,11 +113,13 @@ public class EditController implements Initializable{
     private TextArea Song_Info;
 
     public ObservableList<Song> songlist = FileController.List;
+    public ArrayList<Song> ori_songlist = new ArrayList<>();
 
     private String editor;
 
     private Song songinfo;
 
+    public Map<String, String> User_to_Youtube = FileController.User_to_Youtube;
     private void nonrepeat_random_sublist(int sublist_size){
         ObservableList<Song> temp = FXCollections.observableArrayList();
         Random random = new Random();
@@ -171,6 +173,10 @@ public class EditController implements Initializable{
 
     @FXML
     void chscene_main(ActionEvent event) throws IOException {
+        songlist.clear();
+        for(Song song : ori_songlist){
+            songlist.add(song);
+        }
         System.out.println("change");
         Parent root = FXMLLoader.load(getClass().getResource("file_Scene.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -178,6 +184,39 @@ public class EditController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    void save_changes(MouseEvent event) throws IOException {
+        File file = new File(FileController.now_list_path);
+        try {
+            PrintWriter printWriter = new PrintWriter(file);
+            printWriter.write("<Name>	<Channel>	<Duration>	<URL>\n");
+            for(int i = 0; i < songlist.size() ; i++){
+                printWriter.write(songlist.get(i).getName() + "\t" + songlist.get(i).getChannel());
+                if(!songlist.get(i).getOwner().equals("")){
+                    printWriter.write(User_to_Youtube.get(songlist.get(i).getOwner()));
+                }
+                printWriter.write("\t" + songlist.get(i).getDuration() + "\t" + songlist.get(i).getLink() + "\t" + songlist.get(i).getPreference());
+
+                for(int j = 0 ; j < songlist.get(i).getLabelsize() ; j++){
+                    printWriter.write("\t" + songlist.get(i).getLabel(j));
+                }
+                printWriter.write("\n");
+            }
+            printWriter.close();
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("change");
+        Parent root = FXMLLoader.load(getClass().getResource("file_Scene.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     //創建子歌單
     @FXML
@@ -522,12 +561,12 @@ public class EditController implements Initializable{
         song_preference_buttons.setVisible(false);
     }
 
-    @FXML
-    void save_changes(MouseEvent event) {
-        //將當前變更寫入檔案裡
-    }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        for(Song song : songlist){
+            ori_songlist.add(song);
+        }
         editor = FileController.editor;
         if (editor.equals("薛耀智")){
             Editor1.setSelected(true);

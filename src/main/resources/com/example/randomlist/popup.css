@@ -2,11 +2,12 @@
     font-family: "Iansui094-Regular";
     src: url("Iansui094-Regular.ttf");
 }
-* {
-        -fx-text-fill: white;
-        -fx-font-weight: bold;
-        -fx-font-family: "Iansui094-Regular";
-        -fx-background-color: black;
+.pane {
+    -fx-text-fill: rgb(17, 235, 210);
+    -fx-base: rgb(50, 50, 50);
+    -fx-font-weight: bold;
+    -fx-font-family: "Iansui094-Regular";
+    -fx-background-color: black; /* 使用十六进制颜色代码 */
 }
 
 .label{
@@ -26,6 +27,55 @@
     -fx-border-radius: 3;
 }
 
-.text{
-    -fx-text-fill: white;
+.text-field {
+    -fx-background-color: #FFFFFF; /* 背景颜色 */
+    -fx-border-color: white; /* 边框颜色 */
+    -fx-border-width: 3px; /* 边框宽度 */
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 5px; /* 内边距 */
+    -fx-font-size: 17px; /* 字体大小 */
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+.text-area {
+    -fx-background-color: #FA000A;
+    -fx-text-fill: #D9D9D9;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-width: 5px;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+
+}
+
+.text-area .content {
+    -fx-control-inner-background: black;
+}
+
+.text-area .scroll-bar:horizontal {
+    -fx-background-color: rgb(50, 50, 50); /* 设置水平滚动条的背景颜色 */
+}
+
+.text-area .scroll-bar:horizontal .thumb {
+    -fx-background-color: rgb(80, 80, 80); /* 设置水平滚动条拖动块的背景颜色 */
+}
+
+.text-area .scroll-bar:vertical {
+    -fx-background-color: rgb(50, 50, 50); /* 设置水平滚动条的背景颜色 */
+}
+
+/* 垂直滚动条 */
+.text-area .scroll-bar:pressed .vertical .thumb{
+    -fx-background-color: red; /* 设置垂直滚动条的背景颜色 */
+}
+
+.text-area .scroll-bar:vertical .thumb {
+    -fx-background-color: rgb(80, 80, 80); /* 设置垂直滚动条拖动块的背景颜色 */
+}
+
+.text-area .scroll-pane .scroll-bar {
+    -fx-pref-width: 13px;
+    -fx-pref-height: 13px;
 }

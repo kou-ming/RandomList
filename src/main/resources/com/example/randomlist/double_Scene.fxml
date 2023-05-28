@@ -17,11 +17,23 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1152.0" styleClass="pane" stylesheets="@file_Scene.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.FileController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#454545" height="798.0" layoutX="1117.0" layoutY="-84.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="250.0" />
-      <TableView fx:id="SongTableView" layoutX="204.0" layoutY="54.0" onMouseClicked="#get_Info" prefHeight="395.0" prefWidth="591.0">
-        <columns>
-          <TableColumn fx:id="ListName" prefWidth="-1.0" sortable="false" text="未選取歌單" />
-        </columns>
+      <TableView fx:id="SongTableView" layoutY="54.0" onMouseClicked="#get_Info" prefHeight="368.0" prefWidth="450.0">
+         <columns>
+            <TableColumn fx:id="ListName" prefWidth="-1.0" sortable="false" text="未選取歌單" />
+         </columns>
+         <styleClass>
+            <String fx:value="table-row-cell" />
+            <String fx:value="column-header" />
+            <String fx:value="scroll-bar" />
+         </styleClass>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView fx:id="SongTableView1" layoutX="500.0" layoutY="54.0" onMouseClicked="#get_Info" prefHeight="368.0" prefWidth="450.0">
+         <columns>
+            <TableColumn fx:id="ListName1" prefWidth="-1.0" sortable="false" text="未選取歌單" />
+         </columns>
          <styleClass>
             <String fx:value="table-row-cell" />
             <String fx:value="column-header" />
@@ -34,41 +46,41 @@
       <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="468.0" prefHeight="150.0" prefWidth="880.0" styleClass="text-area">
          <font>
             <Font size="14.0" />
-         </font></TextArea>
+         </font>
+      </TextArea>
       <Text fill="#ff6f6f" layoutX="26.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="詳細資訊" wrappingWidth="107.72460556030273">
          <font>
             <Font name="System Bold Italic" size="25.0" />
          </font>
       </Text>
-      <VBox fx:id="SongList_view" layoutX="32.0" layoutY="54.0" prefHeight="332.0" prefWidth="125.0" />
-      <HBox layoutX="655.0" layoutY="13.0" prefHeight="36.0" prefWidth="499.0">
+      <VBox layoutX="990.0" layoutY="100.0" prefHeight="200.0" prefWidth="160.0">
          <children>
-            <Button fx:id="bt_Call_newlistPopup" mnemonicParsing="false" onMouseClicked="#call_newlistPopup" prefHeight="36.0" prefWidth="133.0" text="建立空白歌單" textFill="#6064d9">
+            <Button fx:id="bt_ExportList" mnemonicParsing="false" onMouseClicked="#exportList" prefHeight="50.0" prefWidth="130.0" text="開啟本地歌單" textFill="#d25e5e">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
+            <Button fx:id="bt_OpenList" mnemonicParsing="false" onMouseClicked="#openList" prefHeight="50.0" prefWidth="130.0" text="開啟外部歌單" textFill="#6064d9">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
-            <Button fx:id="bt_OpenList" mnemonicParsing="false" onMouseClicked="#openList" prefHeight="50.0" prefWidth="100.0" text="開啟歌單" textFill="#6064d9">
+            <Button fx:id="bt_AddList" mnemonicParsing="false" onMouseClicked="#AddList" prefHeight="50.0" prefWidth="130.0" text="導入外部歌單" textFill="#2e9641">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
+            <Button fx:id="bt_Call_newlistPopup" mnemonicParsing="false" onMouseClicked="#call_newlistPopup" prefHeight="36.0" prefWidth="130.0" text="清空原歌單" textFill="#6064d9">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" width="15.0" />
-            <Button fx:id="bt_AddList" mnemonicParsing="false" onMouseClicked="#AddList" prefHeight="50.0" prefWidth="100.0" text="導入歌單" textFill="#2e9641">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Button>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" width="15.0" />
-            <Button fx:id="bt_ExportList" mnemonicParsing="false" onMouseClicked="#exportList" prefHeight="50.0" prefWidth="100.0" text="輸出歌單" textFill="#d25e5e">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Button>
          </children>
-      </HBox>
-      <HBox layoutX="204.0" layoutY="13.0" prefHeight="37.0" prefWidth="349.0">
+      </VBox>
+      <HBox layoutX="500.0" layoutY="13.0" prefHeight="37.0" prefWidth="349.0">
          <children>
             <Label prefHeight="32.0" prefWidth="189.0" text="歌單擁有者/編輯者：" textFill="#d9d9d9">
                <font>
@@ -91,20 +103,5 @@
             </RadioButton>
          </children>
       </HBox>
-      <Button fx:id="bt_Call_labelPopup" layoutX="797.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#call_labelPopup" prefHeight="40.0" prefWidth="108.0" text="新增標籤" textFill="#6cb7ad">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="bt_chscene_double" layoutX="797.0" layoutY="346.0" mnemonicParsing="false" onMouseClicked="#bt_chscene_double" prefHeight="40.0" prefWidth="108.0" text="編輯歌單" textFill="#6cb7ad">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="bt_chscene_editor" layoutX="797.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#chscene_editor" prefHeight="40.0" prefWidth="108.0" text="歌單隨機" textFill="#6cb7ad">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
