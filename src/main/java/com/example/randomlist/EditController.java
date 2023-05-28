@@ -293,6 +293,7 @@ public class EditController implements Initializable{
             ArrayList<Song> temp4 = new ArrayList<>();
             ArrayList<Song> temp_final = new ArrayList<>();
 
+            nonrepeat_random_sublist(songlist.size());
             for (int i = 0; i < songlist.size(); i++) {
                 if (songlist.get(i).getOwner().equals("薛耀智")){
                     temp1.add(songlist.get(i));
@@ -347,6 +348,10 @@ public class EditController implements Initializable{
 
         //設定拉桿長度最大值為歌單長度
         sld_song_amount.setMax(songlist.size());
+
+        for (int i = 0; i < songlist.size(); i++) {
+            System.out.println(songlist.get(i).getLink());
+        }
     }
 
     @FXML

@@ -152,12 +152,12 @@
             <Font size="16.0" />
          </font>
       </TextField>
-      <Label layoutX="216.0" layoutY="22.0" prefHeight="30.0" prefWidth="148.0" text="歌單擁有者/編輯者:">
+      <Label layoutX="216.0" layoutY="22.0" prefHeight="30.0" prefWidth="59.0" text="編輯者:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <RadioButton fx:id="Editor1" layoutX="361.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#bt_editor1" prefHeight="22.0" prefWidth="73.0" text="薛耀智">
+      <RadioButton fx:id="Editor1" layoutX="274.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#bt_editor1" prefHeight="22.0" prefWidth="73.0" text="薛耀智">
          <toggleGroup>
             <ToggleGroup fx:id="Editor" />
          </toggleGroup>
@@ -165,7 +165,7 @@
             <Font size="14.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="Editor2" layoutX="445.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#bt_editor2" text="許高銘" toggleGroup="$Editor">
+      <RadioButton fx:id="Editor2" layoutX="358.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#bt_editor2" text="許高銘" toggleGroup="$Editor">
          <font>
             <Font size="14.0" />
          </font></RadioButton>
