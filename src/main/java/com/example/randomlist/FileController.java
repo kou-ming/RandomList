@@ -60,6 +60,8 @@ public class FileController implements Initializable {
 
     public Map<String, String> User_Map = new HashMap<>();
 
+
+
     static public String editor = "";
 
     static public String listname = "未選取歌單";
@@ -324,7 +326,6 @@ public class FileController implements Initializable {
         System.out.println(songlist_name.getText());
         SongList_view.getChildren().add(songlist_name);
         SongList_view.layout();
-
     }
 
     void closeWindow(Stage stage) {

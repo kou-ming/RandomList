@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -46,6 +47,12 @@ public class EditController implements Initializable{
     private Button chscene_main;
 
     @FXML
+    private Button bt_save_changes;
+
+    @FXML
+    private Button bt_add_song;
+
+    @FXML
     private Button bt_delete_song;
 
     @FXML
@@ -68,6 +75,9 @@ public class EditController implements Initializable{
 
     @FXML
     private RadioButton bt_random_and_preference;
+
+    @FXML
+    private RadioButton bt_random_and_owner;
 
     @FXML
     private VBox song_buttons;
@@ -275,6 +285,65 @@ public class EditController implements Initializable{
                 songlist.add(temp_final.get(i));
             }
         }
+        else if (bt_random_and_owner.isSelected()) {
+            int song_amount = Integer.parseInt(txt_song_amount.getText()), count = 0, song_added = 0;
+            ArrayList<Song> temp1 = new ArrayList<>();
+            ArrayList<Song> temp2 = new ArrayList<>();
+            ArrayList<Song> temp3 = new ArrayList<>();
+            ArrayList<Song> temp4 = new ArrayList<>();
+            ArrayList<Song> temp_final = new ArrayList<>();
+
+            for (int i = 0; i < songlist.size(); i++) {
+                if (songlist.get(i).getOwner().equals("薛耀智")){
+                    temp1.add(songlist.get(i));
+                }
+                else if (songlist.get(i).getOwner().equals("許高銘")){
+                    temp2.add(songlist.get(i));
+                }
+                else if (songlist.get(i).getOwner().equals("王文和")){
+                    temp3.add(songlist.get(i));
+                }
+                else if (songlist.get(i).getOwner().equals("鍾君逸")){
+                    temp4.add(songlist.get(i));
+                }
+            }
+
+            while (true){
+                if (count % 4 == 0 && temp1.size() != 0){
+                    temp_final.add(temp1.get(0));
+                    temp1.remove(0);
+                    song_added ++;
+                }
+                else if (count % 4 == 1 && temp2.size() != 0){
+                    temp_final.add(temp2.get(0));
+                    temp2.remove(0);
+                    song_added ++;
+                }
+                else if (count % 4 == 2 && temp3.size() != 0){
+                    temp_final.add(temp3.get(0));
+                    temp3.remove(0);
+                    song_added ++;
+                }
+                else if (count % 4 == 3 && temp4.size() != 0){
+                    temp_final.add(temp4.get(0));
+                    temp4.remove(0);
+                    song_added ++;
+                }
+
+                count ++;
+
+                if (song_added == song_amount){
+                    break;
+                }
+            }
+
+            songlist.clear();
+            for (int i = 0; i < temp_final.size(); i++) {
+                songlist.add(temp_final.get(i));
+                System.out.println(temp_final.get(i).getOwner());
+            }
+            nonrepeat_random_sublist(song_amount);
+        }
 
         //設定拉桿長度最大值為歌單長度
         sld_song_amount.setMax(songlist.size());
@@ -446,6 +515,11 @@ public class EditController implements Initializable{
     void main_plane_clicked(MouseEvent event) {
         song_buttons.setVisible(false);
         song_preference_buttons.setVisible(false);
+    }
+
+    @FXML
+    void save_changes(MouseEvent event) {
+        //將當前變更寫入檔案裡
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
