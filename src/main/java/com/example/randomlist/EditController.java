@@ -83,6 +83,12 @@ public class EditController implements Initializable{
     private RadioButton bt_random_and_owner;
 
     @FXML
+    private RadioButton bt_random_and_label;
+
+    @FXML
+    private RadioButton bt_random_and_time;
+
+    @FXML
     private VBox song_buttons;
 
     @FXML
@@ -96,6 +102,16 @@ public class EditController implements Initializable{
 
     @FXML
     private TextField txt_song_amount;
+
+    @FXML
+    private TextField txt_hour;
+
+    @FXML
+    private TextField txt_minute;
+
+    @FXML
+    private TextField txt_second;
+
 
     @FXML
     private TextField txt_add_song_link;
@@ -172,6 +188,29 @@ public class EditController implements Initializable{
         for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
             Song_Info.appendText("  " + songinfo.getLabel(i));
         }
+    }
+
+    private void count_list_time(){
+        int total_second = 0;
+        for (int i = 0; i < songlist.size(); i++) {
+            String temp_ = songlist.get(i).getDuration();
+            temp_ = temp_.replaceAll(" ","");
+            String [] time = temp_.split(":");
+            if (time.length == 2){
+                int minute_ = Integer.parseInt(time[0]);
+                int second_ = Integer.parseInt(time[1]);
+                total_second += minute_ * 60 + second_;
+            }
+            //System.out.println(songlist.get(i).getLink());
+        }
+
+        int hour = total_second / 3600;
+        int minute = (total_second % 3600) / 60;
+        int second = total_second % 60;
+        System.out.println(hour + " " + minute + " " + second);
+        txt_hour.setText(String.valueOf(hour));
+        txt_minute.setText(String.valueOf(minute));
+        txt_second.setText(String.valueOf(second));
     }
 
     @FXML
@@ -392,13 +431,71 @@ public class EditController implements Initializable{
             }
             nonrepeat_random_sublist(song_amount);
         }
+        else if (bt_random_and_time.isSelected()) {
+//            for (int i = 0; i < songlist.size(); i++) {
+//                String temp = songlist.get(i).getDuration();
+//                temp = temp.replaceAll(" ","");
+//                String [] time = temp.split(":");
+//                if (time.length == 2){
+//                    int minute_ = Integer.parseInt(time[0]);
+//                    int second_ = Integer.parseInt(time[1]);
+//                    System.out.println(time[0] + " " + time[1] + " " + (minute_ * 60 + second_));
+//                }
+//            }
 
-        //設定拉桿長度最大值為歌單長度
-        sld_song_amount.setMax(songlist.size());
+            int hour = Integer.parseInt(txt_hour.getText());
+            int minute = Integer.parseInt(txt_minute.getText());
+            int second = Integer.parseInt(txt_second.getText());
+            int total_second = hour * 3600 + minute * 60 + second;
+            int count_second = 0;
 
-        for (int i = 0; i < songlist.size(); i++) {
-            System.out.println(songlist.get(i).getLink());
+            ArrayList<Song> temp = new ArrayList<>();
+            Random random = new Random();
+            int num = songlist.size();
+
+            //隨機排序不重複歌曲
+            while (true) {
+                boolean repeat = false;
+                int rand_num = random.nextInt(num);
+                for (int i = 0; i < temp.size(); i++) {
+                    if (temp.get(i).equals(songlist.get(rand_num))) {
+                        repeat = true;
+                        break;
+                    }
+                }
+                if (!repeat) {
+                    temp.add(songlist.get(rand_num));
+
+                    String temp_ = songlist.get(rand_num).getDuration();
+                    temp_ = temp_.replaceAll(" ","");
+                    String [] time = temp_.split(":");
+                    if (time.length == 2){
+                        int minute_ = Integer.parseInt(time[0]);
+                        int second_ = Integer.parseInt(time[1]);
+                        count_second += minute_ * 60 + second_;
+                    }
+                }
+
+                if (count_second >= total_second){
+                    System.out.println(count_second);
+                    break;
+                }
+            }
+
+            //清理原歌單，將修改過後的歌單內容放進原歌單中
+            int size = temp.size();
+            songlist.clear();
+            for(int i = 0 ;i < size ; i++){
+                songlist.add(temp.get(i));
+            }
         }
+
+        //設定拉桿長度最大值和文字顯示
+        sld_song_amount.setMax(songlist.size());
+        txt_song_amount.setText(String.valueOf(songlist.size()));
+
+        //設定歌單總時間長度
+        count_list_time();
     }
 
     @FXML
@@ -643,7 +740,13 @@ public class EditController implements Initializable{
         SongName.setText(FileController.listname);
         SongTableView.setItems(songlist);
 
+        //初始化文字顯示和拉桿
+        txt_song_amount.setText(String.valueOf(songlist.size()));
         sld_song_amount.setMax(songlist.size());
+        sld_song_amount.setValue(songlist.size());
+
+        //初始化時間
+        count_list_time();
 
         //讀取所有的標籤並建立按鈕
         for (int i = 0; i < FileController.Labels.size(); i++) {
