@@ -15,11 +15,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1152.0" styleClass="pane" stylesheets="@file_Scene.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.FileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1152.0" styleClass="pane" stylesheets="@file_Scene.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.Create_Controller">
    <children>
       <TableView fx:id="SongTableView" layoutY="54.0" onMouseClicked="#get_Info" prefHeight="368.0" prefWidth="450.0">
          <columns>
-            <TableColumn fx:id="ListName" prefWidth="-1.0" sortable="false" text="未選取歌單" />
+            <TableColumn fx:id="ListName" maxWidth="300.0" prefWidth="300.0" resizable="false" sortable="false" text="未選取歌單" />
+            <TableColumn fx:id="WriterName" maxWidth="80.0" resizable="false" sortable="false" text="添加者" />
+            <TableColumn fx:id="Pref" maxWidth="50.0" prefWidth="50.0" resizable="false" sortable="false" text="偏好" />
          </columns>
          <styleClass>
             <String fx:value="table-row-cell" />
@@ -30,9 +32,11 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TableView fx:id="SongTableView1" layoutX="500.0" layoutY="54.0" onMouseClicked="#get_Info" prefHeight="368.0" prefWidth="450.0">
+      <TableView fx:id="Other_SongTableView" layoutX="500.0" layoutY="54.0" onMouseClicked="#get_Info" prefHeight="368.0" prefWidth="450.0">
          <columns>
-            <TableColumn fx:id="ListName1" prefWidth="-1.0" sortable="false" text="未選取歌單" />
+            <TableColumn fx:id="Other_ListName" maxWidth="300.0" prefWidth="300.0" resizable="false" sortable="false" text="歌名" />
+            <TableColumn fx:id="Other_WriterName" maxWidth="80.0" resizable="false" sortable="false" text="添加者" />
+            <TableColumn fx:id="Other_Pref" maxWidth="50.0" prefWidth="50.0" resizable="false" sortable="false" text="偏好" />
          </columns>
          <styleClass>
             <String fx:value="table-row-cell" />
@@ -55,25 +59,25 @@
       </Text>
       <VBox layoutX="990.0" layoutY="100.0" prefHeight="200.0" prefWidth="160.0">
          <children>
-            <Button fx:id="bt_ExportList" mnemonicParsing="false" onMouseClicked="#exportList" prefHeight="50.0" prefWidth="130.0" text="開啟本地歌單" textFill="#d25e5e">
+            <Button fx:id="bt_Open_localList" mnemonicParsing="false" onMouseClicked="#open_localList" prefHeight="50.0" prefWidth="130.0" text="開啟本地歌單" textFill="#d25e5e">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
-            <Button fx:id="bt_OpenList" mnemonicParsing="false" onMouseClicked="#openList" prefHeight="50.0" prefWidth="130.0" text="開啟外部歌單" textFill="#6064d9">
+            <Button fx:id="bt_Open_outsideList" mnemonicParsing="false" onMouseClicked="#open_outsideList" prefHeight="50.0" prefWidth="130.0" text="開啟外部歌單" textFill="#6064d9">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
-            <Button fx:id="bt_AddList" mnemonicParsing="false" onMouseClicked="#AddList" prefHeight="50.0" prefWidth="130.0" text="導入外部歌單" textFill="#2e9641">
+            <Button fx:id="bt_Add_outsideList" mnemonicParsing="false" onMouseClicked="#add_outsideList" prefHeight="50.0" prefWidth="130.0" text="導入外部歌單" textFill="#2e9641">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
-            <Button fx:id="bt_Call_newlistPopup" mnemonicParsing="false" onMouseClicked="#call_newlistPopup" prefHeight="36.0" prefWidth="130.0" text="清空原歌單" textFill="#6064d9">
+            <Button fx:id="bt_ClearAll" mnemonicParsing="false" onMouseClicked="#clearAll" prefHeight="36.0" prefWidth="130.0" text="清空原歌單" textFill="#6064d9">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
