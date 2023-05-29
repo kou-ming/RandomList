@@ -13,7 +13,7 @@ public class Main extends Application{
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("file_Scene.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1152, 648);
+        Scene scene = new Scene(fxmlLoader.load(), 1500, 648);
         stage.setTitle("RandomList");
         stage.setScene(scene);
         stage.show();

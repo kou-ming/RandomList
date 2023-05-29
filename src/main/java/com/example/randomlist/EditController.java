@@ -44,7 +44,7 @@ public class EditController implements Initializable{
     private Button bt_pick10;
 
     @FXML
-    private Button chscene_main;
+    private Button bt_chscene_main;
 
     @FXML
     private Button bt_save_changes;
@@ -84,6 +84,12 @@ public class EditController implements Initializable{
 
     @FXML
     private VBox song_buttons;
+
+    @FXML
+    private ScrollPane song_add_label_buttons_pane;
+
+    @FXML
+    private VBox song_add_label_buttons;
 
     @FXML
     private VBox song_preference_buttons;
@@ -164,7 +170,7 @@ public class EditController implements Initializable{
         Song_Info.appendText("偏好: " + songinfo.getPreference() + "\n");
         Song_Info.appendText("標籤：");
         for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
-            Song_Info.appendText(" " + songinfo.getLabel(i));
+            Song_Info.appendText("  " + songinfo.getLabel(i));
         }
     }
 
@@ -440,6 +446,7 @@ public class EditController implements Initializable{
         show_song_detail();
         song_buttons.setVisible(false);
         song_preference_buttons.setVisible(false);
+        song_add_label_buttons_pane.setVisible(false);
         //右鍵顯示按鈕列
         if (event.getButton() == MouseButton.SECONDARY) {
             System.out.println(song_selected.getName());
@@ -449,6 +456,7 @@ public class EditController implements Initializable{
             song_buttons.setTranslateY(mouse_y + 50);
             song_buttons.setVisible(true);
             song_preference_buttons.setVisible(false);
+            song_add_label_buttons_pane.setVisible(false);
         }
     }
 
@@ -516,12 +524,22 @@ public class EditController implements Initializable{
             txt_song_amount.setText(String.valueOf(song_amount));
             song_buttons.setVisible(false);
             song_preference_buttons.setVisible(false);
+            song_add_label_buttons_pane.setVisible(false);
         }
     }
 
     @FXML
     void add_song_label(MouseEvent event) {
 
+    }
+
+    @FXML
+    void enter_bt_add_label(MouseEvent event) {
+        song_add_label_buttons_pane.setTranslateX(mouse_x + 570);
+        song_add_label_buttons_pane.setTranslateY(mouse_y + 50);
+
+        song_add_label_buttons_pane.setVisible(true);
+        song_preference_buttons.setVisible(false);
     }
 
 
@@ -532,12 +550,12 @@ public class EditController implements Initializable{
             song_preference_buttons.setTranslateX(mouse_x + 570);
             song_preference_buttons.setTranslateY(mouse_y + 50);
             song_preference_buttons.setVisible(true);
+            song_add_label_buttons_pane.setVisible(false);
         //}
     }
 
     @FXML
     void hide_song_preference(MouseEvent event) {
-
         song_preference_buttons.setVisible(false);
     }
 
@@ -596,6 +614,7 @@ public class EditController implements Initializable{
     void main_plane_clicked(MouseEvent event) {
         song_buttons.setVisible(false);
         song_preference_buttons.setVisible(false);
+        song_add_label_buttons_pane.setVisible(false);
     }
 
 
@@ -625,5 +644,31 @@ public class EditController implements Initializable{
         SongTableView.setItems(songlist);
 
         sld_song_amount.setMax(songlist.size());
+
+        //讀取所有的標籤並建立按鈕
+        for (int i = 0; i < FileController.Labels.size(); i++) {
+            System.out.println(FileController.Labels.get(i));
+
+            Button button = new Button(FileController.Labels.get(i));
+            button.setPrefSize(110, 36);
+
+            button.setOnAction(e -> {
+                boolean repeat = false;
+                for (int j = 0; j < song_selected.SongLabels.size(); j++) {
+                    if (song_selected.getLabel(j).equals(button.getText())){
+                        repeat = true;
+                        break;
+                    }
+                }
+
+                if (!repeat){
+                    song_selected.addLabel(button.getText());
+                    show_song_detail();
+                }
+
+            });
+
+            song_add_label_buttons.getChildren().add(button);
+        }
     }
 }

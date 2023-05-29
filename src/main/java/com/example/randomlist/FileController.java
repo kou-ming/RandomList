@@ -127,7 +127,7 @@ public class FileController implements Initializable {
         System.out.println("call a popupScene");
         Stage popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.initOwner(Main. primaryStage);
+        popupStage.initOwner(Main.primaryStage);
 
         Label label = new Label("空白歌單名稱為：");
         label.setLayoutX(76);
@@ -139,8 +139,6 @@ public class FileController implements Initializable {
         textfield.setPrefWidth(200);
         VBox.setMargin(textfield, new Insets(100, 0, 0, 0)); // 设置上边距为100
         textfield.setPrefSize(300, 40);
-
-
 
         Button button = new Button("建立");
         button.setPrefSize(97, 41);
@@ -156,8 +154,6 @@ public class FileController implements Initializable {
             SongList_view.getChildren().clear();
             loadFile();
             closeWindow(popupStage);
-
-
         });
 
         VBox root = new VBox(textfield);
@@ -170,7 +166,6 @@ public class FileController implements Initializable {
         Scene popupScene = new Scene(popupRoot, 400, 300);
         popupStage.setScene(popupScene);
         popupStage.showAndWait();
-
     }
 
     //建立新標籤
@@ -422,7 +417,9 @@ public class FileController implements Initializable {
         Button songlist_name = new Button(list_name);
 //        songlist_name.getStylesheets().add(String.valueOf(getClass().getResource("file_Scene.css")));
         songlist_name.getStyleClass().add("list_button");
+
         songlist_name.setPrefSize(125, 50);
+
         songlist_name.setOnAction(event -> {
             System.out.println("Button clicked!");
             listname = songlist_name.getText();
