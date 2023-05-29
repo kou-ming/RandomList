@@ -56,6 +56,22 @@ public class Song {
         return owner;
     }
 
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setLink(String link){
+        this.link = link;
+    }
+
+    public void setChannel(String channel){
+        this.channel = channel;
+    }
+
+    public void setDuration(String duration){
+        this.duration = duration;
+    }
+
     public void setOwner(String owner){
         this.owner = owner;
     }

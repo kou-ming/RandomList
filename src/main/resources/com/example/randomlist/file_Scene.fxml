@@ -96,12 +96,12 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="bt_chscene_double" layoutX="797.0" layoutY="346.0" mnemonicParsing="false" onMouseClicked="#bt_chscene_double" prefHeight="40.0" prefWidth="108.0" text="編輯歌單" textFill="#6cb7ad">
+      <Button fx:id="bt_chscene_double" layoutX="797.0" layoutY="346.0" mnemonicParsing="false" onMouseClicked="#bt_chscene_double" prefHeight="40.0" prefWidth="108.0" text="引入歌單" textFill="#6cb7ad">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="bt_chscene_editor" layoutX="797.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#chscene_editor" prefHeight="40.0" prefWidth="108.0" text="歌單隨機" textFill="#6cb7ad">
+      <Button fx:id="bt_chscene_editor" layoutX="797.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#chscene_editor" prefHeight="40.0" prefWidth="108.0" text="編輯歌單" textFill="#6cb7ad">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

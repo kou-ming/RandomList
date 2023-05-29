@@ -276,9 +276,14 @@ public class FileController implements Initializable {
                             List.add(new Song(row[0], row[1],row[2],row[3]));
                         }
                     }
-                    for (int i = 4 ; i < row.length ; i++){
-                        List.get(index_line).addLabel(row[i]);
+
+                    if(row.length >= 5){
+                        List.get(index_line).setPreference(Integer.parseInt(row[4]));
+                        for (int i = 5 ; i < row.length ; i++){
+                            List.get(index_line).addLabel(row[i]);
+                        }
                     }
+
                     index_line += 1;
                 }
             }
@@ -554,6 +559,4 @@ public class FileController implements Initializable {
             Editor2.setSelected(true);
         }
     }
-
-
 }

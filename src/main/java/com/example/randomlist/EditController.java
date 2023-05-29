@@ -53,6 +53,9 @@ public class EditController implements Initializable{
     private Button bt_add_song;
 
     @FXML
+    private Button bt_edit_song;
+
+    @FXML
     private Button bt_delete_song;
 
     @FXML
@@ -216,7 +219,6 @@ public class EditController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
-
 
     //創建子歌單
     @FXML
@@ -433,12 +435,14 @@ public class EditController implements Initializable{
     void get_Info(MouseEvent event) {
         //顯示已選取的歌曲的資訊
         songinfo = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
+        song_selected = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
+        System.out.println(songinfo.getName());
         show_song_detail();
         song_buttons.setVisible(false);
         song_preference_buttons.setVisible(false);
         //右鍵顯示按鈕列
         if (event.getButton() == MouseButton.SECONDARY) {
-            song_selected = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
+            System.out.println(song_selected.getName());
             mouse_x = event.getX();
             mouse_y = event.getY();
             song_buttons.setTranslateX(mouse_x + 570);
@@ -461,13 +465,40 @@ public class EditController implements Initializable{
             Song song = new Song(song_name, song_artist, song_length, song_link);
             song.setOwner(editor);
             System.out.println(editor);
-            songlist.add(song);
+            songlist.add(0, song);
 
             txt_add_song_name.setText("");
             txt_add_song_link.setText("");
             txt_add_song_artist.setText("");
             txt_add_song_length.setText("");
         }
+    }
+
+    //左鍵點擊按鈕編輯已選取的歌曲資訊
+    @FXML
+    void edit_song(MouseEvent event) {
+        if (!txt_add_song_name.getText().equals("")){
+            String song_name = txt_add_song_name.getText();
+            song_selected.setName(song_name);
+        }
+        if (!txt_add_song_link.getText().equals("")){
+            String song_link = txt_add_song_link.getText();
+            song_selected.setLink(song_link);
+        }
+        if (!txt_add_song_artist.getText().equals("")){
+            String song_artist = txt_add_song_artist.getText();
+            song_selected.setChannel(song_artist);
+        }
+        if (!txt_add_song_length.getText().equals("")){
+            String song_length = txt_add_song_length.getText();
+            song_selected.setDuration(song_length);
+        }
+
+        show_song_detail();
+        txt_add_song_name.setText("");
+        txt_add_song_link.setText("");
+        txt_add_song_artist.setText("");
+        txt_add_song_length.setText("");
     }
 
     //左鍵點擊按鈕刪除以選取的歌曲
@@ -487,6 +518,12 @@ public class EditController implements Initializable{
             song_preference_buttons.setVisible(false);
         }
     }
+
+    @FXML
+    void add_song_label(MouseEvent event) {
+
+    }
+
 
     //左鍵點擊按鈕展開歌曲偏好按鈕列
     @FXML
@@ -588,7 +625,5 @@ public class EditController implements Initializable{
         SongTableView.setItems(songlist);
 
         sld_song_amount.setMax(songlist.size());
-
-
     }
 }
