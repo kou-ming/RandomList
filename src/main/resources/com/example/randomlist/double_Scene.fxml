@@ -115,5 +115,11 @@
             <Font size="25.0" />
          </font>
       </Label>
+      <Button fx:id="bt_chscene_main" layoutX="991.0" layoutY="545.0" mnemonicParsing="false" onMouseClicked="#chscene_main" prefHeight="60.0" prefWidth="117.0" text="回首頁">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="bt_save_changes" layoutX="990.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#save_changes" prefHeight="60.0" prefWidth="117.0" text="儲存變更" />
    </children>
 </AnchorPane>
