@@ -9,6 +9,8 @@ public class Song {
     private String duration;
     private String link;
     private int preference = 1;
+
+    private String str_pre = "1";
     private String owner = "";
 
     ArrayList<String> SongLabels = new ArrayList<>();

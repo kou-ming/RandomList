@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 import java.io.*;
 import java.net.URL;
@@ -34,10 +36,16 @@ public class FileController implements Initializable {
     private VBox SongList_view;
 
     @FXML
+    private TableView<Song> SongTableView;
+
+    @FXML
     private TableColumn<Song, String> ListName;
 
     @FXML
-    private TableView<Song> SongTableView;
+    private TableColumn<Song, String> WriterName;
+
+    @FXML
+    private TableColumn<Song, Integer> Pref;
 
     @FXML
     private TextArea Song_Info;
@@ -80,7 +88,6 @@ public class FileController implements Initializable {
             path = file.getAbsolutePath();  //若檔案不為空則重設路徑
         }
         readFile(path);
-
     }
 
     //導入歌單(不清除上一個歌單紀錄)
@@ -543,6 +550,46 @@ public class FileController implements Initializable {
         //初始化表格
         ListName.setSortable(false);
         ListName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        WriterName.setCellValueFactory(new PropertyValueFactory<>("owner"));
+        WriterName.setCellFactory(new Callback<TableColumn<Song, String>, TableCell<Song, String>>() {
+            @Override
+            public TableCell<Song, String> call(TableColumn<Song, String> param) {
+                TableCell<Song, String> cell = new TableCell<Song, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setText(null);
+                        } else {
+                            setText(item);
+                        }
+                    }
+                };
+                cell.setAlignment(Pos.CENTER); // 设置单元格内容居中
+                return cell;
+            }
+        });
+
+        Pref.setCellValueFactory(new PropertyValueFactory<>("preference"));
+        Pref.setCellFactory(new Callback<TableColumn<Song, Integer>, TableCell<Song, Integer>>() {
+            @Override
+            public TableCell<Song, Integer> call(TableColumn<Song, Integer> param) {
+                TableCell<Song, Integer> cell = new TableCell<Song, Integer>() {
+                    @Override
+                    protected void updateItem(Integer item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setText(null);
+                        } else {
+                            setText(String.valueOf(item));
+                        }
+                    }
+                };
+                cell.setAlignment(Pos.CENTER); // 设置单元格内容居中
+                return cell;
+            }
+        });
+
         ListName.setText(listname);
         SongTableView.setItems(List);
 
