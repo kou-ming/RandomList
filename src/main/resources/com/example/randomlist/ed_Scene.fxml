@@ -208,11 +208,11 @@
       </Label>
       <Button fx:id="bt_save_changes" layoutX="26.0" layoutY="491.0" mnemonicParsing="false" onMouseClicked="#save_changes" prefHeight="60.0" prefWidth="117.0" text="儲存變更" />
       <RadioButton fx:id="bt_random_and_time" layoutX="505.0" layoutY="190.0" mnemonicParsing="false" text="歌單時長" toggleGroup="$random_type" />
-      <TextField fx:id="txt_hour" layoutX="567.0" layoutY="226.0" prefHeight="39.0" prefWidth="38.0" />
-      <Text fill="WHITE" layoutX="609.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="小時" />
-      <TextField fx:id="txt_minute" layoutX="645.0" layoutY="226.0" prefHeight="39.0" prefWidth="38.0" />
-      <Text fill="WHITE" layoutX="687.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="分鐘" />
-      <TextField fx:id="txt_second" layoutX="724.0" layoutY="225.0" prefHeight="39.0" prefWidth="38.0" />
-      <Text fill="WHITE" layoutX="768.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秒" />
+      <TextField fx:id="txt_hour" layoutX="216.0" layoutY="266.0" prefHeight="39.0" prefWidth="38.0" />
+      <Text fill="WHITE" layoutX="258.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="小時" />
+      <TextField fx:id="txt_minute" layoutX="294.0" layoutY="266.0" prefHeight="39.0" prefWidth="38.0" />
+      <Text fill="WHITE" layoutX="336.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="分鐘" />
+      <TextField fx:id="txt_second" layoutX="373.0" layoutY="265.0" prefHeight="39.0" prefWidth="38.0" />
+      <Text fill="WHITE" layoutX="417.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秒" />
    </children>
 </AnchorPane>
