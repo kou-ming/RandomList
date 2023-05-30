@@ -3,7 +3,7 @@ package com.example.randomlist;
 
 import java.util.ArrayList;
 
-public class Song {
+public class Song implements Cloneable {
     private String name;
     private String channel;
     private String duration;
@@ -22,6 +22,15 @@ public class Song {
         this.link = link;
     }
 
+    @Override
+    public Song clone() {
+        try {
+            return (Song) super.clone();
+        } catch (CloneNotSupportedException e) {
+
+            return null;
+        }
+    }
     public String getName() {
         return name;
     }
