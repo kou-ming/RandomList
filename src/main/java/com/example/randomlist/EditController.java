@@ -514,6 +514,7 @@ public class EditController implements Initializable{
         System.out.println("wow");
         int song_amount = Integer.parseInt(txt_song_amount.getText());
         sld_song_amount.setValue(song_amount);
+        //count_list_time();
     }
 
     //文字的值配合拉桿的值改變(滑鼠點擊)
