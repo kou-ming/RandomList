@@ -149,7 +149,7 @@ public class EditController implements Initializable{
     public ObservableList<Song> songlist = FileController.List;
     public ArrayList<Song> ori_songlist = new ArrayList<>();
 
-    private String editor;
+    private String editor = "";
 
     private Song songinfo;
 
@@ -752,13 +752,11 @@ public class EditController implements Initializable{
     @FXML
     void bt_editor1(MouseEvent event) {
         editor = "薛耀智";
-        FileController.editor = editor;
     }
 
     @FXML
     void bt_editor2(MouseEvent event) {
         editor = "許高銘";
-        FileController.editor = editor;
     }
 
     @FXML
@@ -775,7 +773,6 @@ public class EditController implements Initializable{
         for(Song song : songlist){
             ori_songlist.add(song.clone());
         }
-        editor = FileController.editor;
         if (editor.equals("薛耀智")){
             Editor1.setSelected(true);
         }

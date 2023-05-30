@@ -50,12 +50,6 @@ public class FileController implements Initializable {
     @FXML
     private TextArea Song_Info;
 
-    @FXML
-    private RadioButton Editor1;
-
-    @FXML
-    private RadioButton Editor2;
-
 
     FileChooser fileChooser = new FileChooser();    //建立檔案選擇器
     public String path = "C:";  //預設檔案路徑
@@ -74,32 +68,10 @@ public class FileController implements Initializable {
 
 
 
-    static public String editor = "";
 
     static public String listname = "未選取歌單";
 
-    //開啟歌單(清除上一個歌單紀錄)
-    @FXML
-    void openList(MouseEvent event) {
-        List.clear();
-        System.out.println("openList");
-        File file = fileChooser.showOpenDialog(new Stage());    //可以在頁面選擇檔案位置
-        if (file != null) {
-            path = file.getAbsolutePath();  //若檔案不為空則重設路徑
-        }
-        readFile(path);
-    }
 
-    //導入歌單(不清除上一個歌單紀錄)
-    @FXML
-    void AddList(MouseEvent event) {
-        System.out.println("addList");
-        File file = fileChooser.showOpenDialog(new Stage());    //可以在頁面選擇檔案位置
-        if (file != null) {
-            path = file.getAbsolutePath();  //若檔案不為空則重設路徑
-        }
-        readFile(path);
-    }
 
     //輸出歌單
     @FXML
@@ -319,11 +291,17 @@ public class FileController implements Initializable {
             PrintWriter printWriter = new PrintWriter(file);
             printWriter.write("<Name>	<Channel>	<Duration>	<URL>\n");
             for(int i = 0; i < List.size() ; i++){
-                printWriter.write(List.get(i).getName() + "\t" + List.get(i).getChannel() + "\t" + List.get(i).getDuration() + "\t" + List.get(i).getLink() + "\n");
-            }
+                printWriter.write(List.get(i).getName() + "\t" + List.get(i).getChannel());
+                if(!List.get(i).getOwner().equals("")){
+                    printWriter.write(User_to_Youtube.get(List.get(i).getOwner()));
+                }
+                printWriter.write("\t" + List.get(i).getDuration() + "\t" + List.get(i).getLink() + "\t" + List.get(i).getPreference());
 
-            System.out.println(file.getName());
-            System.out.println(file.getPath());
+                for(int j = 0 ; j < List.get(i).getLabelsize() ; j++){
+                    printWriter.write("\t" + List.get(i).getLabel(j));
+                }
+                printWriter.write("\n");
+            }
             printWriter.close();
 
         } catch (FileNotFoundException e) {
@@ -505,40 +483,59 @@ public class FileController implements Initializable {
     //替轉至編輯頁面
     @FXML
     void chscene_editor(MouseEvent event) throws IOException {
-        //if (Editor1.isSelected() || Editor2.isSelected()){
-            System.out.println("change");
+        if (listname.equals("未選取歌單")){
+            no_choose_list();
+        }
+        else{
             Parent root = FXMLLoader.load(getClass().getResource("ed_Scene.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        //}
-        //else{
-            System.out.println("未選取編輯者");
-        //}
+        }
 
     }
 
 
     @FXML
     void bt_chscene_double(MouseEvent event) throws IOException {
-        System.out.println("change");
-        Parent root = FXMLLoader.load(getClass().getResource("double_Scene.fxml"));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    @FXML
-    void bt_editor1(MouseEvent event) {
-        editor = "薛耀智";
+        if(listname.equals("未選取歌單")){
+            no_choose_list();
+        }
+        else{
+            Parent root = FXMLLoader.load(getClass().getResource("double_Scene.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+
     }
 
-    @FXML
-    void bt_editor2(MouseEvent event) {
-        editor = "許高銘";
-    }
+    //若沒有選取歌單則警告
+    void no_choose_list() throws IOException {
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(Main.primaryStage);
 
+        Pane popupRoot = FXMLLoader.load(getClass().getResource("new_list_popupScene.fxml"));
+
+
+        Label label1 = new Label("警告！");
+        label1.setLayoutX(130);
+        label1.setLayoutY(60);
+        label1.setFont(new Font(45));
+        label1.getStyleClass().add("error_label");
+        Label label2 = new Label("你未選取歌單");
+        label2.setLayoutX(65);
+        label2.setLayoutY(130);
+        label2.setFont(new Font(45));
+        label2.getStyleClass().add("error_label");
+        popupRoot.getChildren().addAll(label1, label2);
+        Scene popupScene = new Scene(popupRoot, 400, 300);
+        popupStage.setScene(popupScene);
+        popupStage.showAndWait();
+    }
     //初始化
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fileChooser.setInitialDirectory(new File("C:\\Users\\user\\Downloads"));    //將初始路徑設為"下載"
@@ -596,11 +593,5 @@ public class FileController implements Initializable {
         loadFile();
         loadLabel();
 
-        if (editor.equals("薛耀智")){
-            Editor1.setSelected(true);
-        }
-        else if (editor.equals("許高銘")){
-            Editor2.setSelected(true);
-        }
     }
 }

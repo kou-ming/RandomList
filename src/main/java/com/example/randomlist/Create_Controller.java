@@ -425,6 +425,8 @@ public class Create_Controller implements Initializable {
         }
     }
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fileChooser.setInitialDirectory(new File("C:\\Users\\user\\Downloads"));
+
         //初始化表格
         ListName.setSortable(false);
         ListName.setCellValueFactory(new PropertyValueFactory<>("name"));
