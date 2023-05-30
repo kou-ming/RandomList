@@ -505,17 +505,17 @@ public class FileController implements Initializable {
     //替轉至編輯頁面
     @FXML
     void chscene_editor(MouseEvent event) throws IOException {
-        if (Editor1.isSelected() || Editor2.isSelected()){
+        //if (Editor1.isSelected() || Editor2.isSelected()){
             System.out.println("change");
             Parent root = FXMLLoader.load(getClass().getResource("ed_Scene.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }
-        else{
+        //}
+        //else{
             System.out.println("未選取編輯者");
-        }
+        //}
 
     }
 

@@ -59,7 +59,10 @@ public class EditController implements Initializable{
     private Button bt_delete_song;
 
     @FXML
-    private Button bt_add_tag;
+    private Button bt_add_label;
+
+    @FXML
+    private Button bt_delete_label;
 
     @FXML
     private Button bt_song_preference;
@@ -143,6 +146,8 @@ public class EditController implements Initializable{
     private String editor;
 
     private Song songinfo;
+
+    private int table_x, table_y;
 
     public Map<String, String> User_to_Youtube = FileController.User_to_Youtube;
     private void nonrepeat_random_sublist(int sublist_size){
@@ -431,18 +436,10 @@ public class EditController implements Initializable{
             }
             nonrepeat_random_sublist(song_amount);
         }
-        else if (bt_random_and_time.isSelected()) {
-//            for (int i = 0; i < songlist.size(); i++) {
-//                String temp = songlist.get(i).getDuration();
-//                temp = temp.replaceAll(" ","");
-//                String [] time = temp.split(":");
-//                if (time.length == 2){
-//                    int minute_ = Integer.parseInt(time[0]);
-//                    int second_ = Integer.parseInt(time[1]);
-//                    System.out.println(time[0] + " " + time[1] + " " + (minute_ * 60 + second_));
-//                }
-//            }
+        else if (bt_random_and_label.isSelected()){
 
+        }
+        else if (bt_random_and_time.isSelected()) {
             int hour = Integer.parseInt(txt_hour.getText());
             int minute = Integer.parseInt(txt_minute.getText());
             int second = Integer.parseInt(txt_second.getText());
@@ -514,7 +511,6 @@ public class EditController implements Initializable{
         System.out.println("wow");
         int song_amount = Integer.parseInt(txt_song_amount.getText());
         sld_song_amount.setValue(song_amount);
-        //count_list_time();
     }
 
     //文字的值配合拉桿的值改變(滑鼠點擊)
@@ -550,8 +546,9 @@ public class EditController implements Initializable{
             System.out.println(song_selected.getName());
             mouse_x = event.getX();
             mouse_y = event.getY();
-            song_buttons.setTranslateX(mouse_x + 570);
-            song_buttons.setTranslateY(mouse_y + 50);
+
+            song_buttons.setTranslateX(mouse_x + table_x);
+            song_buttons.setTranslateY(mouse_y + table_y);
             song_buttons.setVisible(true);
             song_preference_buttons.setVisible(false);
             song_add_label_buttons_pane.setVisible(false);
@@ -578,6 +575,10 @@ public class EditController implements Initializable{
             txt_add_song_artist.setText("");
             txt_add_song_length.setText("");
         }
+
+        sld_song_amount.setMax(songlist.size());
+        txt_song_amount.setText(String.valueOf(songlist.size()));
+        count_list_time();
     }
 
     //左鍵點擊按鈕編輯已選取的歌曲資訊
@@ -600,6 +601,7 @@ public class EditController implements Initializable{
             song_selected.setDuration(song_length);
         }
 
+        count_list_time();
         show_song_detail();
         txt_add_song_name.setText("");
         txt_add_song_link.setText("");
@@ -618,8 +620,8 @@ public class EditController implements Initializable{
                 }
             }
             sld_song_amount.setMax(songlist.size());
-            int song_amount = (int) sld_song_amount.getValue();
-            txt_song_amount.setText(String.valueOf(song_amount));
+            txt_song_amount.setText(String.valueOf(songlist.size()));
+            count_list_time();
             song_buttons.setVisible(false);
             song_preference_buttons.setVisible(false);
             song_add_label_buttons_pane.setVisible(false);
@@ -627,26 +629,25 @@ public class EditController implements Initializable{
     }
 
     @FXML
-    void add_song_label(MouseEvent event) {
-
-    }
-
-    @FXML
     void enter_bt_add_label(MouseEvent event) {
-        song_add_label_buttons_pane.setTranslateX(mouse_x + 570);
-        song_add_label_buttons_pane.setTranslateY(mouse_y + 50);
+        song_add_label_buttons_pane.setTranslateX(mouse_x + table_x);
+        song_add_label_buttons_pane.setTranslateY(mouse_y + table_y);
 
         song_add_label_buttons_pane.setVisible(true);
         song_preference_buttons.setVisible(false);
     }
 
+    @FXML
+    void enter_bt_delete_label(MouseEvent event) {
+
+    }
 
     //左鍵點擊按鈕展開歌曲偏好按鈕列
     @FXML
     void song_preference(MouseEvent event) {
         //if (event.getButton() == MouseButton.PRIMARY){
-            song_preference_buttons.setTranslateX(mouse_x + 570);
-            song_preference_buttons.setTranslateY(mouse_y + 50);
+            song_preference_buttons.setTranslateX(mouse_x + table_x);
+            song_preference_buttons.setTranslateY(mouse_y + table_y);
             song_preference_buttons.setVisible(true);
             song_add_label_buttons_pane.setVisible(false);
         //}
@@ -740,6 +741,8 @@ public class EditController implements Initializable{
         SongName.setCellValueFactory(new PropertyValueFactory<>("name"));
         SongName.setText(FileController.listname);
         SongTableView.setItems(songlist);
+        table_x = (int) SongTableView.getLayoutX();
+        table_y = (int) SongTableView.getLayoutY();
 
         //初始化文字顯示和拉桿
         txt_song_amount.setText(String.valueOf(songlist.size()));
