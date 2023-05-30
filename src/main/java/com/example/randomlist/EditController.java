@@ -101,6 +101,12 @@ public class EditController implements Initializable{
     private VBox song_add_label_buttons;
 
     @FXML
+    private ScrollPane song_delete_label_buttons_pane;
+
+    @FXML
+    private VBox song_delete_label_buttons;
+
+    @FXML
     private VBox song_preference_buttons;
 
     @FXML
@@ -149,6 +155,10 @@ public class EditController implements Initializable{
 
     private int table_x, table_y;
 
+    private Song song_selected;
+
+
+
     public Map<String, String> User_to_Youtube = FileController.User_to_Youtube;
     private void nonrepeat_random_sublist(int sublist_size){
         ObservableList<Song> temp = FXCollections.observableArrayList();
@@ -183,12 +193,12 @@ public class EditController implements Initializable{
 
     private void show_song_detail(){
         Song_Info.clear();
-        Song_Info.appendText("歌名: " + songinfo.getName() + "\n");
-        Song_Info.appendText("歌曲連結: " + songinfo.getLink() + "\n");
-        Song_Info.appendText("頻道名稱: " + songinfo.getChannel() + "\n");
-        Song_Info.appendText("歌曲長度: " + songinfo.getDuration() + "\n");
-        Song_Info.appendText("添加者: " + songinfo.getOwner() + "\n");
-        Song_Info.appendText("偏好: " + songinfo.getPreference() + "\n");
+        Song_Info.appendText("歌名：" + songinfo.getName() + "\n");
+        Song_Info.appendText("歌曲連結：" + songinfo.getLink() + "\n");
+        Song_Info.appendText("頻道名稱：" + songinfo.getChannel() + "\n");
+        Song_Info.appendText("歌曲長度：" + songinfo.getDuration() + "\n");
+        Song_Info.appendText("添加者：" + songinfo.getOwner() + "\n");
+        Song_Info.appendText("偏好：" + songinfo.getPreference() + "\n");
         Song_Info.appendText("標籤：");
         for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
             Song_Info.appendText("  " + songinfo.getLabel(i));
@@ -493,6 +503,10 @@ public class EditController implements Initializable{
 
         //設定歌單總時間長度
         count_list_time();
+
+        for (int i = 0; i < songlist.size(); i++) {
+            System.out.println(songlist.get(i).getLink());
+        }
     }
 
     @FXML
@@ -529,7 +543,6 @@ public class EditController implements Initializable{
         txt_song_amount.setText(String.valueOf(song_amount));
     }
 
-    private Song song_selected;
     private double mouse_x, mouse_y;
     @FXML
     void get_Info(MouseEvent event) {
@@ -541,6 +554,8 @@ public class EditController implements Initializable{
         song_buttons.setVisible(false);
         song_preference_buttons.setVisible(false);
         song_add_label_buttons_pane.setVisible(false);
+        song_delete_label_buttons_pane.setVisible(false);
+
         //右鍵顯示按鈕列
         if (event.getButton() == MouseButton.SECONDARY) {
             System.out.println(song_selected.getName());
@@ -552,6 +567,9 @@ public class EditController implements Initializable{
             song_buttons.setVisible(true);
             song_preference_buttons.setVisible(false);
             song_add_label_buttons_pane.setVisible(false);
+            song_delete_label_buttons_pane.setVisible(false);
+
+            //create_delete_label_buttons();
         }
     }
 
@@ -634,22 +652,56 @@ public class EditController implements Initializable{
         song_add_label_buttons_pane.setTranslateY(mouse_y + table_y);
 
         song_add_label_buttons_pane.setVisible(true);
-        song_preference_buttons.setVisible(false);
+        song_delete_label_buttons_pane.setVisible(false);
+
     }
 
     @FXML
     void enter_bt_delete_label(MouseEvent event) {
+        song_delete_label_buttons_pane.setTranslateX(mouse_x + table_x);
+        song_delete_label_buttons_pane.setTranslateY(mouse_y + table_y);
 
+        if (song_selected.SongLabels.size() != 0){
+            song_delete_label_buttons_pane.setVisible(true);
+        }
+
+        song_delete_label_buttons.getChildren().clear();
+        for (int i = 0; i < song_selected.SongLabels.size(); i++) {
+            System.out.println(song_selected.SongLabels.get(i));
+
+            Button button = new Button(song_selected.getLabel(i));
+            button.setPrefSize(110, 36);
+
+            button.setOnAction(e -> {
+                for (int j = 0; j < song_selected.SongLabels.size(); j++) {
+                    if (song_selected.getLabel(j).equals(button.getText())) {
+                        song_selected.SongLabels.remove(j);
+                        break;
+                    }
+                }
+                if (song_selected.SongLabels.size() == 0) {
+                    song_delete_label_buttons_pane.setVisible(false);
+                }
+
+                song_delete_label_buttons.getChildren().remove(button);
+                show_song_detail();
+            });
+
+            song_delete_label_buttons.getChildren().add(button);
+        }
+        song_add_label_buttons_pane.setVisible(false);
+        song_preference_buttons.setVisible(false);
     }
 
-    //左鍵點擊按鈕展開歌曲偏好按鈕列
+    //游標進入按鈕展開歌曲偏好按鈕列
     @FXML
     void song_preference(MouseEvent event) {
         //if (event.getButton() == MouseButton.PRIMARY){
             song_preference_buttons.setTranslateX(mouse_x + table_x);
             song_preference_buttons.setTranslateY(mouse_y + table_y);
             song_preference_buttons.setVisible(true);
-            song_add_label_buttons_pane.setVisible(false);
+            song_delete_label_buttons_pane.setVisible(false);
+
         //}
     }
 
@@ -714,6 +766,7 @@ public class EditController implements Initializable{
         song_buttons.setVisible(false);
         song_preference_buttons.setVisible(false);
         song_add_label_buttons_pane.setVisible(false);
+        song_delete_label_buttons_pane.setVisible(false);
     }
 
 
@@ -754,8 +807,6 @@ public class EditController implements Initializable{
 
         //讀取所有的標籤並建立按鈕
         for (int i = 0; i < FileController.Labels.size(); i++) {
-            System.out.println(FileController.Labels.get(i));
-
             Button button = new Button(FileController.Labels.get(i));
             button.setPrefSize(110, 36);
 
@@ -772,7 +823,6 @@ public class EditController implements Initializable{
                     song_selected.addLabel(button.getText());
                     show_song_detail();
                 }
-
             });
 
             song_add_label_buttons.getChildren().add(button);

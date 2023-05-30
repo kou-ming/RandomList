@@ -98,17 +98,27 @@
       <VBox fx:id="song_buttons" layoutY="1.0" prefHeight="196.0" prefWidth="129.0" visible="false">
          <children>
             <Button fx:id="bt_delete_song" mnemonicParsing="false" onMouseClicked="#delete_song" prefHeight="30.0" prefWidth="106.0" text="刪除歌曲" />
-            <Button fx:id="bt_add_label" mnemonicParsing="false" onMouseEntered="#enter_bt_add_label" prefHeight="36.0" prefWidth="106.0" text="加入標籤" />
-            <Button fx:id="bt_delete_label" mnemonicParsing="false" onMouseEntered="#enter_bt_delete_label" prefHeight="30.0" prefWidth="106.0" text="刪除標籤" />
+            <Button fx:id="bt_add_label" mnemonicParsing="false" onMouseEntered="#enter_bt_add_label" prefHeight="36.0" prefWidth="106.0" text="加入標籤＞" />
+            <Button fx:id="bt_delete_label" mnemonicParsing="false" onMouseEntered="#enter_bt_delete_label" prefHeight="30.0" prefWidth="106.0" text="刪除標籤＞" />
             <Button fx:id="bt_song_preference" mnemonicParsing="false" onMouseEntered="#song_preference" prefHeight="36.0" prefWidth="106.0" text="歌曲偏好＞" />
          </children>
       </VBox>
-      <VBox fx:id="song_preference_buttons" layoutX="106.0" layoutY="72.0" onMouseExited="#hide_song_preference" prefHeight="200.0" prefWidth="82.0" visible="false">
+      <VBox fx:id="song_preference_buttons" layoutX="106.0" layoutY="109.0" onMouseExited="#hide_song_preference" prefHeight="200.0" prefWidth="82.0" visible="false">
          <children>
             <Button fx:id="bt_song_preference3" mnemonicParsing="false" onMouseClicked="#song_preference3_selected" prefHeight="30.0" prefWidth="50.0" text="3" />
             <Button fx:id="bt_song_preference2" mnemonicParsing="false" onMouseClicked="#song_preference2_selected" prefHeight="30.0" prefWidth="50.0" text="2" />
             <Button fx:id="bt_song_preference1" mnemonicParsing="false" onMouseClicked="#song_preference1_selected" prefHeight="30.0" prefWidth="50.0" text="1" />
          </children></VBox>
+      <ScrollPane fx:id="song_add_label_buttons_pane" hbarPolicy="NEVER" layoutX="106.0" layoutY="37.0" prefHeight="182.0" prefWidth="130.0" visible="false">
+         <content>
+            <VBox fx:id="song_add_label_buttons" prefHeight="182.0" prefWidth="114.0" />
+         </content>
+      </ScrollPane>
+      <ScrollPane fx:id="song_delete_label_buttons_pane" hbarPolicy="NEVER" layoutX="106.0" layoutY="73.0" prefHeight="182.0" prefWidth="130.0" visible="false">
+         <content>
+            <VBox fx:id="song_delete_label_buttons" prefHeight="182.0" prefWidth="114.0" />
+         </content>
+      </ScrollPane>
       <Button fx:id="bt_add_song" layoutX="20.0" layoutY="331.0" mnemonicParsing="false" onMouseClicked="#add_song" prefHeight="60.0" prefWidth="129.0" text="加入歌曲">
          <font>
             <Font size="18.0" />
@@ -190,19 +200,14 @@
          </font>
       </RadioButton>
       <RadioButton fx:id="bt_random_and_owner" layoutX="394.0" layoutY="190.0" mnemonicParsing="false" text="擁有者平分" toggleGroup="$random_type" />
-      <RadioButton fx:id="bt_random_and_label" layoutX="502.0" layoutY="189.0" mnemonicParsing="false" text="標籤" toggleGroup="$random_type" />
+      <RadioButton fx:id="bt_random_and_label" layoutX="605.0" layoutY="190.0" mnemonicParsing="false" text="標籤" toggleGroup="$random_type" />
       <Label layoutX="171.0" layoutY="193.0" text="篩選:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       <Button fx:id="bt_save_changes" layoutX="26.0" layoutY="491.0" mnemonicParsing="false" onMouseClicked="#save_changes" prefHeight="60.0" prefWidth="117.0" text="儲存變更" />
-      <ScrollPane fx:id="song_add_label_buttons_pane" hbarPolicy="NEVER" layoutX="106.0" layoutY="37.0" prefHeight="182.0" prefWidth="130.0" visible="false">
-         <content>
-            <VBox fx:id="song_add_label_buttons" prefHeight="200.0" prefWidth="114.0" />
-         </content>
-      </ScrollPane>
-      <RadioButton fx:id="bt_random_and_time" layoutX="576.0" layoutY="189.0" mnemonicParsing="false" text="歌單時長" toggleGroup="$random_type" />
+      <RadioButton fx:id="bt_random_and_time" layoutX="505.0" layoutY="190.0" mnemonicParsing="false" text="歌單時長" toggleGroup="$random_type" />
       <TextField fx:id="txt_hour" layoutX="567.0" layoutY="226.0" prefHeight="39.0" prefWidth="38.0" />
       <Text fill="WHITE" layoutX="609.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="小時" />
       <TextField fx:id="txt_minute" layoutX="645.0" layoutY="226.0" prefHeight="39.0" prefWidth="38.0" />

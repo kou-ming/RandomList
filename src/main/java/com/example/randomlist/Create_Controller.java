@@ -360,8 +360,5 @@ public class Create_Controller implements Initializable {
         });
 
         Other_SongTableView.setItems(second_songlist);
-
-
     }
-
 }
