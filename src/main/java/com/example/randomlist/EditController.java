@@ -719,7 +719,7 @@ public class EditController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         for(Song song : songlist){
-            ori_songlist.add(song);
+            ori_songlist.add(song.clone());
         }
         editor = FileController.editor;
         if (editor.equals("薛耀智")){

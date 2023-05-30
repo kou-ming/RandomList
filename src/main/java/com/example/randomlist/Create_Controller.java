@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -64,6 +65,8 @@ public class Create_Controller implements Initializable {
     @FXML
     private TextArea Song_Info;
 
+    @FXML
+    private Label songInfo_label;
 
     public String now_list_path = FileController.now_list_path;
 
@@ -74,7 +77,8 @@ public class Create_Controller implements Initializable {
     public Map<String, String> User_Map = FileController.User_Map;
     public ObservableList<Song> second_songlist = FXCollections.observableArrayList();  //引入的歌單
 
-
+    Song temp_song = null;
+    private String editor = "";
     FileChooser fileChooser = new FileChooser();    //建立檔案選擇器
 
 
@@ -104,12 +108,12 @@ public class Create_Controller implements Initializable {
 
     @FXML
     void bt_editor1(MouseEvent event) {
-
+        editor = "薛耀智";
     }
 
     @FXML
     void bt_editor2(MouseEvent event) {
-
+        editor = "許高銘";
     }
 
     @FXML
@@ -119,13 +123,76 @@ public class Create_Controller implements Initializable {
 
     @FXML
     void get_Info(MouseEvent event) {
-
+        if (event.getButton() == MouseButton.PRIMARY) {
+            Song songinfo = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
+            display_songinfo(songinfo);
+            Song_Info.getStyleClass().remove("text-area_v1");
+            Song_Info.getStyleClass().add("text-area_v1");
+            Song_Info.getStyleClass().remove("text-area_v2");
+            songInfo_label.getStyleClass().remove("songInfo_label_v1");
+            songInfo_label.getStyleClass().add("songInfo_label_v1");
+            songInfo_label.getStyleClass().remove("songInfo_label_v2");
+        }
+    }
+    @FXML
+    void get_Info_v2(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            Song songinfo = Other_SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
+            temp_song = songinfo;
+            display_songinfo(songinfo);
+            Song_Info.getStyleClass().remove("text-area_v2");
+            Song_Info.getStyleClass().add("text-area_v2");
+            Song_Info.getStyleClass().remove("text-area_v1");
+            songInfo_label.getStyleClass().remove("songInfo_label_v2");
+            songInfo_label.getStyleClass().add("songInfo_label_v2");
+            songInfo_label.getStyleClass().remove("songInfo_label_v1");
+        }
     }
 
     @FXML
     void open_localList(MouseEvent event) {
 
     }
+
+    @FXML
+    void add_All(MouseEvent event) {
+        if(!editor.equals("")){
+            for(int i = 0; i < second_songlist.size() ; i++){
+                check_and_add(second_songlist.get(i), editor);
+            }
+        }
+    }
+
+    @FXML
+    void add_Some(MouseEvent event) {
+        if(!editor.equals("")){
+            check_and_add(temp_song, editor);
+        }
+    }
+
+    void check_and_add(Song song, String now_editor){
+        boolean flag = true;
+        if(song != null){
+            for(int i  = 0 ; i < first_songlist.size() ; i++){
+                if (first_songlist.get(i).getLink().equals(song.getLink())){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag){
+                Song new_song = song.clone();
+                if(new_song.getOwner().equals("")){
+                    new_song.setOwner(now_editor);
+                }
+                first_songlist.add(new_song);
+            }
+        }
+    }
+    @FXML
+    void del(MouseEvent event) {
+
+    }
+
 
     //讀取檔案
     void readFile(String path){
@@ -187,6 +254,20 @@ public class Create_Controller implements Initializable {
             }
         }
         return "";
+    }
+
+    void display_songinfo(Song songinfo){
+        Song_Info.clear();
+        Song_Info.appendText("歌名: " + songinfo.getName() + "\n");
+        Song_Info.appendText("歌曲連結: " + songinfo.getLink() + "\n");
+        Song_Info.appendText("頻道名稱: " + songinfo.getChannel() + "\n");
+        Song_Info.appendText("歌曲長度: " + songinfo.getDuration() + "\n");
+        Song_Info.appendText("添加者: " + songinfo.getOwner() + "\n");
+        Song_Info.appendText("偏好: " + songinfo.getPreference() + "\n");
+        Song_Info.appendText("標籤：");
+        for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
+            Song_Info.appendText(" " + songinfo.getLabel(i));
+        }
     }
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //初始化表格
