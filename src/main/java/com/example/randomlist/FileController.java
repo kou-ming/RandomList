@@ -115,12 +115,12 @@ public class FileController implements Initializable {
         if (event.getButton() == MouseButton.PRIMARY) {
             Song songinfo = SongTableView.getSelectionModel().getSelectedItem(); //取得歌曲資訊
             Song_Info.clear();
-            Song_Info.appendText("歌名: " + songinfo.getName() + "\n");
-            Song_Info.appendText("歌曲連結: " + songinfo.getLink() + "\n");
-            Song_Info.appendText("頻道名稱: " + songinfo.getChannel() + "\n");
-            Song_Info.appendText("歌曲長度: " + songinfo.getDuration() + "\n");
-            Song_Info.appendText("添加者: " + songinfo.getOwner() + "\n");
-            Song_Info.appendText("偏好: " + songinfo.getPreference() + "\n");
+            Song_Info.appendText("歌名：" + songinfo.getName() + "\n");
+            Song_Info.appendText("歌曲連結：" + songinfo.getLink() + "\n");
+            Song_Info.appendText("頻道名稱：" + songinfo.getChannel() + "\n");
+            Song_Info.appendText("歌曲長度：" + songinfo.getDuration() + "\n");
+            Song_Info.appendText("添加者：" + songinfo.getOwner() + "\n");
+            Song_Info.appendText("偏好：" + songinfo.getPreference() + "\n");
             Song_Info.appendText("標籤：");
             for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
                 Song_Info.appendText(" " + songinfo.getLabel(i));
@@ -270,12 +270,12 @@ public class FileController implements Initializable {
                     if(index_line >= 0){
                         String ownerlname = check_owner(row[1]);
                         if(!ownerlname.equals("")){
-                            Song song = new Song(row[0], row[1].replace(ownerlname, ""),row[2],row[3]);
+                            Song song = new Song(row[0], row[1].replace(ownerlname, ""),row[2].replaceAll(" ", ""),row[3]);
                             song.setOwner(User_Map.get(ownerlname));
                             List.add(song);
                         }
                         else{
-                            List.add(new Song(row[0], row[1],row[2],row[3]));
+                            List.add(new Song(row[0], row[1],row[2].replaceAll(" ", ""),row[3]));
                         }
                     }
 

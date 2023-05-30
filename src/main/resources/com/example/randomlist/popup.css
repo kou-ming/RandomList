@@ -27,6 +27,20 @@
     -fx-border-radius: 3;
 }
 
+.list_button {
+    -fx-background-color: black;
+    -fx-text-fill: #E6E6E6;
+    -fx-font-size: 16px;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-font-weight: bold;
+}
+
+.list_button:pressed {
+    -fx-background-color: #E6E6E6;
+    -fx-text-fill: black;
+}
+
 .text-field {
     -fx-background-color: #FFFFFF; /* 背景颜色 */
     -fx-border-color: white; /* 边框颜色 */
@@ -78,4 +92,8 @@
 .text-area .scroll-pane .scroll-bar {
     -fx-pref-width: 13px;
     -fx-pref-height: 13px;
+}
+
+.error_label{
+    -fx-text-fill: #ff6f6f;
 }
