@@ -1,10 +1,10 @@
 <Name>	<Channel>	<Duration>	<URL>
-Jason Mraz - Have It All (Official Video)	Jason MrazWang wen-ho	4:20	https://www.youtube.com/watch?v=BFkTu8Y1KLs&pp=gAQBiAQB8AUB	1
-陸軍航空の歌 - 陸軍航空之歌	Note :Pevan	3:29	https://www.youtube.com/watch?v=72VSlCph3dw&pp=gAQBiAQB8AUB	1
-太平洋行進曲	slhs0083evan	3:43	https://www.youtube.com/watch?v=UH3gZlewu7o&pp=gAQBiAQB8AUB	1
-【NATIONALIST CHINESE SONG】Anthem of Whampoa Military Academy (黄埔军校校歌) w/ ENG lyrics	The 51st Divisionevan	2:01	https://www.youtube.com/watch?v=C_LoEFBKzm4&pp=gAQBiAQB8AUB	1
-中央警察大學校歌	中央警察大學evan	1:47	https://www.youtube.com/watch?v=nBbxTFc69IU&pp=gAQBiAQB8AUB	1
-Tiếng Gọi Công Dân—呼喚公民（南越國歌）	Chiyomi Anchovy 安丘比evan	1:08	https://www.youtube.com/watch?v=2rR059I2-Ko&pp=gAQBiAQB8AUB	1
+Jason Mraz - Have It All (Official Video)	Jason MrazWang wen-ho	4:20	https://www.youtube.com/watch?v=BFkTu8Y1KLs&pp=gAQBiAQB8AUB	1	我的最愛
+陸軍航空の歌 - 陸軍航空之歌	Note :Pevan	3:29	https://www.youtube.com/watch?v=72VSlCph3dw&pp=gAQBiAQB8AUB	1	我的最愛
+太平洋行進曲	slhs0083evan	3:43	https://www.youtube.com/watch?v=UH3gZlewu7o&pp=gAQBiAQB8AUB	1	我的最愛
+【NATIONALIST CHINESE SONG】Anthem of Whampoa Military Academy (黄埔军校校歌) w/ ENG lyrics	The 51st Divisionevan	2:01	https://www.youtube.com/watch?v=C_LoEFBKzm4&pp=gAQBiAQB8AUB	1	我的最愛
+中央警察大學校歌	中央警察大學evan	1:47	https://www.youtube.com/watch?v=nBbxTFc69IU&pp=gAQBiAQB8AUB	1	我的最愛
+Tiếng Gọi Công Dân—呼喚公民（南越國歌）	Chiyomi Anchovy 安丘比evan	1:08	https://www.youtube.com/watch?v=2rR059I2-Ko&pp=gAQBiAQB8AUB	1	我的最愛
 陸上自衛隊 北部方面隊歌	Note :Pevan	3:04	https://www.youtube.com/watch?v=v0_LyEQqq5c&pp=gAQBiAQB8AUB	1
 애국가(The Patriotic Song)愛國歌-大韓民國臨時政府國歌	Note :Pevan	1:05	https://www.youtube.com/watch?v=g1950PQpARw&pp=gAQBiAQB8AUB	1
 조선인민군가 - 朝鮮人民軍歌	Note :Pevan	3:23	https://www.youtube.com/watch?v=R1LB9HS2vLc&pp=gAQBiAQB8AUB	1

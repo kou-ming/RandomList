@@ -38,6 +38,12 @@ public class EditController implements Initializable{
     private RadioButton Editor2;
 
     @FXML
+    private RadioButton Editor3;
+
+    @FXML
+    private RadioButton Editor4;
+
+    @FXML
     private Button bt_random;
 
     @FXML
@@ -76,6 +82,7 @@ public class EditController implements Initializable{
     @FXML
     private Button bt_song_preference3;
 
+
     @FXML
     private RadioButton bt_only_random;
 
@@ -86,10 +93,14 @@ public class EditController implements Initializable{
     private RadioButton bt_random_and_owner;
 
     @FXML
-    private RadioButton bt_random_and_label;
+    private RadioButton bt_random_and_time;
 
     @FXML
-    private RadioButton bt_random_and_time;
+    private Button bt_open_close_labels;
+
+    @FXML
+    private Button bt_open_close_adder;
+
 
     @FXML
     private VBox song_buttons;
@@ -102,6 +113,18 @@ public class EditController implements Initializable{
 
     @FXML
     private ScrollPane song_delete_label_buttons_pane;
+
+    @FXML
+    private ScrollPane labels_pane;
+
+    @FXML
+    private VBox labels;
+
+    @FXML
+    private ScrollPane adder_pane;
+
+    @FXML
+    private VBox adder;
 
     @FXML
     private VBox song_delete_label_buttons;
@@ -201,7 +224,7 @@ public class EditController implements Initializable{
         Song_Info.appendText("偏好：" + songinfo.getPreference() + "\n");
         Song_Info.appendText("標籤：");
         for(int i = 0 ; i < songinfo.getLabelsize() ; i++){
-            Song_Info.appendText("  " + songinfo.getLabel(i));
+            Song_Info.appendText( songinfo.getLabel(i) + "  ");
         }
     }
 
@@ -445,9 +468,6 @@ public class EditController implements Initializable{
                 System.out.println(temp_final.get(i).getOwner());
             }
             nonrepeat_random_sublist(song_amount);
-        }
-        else if (bt_random_and_label.isSelected()){
-
         }
         else if (bt_random_and_time.isSelected()) {
             int hour = Integer.parseInt(txt_hour.getText());
@@ -716,10 +736,6 @@ public class EditController implements Initializable{
             song_selected.setPreference(1);
             song_preference_buttons.setVisible(false);
             show_song_detail();
-
-            for (int i = 0; i < songlist.size(); i++) {
-                System.out.println(songlist.get(i).getPreference());
-            }
         }
     }
 
@@ -729,10 +745,6 @@ public class EditController implements Initializable{
             song_selected.setPreference(2);
             song_preference_buttons.setVisible(false);
             show_song_detail();
-
-            for (int i = 0; i < songlist.size(); i++) {
-                System.out.println(songlist.get(i).getPreference());
-            }
         }
     }
 
@@ -742,23 +754,27 @@ public class EditController implements Initializable{
             song_selected.setPreference(3);
             song_preference_buttons.setVisible(false);
             show_song_detail();
-
-            for (int i = 0; i < songlist.size(); i++) {
-                System.out.println(songlist.get(i).getPreference());
-            }
         }
     }
 
     @FXML
     void bt_editor1(MouseEvent event) {
-        editor = "薛耀智";
-        FileController.editor = editor;
+        editor = Editor1.getText();
     }
 
     @FXML
     void bt_editor2(MouseEvent event) {
-        editor = "許高銘";
-        FileController.editor = editor;
+        editor = Editor2.getText();
+    }
+
+    @FXML
+    void bt_editor3(MouseEvent event) {
+        editor = Editor3.getText();
+    }
+
+    @FXML
+    void bt_editor4(MouseEvent event) {
+        editor = Editor4.getText();
     }
 
     @FXML
@@ -769,11 +785,38 @@ public class EditController implements Initializable{
         song_delete_label_buttons_pane.setVisible(false);
     }
 
+    @FXML
+    void open_close_labels(MouseEvent event) {
+        if (labels_pane.isVisible()){
+            labels_pane.setVisible(false);
+        }
+        else {
+            labels_pane.setVisible(true);
+        }
+    }
+
+    @FXML
+    void open_close_adder(MouseEvent event) {
+        if (adder_pane.isVisible()){
+            adder_pane.setVisible(false);
+        }
+        else{
+            adder_pane.setVisible(true);
+        }
+    }
+
+    private ArrayList<String> labels_selected = new ArrayList<>();
+
+    private ArrayList<String> adder_selected = new ArrayList<>();
+
+    private ArrayList<Song> full_songlist = new ArrayList<>();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         for(Song song : songlist){
             ori_songlist.add(song.clone());
+        }
+        for (int i = 0; i < songlist.size(); i++) {
+            full_songlist.add(songlist.get(i));
         }
         editor = FileController.editor;
         if (editor.equals("薛耀智")){
@@ -805,8 +848,8 @@ public class EditController implements Initializable{
         //初始化時間
         count_list_time();
 
-        //讀取所有的標籤並建立按鈕
         for (int i = 0; i < FileController.Labels.size(); i++) {
+            //讀取所有的標籤並建立按鈕
             Button button = new Button(FileController.Labels.get(i));
             button.setPrefSize(110, 36);
 
@@ -826,6 +869,109 @@ public class EditController implements Initializable{
             });
 
             song_add_label_buttons.getChildren().add(button);
+
+            //建立所有標籤的選取按鈕
+            CheckBox checkBox = new CheckBox(FileController.Labels.get(i));
+            checkBox.setPrefSize(150,36);
+
+            checkBox.setOnAction(e -> {
+                labels_selected.clear();
+                for (javafx.scene.Node node : labels.getChildren()){
+                    if (node instanceof CheckBox) {
+                        CheckBox current_check_box = (CheckBox) node;
+                        if (current_check_box.isSelected()){
+                            labels_selected.add(current_check_box.getText());
+                        }
+                    }
+                }
+
+                ArrayList<Song> temp = new ArrayList<>();
+                if (labels_selected.size() == 0){
+                    for (int j = 0; j < full_songlist.size(); j++) {
+                        temp.add(full_songlist.get(j));
+                    }
+                }
+                else{
+                    for (int j = 0; j < full_songlist.size(); j++) {
+                        for (int k = 0; k < labels_selected.size(); k++) {
+                            if (full_songlist.get(j).check_label(labels_selected.get(k))){
+                                temp.add(full_songlist.get(j));
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                songlist.clear();
+                for (int j = 0; j < temp.size(); j++) {
+                    songlist.add(temp.get(j));
+                }
+
+                txt_song_amount.setText(String.valueOf(songlist.size()));
+                sld_song_amount.setMax(songlist.size());
+                sld_song_amount.setValue(songlist.size());
+                count_list_time();
+            });
+            labels.getChildren().add(checkBox);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            CheckBox checkBox = new CheckBox();
+            checkBox.setPrefSize(150,36);
+            checkBox.setSelected(true);
+            if (i == 0){
+                checkBox.setText(Editor1.getText());
+            }
+            else if (i == 1) {
+                checkBox.setText(Editor2.getText());
+            }
+            else if (i == 2) {
+                checkBox.setText(Editor3.getText());
+            }
+            else if (i == 3) {
+                checkBox.setText(Editor4.getText());
+            }
+
+            checkBox.setOnAction(e -> {
+                adder_selected.clear();
+                for (javafx.scene.Node node : adder.getChildren()){
+                    if (node instanceof CheckBox) {
+                        CheckBox current_check_box = (CheckBox) node;
+                        if (current_check_box.isSelected()){
+                            adder_selected.add(current_check_box.getText());
+                        }
+                    }
+                }
+
+                ArrayList<Song> temp = new ArrayList<>();
+                if (adder_selected.size() == 4){
+                    for (int j = 0; j < full_songlist.size(); j++) {
+                        temp.add(full_songlist.get(j));
+                    }
+                }
+                else{
+                    for (int j = 0; j < full_songlist.size(); j++) {
+                        for (int k = 0; k < adder_selected.size(); k++) {
+                            if (full_songlist.get(j).getOwner().equals(adder_selected.get(k))){
+                                temp.add(full_songlist.get(j));
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                songlist.clear();
+                for (int j = 0; j < temp.size(); j++) {
+                    songlist.add(temp.get(j));
+                }
+
+                txt_song_amount.setText(String.valueOf(songlist.size()));
+                sld_song_amount.setMax(songlist.size());
+                sld_song_amount.setValue(songlist.size());
+                count_list_time();
+            });
+
+            adder.getChildren().add(checkBox);
         }
     }
 }

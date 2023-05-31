@@ -91,5 +91,13 @@ public class Song implements Cloneable {
         this.preference = preference;
     }
 
+    public Boolean check_label(String label){
+        for (int i = 0; i < SongLabels.size(); i++) {
+            if (SongLabels.get(i).equals(label)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
