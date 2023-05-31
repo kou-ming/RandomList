@@ -4,3 +4,6 @@ OMG.txt
 temp.txt
 sus.txt
 404.txt
+test.txt
+測試用.txt
+測.txt

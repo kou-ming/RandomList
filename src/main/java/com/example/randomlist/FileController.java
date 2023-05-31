@@ -50,6 +50,13 @@ public class FileController implements Initializable {
     @FXML
     private TextArea Song_Info;
 
+    @FXML
+    private VBox list_buttons;
+
+
+    @FXML
+    private ScrollPane List_Pane;
+
 
     FileChooser fileChooser = new FileChooser();    //建立檔案選擇器
     public String path = "C:";  //預設檔案路徑
@@ -66,6 +73,8 @@ public class FileController implements Initializable {
     static public Map<String, String> User_Map = new HashMap<>();
     static public Map<String, String> User_to_Youtube = new HashMap<>();
 
+
+    private double scroll_value = 0;
 
 
 
@@ -405,17 +414,32 @@ public class FileController implements Initializable {
 
         songlist_name.setPrefSize(125, 50);
 
-        songlist_name.setOnAction(event -> {
-            System.out.println("Button clicked!");
-            listname = songlist_name.getText();
-            ListName.setText(listname);
-            List.clear();
-            path = "src\\main\\java\\SongList_File\\" + songlist_name.getText() + ".txt";
-            now_list_path = path;
-            readFile(path);
+        songlist_name.setOnMouseClicked(event -> {
+            if(event.getButton() == MouseButton.SECONDARY){
+                list_buttons.setVisible(true);
+                System.out.println(scroll_value + " " + SongList_view.getPrefHeight() + " " + scroll_value * (SongList_view.getPrefHeight() - List_Pane.getPrefHeight()));
+                list_buttons.setLayoutX(songlist_name.getLayoutX() + 80);
+                list_buttons.setLayoutY(songlist_name.getLayoutY() + 20 - scroll_value * (SongList_view.getPrefHeight() - List_Pane.getPrefHeight()));
+            }
+            else{
+                System.out.println("Button clicked!");
+                listname = songlist_name.getText();
+                ListName.setText(listname);
+                List.clear();
+                path = "src\\main\\java\\SongList_File\\" + songlist_name.getText() + ".txt";
+                now_list_path = path;
+                readFile(path);
+            }
         });
         System.out.println(songlist_name.getText());
+//        SongList_view.getChildren().
         SongList_view.getChildren().add(songlist_name);
+        int count = 0;
+        for (javafx.scene.Node node : SongList_view.getChildren()) {
+            count++;
+        }
+        SongList_view.setPrefHeight(count * 50);
+
         SongList_view.layout();
     }
 
@@ -567,6 +591,16 @@ public class FileController implements Initializable {
 
     }
 
+
+    @FXML
+    void rename_List(MouseEvent event) {
+
+    }
+
+    @FXML
+    void del_Lsit(MouseEvent event) {
+
+    }
     //若沒有選取歌單則警告
     void no_choose_list() throws IOException {
         Stage popupStage = new Stage();
@@ -648,5 +682,16 @@ public class FileController implements Initializable {
         loadFile();
         loadLabel();
 
+        List_Pane.vvalueProperty().addListener((observable, oldValue, newValue) -> {
+            scroll_value = (double) newValue;
+            list_buttons.setLayoutY(list_buttons.getLayoutY() - ((double) newValue - (double) oldValue) * (SongList_view.getPrefHeight() - List_Pane.getPrefHeight()));
+            if(list_buttons.getLayoutY() < 0){
+                list_buttons.setVisible(false);
+            }
+            else if(list_buttons.getLayoutY() > List_Pane.getPrefHeight()){
+                list_buttons.setVisible(false);
+            }
+
+        });
     }
 }
