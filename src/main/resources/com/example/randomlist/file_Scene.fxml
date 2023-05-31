@@ -40,7 +40,7 @@
          </font>
       </Text>
       <VBox fx:id="SongList_view" layoutX="32.0" layoutY="54.0" prefHeight="332.0" prefWidth="125.0" />
-      <HBox layoutX="851.0" layoutY="14.0" prefHeight="36.0" prefWidth="499.0">
+      <HBox layoutX="774.0" layoutY="11.0" prefHeight="36.0" prefWidth="499.0">
          <children>
             <Button fx:id="bt_Call_newlistPopup" mnemonicParsing="false" onMouseClicked="#call_newlistPopup" prefHeight="36.0" prefWidth="133.0" text="建立空白歌單" textFill="#6064d9">
                <font>
@@ -48,7 +48,13 @@
                </font>
             </Button>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
-            <Button fx:id="bt_ExportList" mnemonicParsing="false" onMouseClicked="#exportList" prefHeight="50.0" prefWidth="100.0" text="輸出歌單" textFill="#d25e5e">
+            <Button fx:id="bt_ExportList" mnemonicParsing="false" onMouseClicked="#exportList" prefHeight="50.0" prefWidth="100.0" text="備份歌單" textFill="#d25e5e">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
+            <Button fx:id="bt_Export_Url" mnemonicParsing="false" onMouseClicked="#export_Url" prefHeight="50.0" prefWidth="100.0" text="輸出URL" textFill="#d25e5e">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

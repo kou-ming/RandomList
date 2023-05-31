@@ -63,6 +63,9 @@
     -fx-font-size: 24px;
 
 }
+.text-area_v2 {
+    -fx-font-size: 12px;
+}
 
 .text-area .content {
     -fx-control-inner-background: black;

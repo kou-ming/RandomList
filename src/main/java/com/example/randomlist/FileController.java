@@ -480,6 +480,61 @@ public class FileController implements Initializable {
         }
     }
 
+    @FXML
+    void export_Url(MouseEvent event) throws IOException {
+        if (listname.equals("未選取歌單")){
+            no_choose_list();
+        }
+        else{
+            for(Song song: List){
+                System.out.println(song.getLink());
+
+            }
+            call_url();
+        }
+    }
+
+    void call_url() throws IOException {
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(Main.primaryStage);
+
+        Pane popupRoot = FXMLLoader.load(getClass().getResource("new_list_popupScene.fxml"));
+
+        TextArea textArea = new TextArea();
+        for(int i = 0 ; i < List.size() ; i++){
+            if( i == List.size() - 1){
+                textArea.appendText(List.get(i).getLink());
+            }
+            else{
+                textArea.appendText(List.get(i).getLink() + "\n");
+            }
+        }
+        textArea.setLayoutX(100);
+        textArea.setLayoutY(20);
+        textArea.setPrefWidth(500);
+        textArea.setPrefHeight(450);
+        textArea.getStyleClass().add("text-area_v2");
+        textArea.setEditable(false);
+
+
+//        Label label1 = new Label("警告！");
+//        label1.setLayoutX(130);
+//        label1.setLayoutY(60);
+//        label1.setFont(new Font(45));
+//        label1.getStyleClass().add("error_label");
+//        Label label2 = new Label("你未選取歌單");
+//        label2.setLayoutX(65);
+//        label2.setLayoutY(130);
+//        label2.setFont(new Font(45));
+//        label2.getStyleClass().add("error_label");
+//        popupRoot.getChildren().addAll(label1, label2);
+        popupRoot.getChildren().addAll(textArea);
+        Scene popupScene = new Scene(popupRoot, 700, 500);
+        popupStage.setScene(popupScene);
+        popupStage.showAndWait();
+    }
+
     //替轉至編輯頁面
     @FXML
     void chscene_editor(MouseEvent event) throws IOException {
