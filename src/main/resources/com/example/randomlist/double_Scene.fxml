@@ -78,9 +78,9 @@
             </Button>
          </children>
       </VBox>
-      <HBox layoutX="500.0" layoutY="13.0" prefHeight="37.0" prefWidth="349.0">
+      <HBox layoutX="500.0" layoutY="13.0" prefHeight="37.0" prefWidth="599.0">
          <children>
-            <Label prefHeight="32.0" prefWidth="189.0" text="歌單擁有者/編輯者：" textFill="#d9d9d9">
+            <Label prefHeight="32.0" prefWidth="149.0" text="歌單擁有者/編輯者：" textFill="#d9d9d9">
                <font>
                   <Font size="18.0" />
                </font>
@@ -95,6 +95,18 @@
             </RadioButton>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
             <RadioButton fx:id="Editor2" mnemonicParsing="false" onMouseClicked="#bt_editor2" prefHeight="32.0" prefWidth="84.0" text="許高銘" toggleGroup="$Editor">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
+            <RadioButton fx:id="Editor3" mnemonicParsing="false" onMouseClicked="#bt_editor3" prefHeight="32.0" prefWidth="79.0" text="王文和" toggleGroup="$Editor">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
+            <RadioButton fx:id="Editor4" mnemonicParsing="false" onMouseClicked="#bt_editor4" prefHeight="32.0" prefWidth="79.0" text="鍾君逸" toggleGroup="$Editor">
                <font>
                   <Font size="14.0" />
                </font>
