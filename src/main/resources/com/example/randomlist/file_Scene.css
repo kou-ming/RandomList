@@ -39,21 +39,23 @@
     -fx-text-fill: black;
 }
 
-.sublist_button {
-    -fx-background-color: black;
-    -fx-text-fill: #E6E6E6;
-    -fx-font-size: 16px;
-    -fx-border-color: white;
-    -fx-border-width: 2px;
-    -fx-font-weight: bold;
+.add_song_button {
+    -fx-background-color: rgb(0, 0, 0);
+        -fx-text-fill: rgb(0, 115, 230);
+        -fx-font-size: 16px;
+        /*-fx-font-family: "setofont";*/
+        -fx-font-family: "Iansui094-Regular";
+        -fx-font-weight: bold;
+        -fx-border-color: #0072E3;
+        -fx-border-width: 2px;
+        -fx-background-radius: 3;
+        -fx-border-radius: 3;
 }
 
-.sublist_button:pressed {
-    -fx-background-color: #E6E6E6;
-    -fx-text-fill: black;
+.add_song_button:pressed {
+    -fx-background-color: rgb(0, 115, 230);
+        -fx-text-fill: black;
 }
-
-
 
 .list_button {
     -fx-background-color: black;
@@ -188,7 +190,6 @@
     -fx-background-radius: 5;
     -fx-border-radius: 5;
     -fx-border-width: 5px;
-
 }
 
 .text-area_v1 .content {

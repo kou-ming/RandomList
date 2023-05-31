@@ -38,6 +38,9 @@ public class EditController implements Initializable{
     private Group Buttons;
 
     @FXML
+    private Group Right_Click;
+
+    @FXML
     private ToggleGroup Editor;
 
     @FXML
@@ -612,6 +615,25 @@ public class EditController implements Initializable{
         }
     }
 
+    @FXML
+    void exit_right_click_group(MouseEvent event) {
+        song_buttons.setVisible(false);
+        song_preference_buttons.setVisible(false);
+        song_delete_label_buttons_pane.setVisible(false);
+        song_add_label_buttons_pane.setVisible(false);
+    }
+
+    @FXML
+    void exit_add_label_buttons(MouseEvent event) {
+        song_add_label_buttons_pane.setVisible(false);
+    }
+
+    @FXML
+    void exit_delete_label_buttons(MouseEvent event) {
+        song_delete_label_buttons_pane.setVisible(false);
+    }
+
+
     //左鍵點擊按鈕加入歌曲
     @FXML
     void add_song(MouseEvent event) throws IOException {
@@ -948,8 +970,6 @@ public class EditController implements Initializable{
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //bt_random.setText("隨機" + "\n" + "排序");
-
         for(Song song : songlist){
             ori_songlist.add(song.clone());
         }
@@ -1047,6 +1067,10 @@ public class EditController implements Initializable{
                 count_list_time();
             });
             labels.getChildren().add(checkBox);
+        }
+
+        if (FileController.Labels.size() > 6){
+            labels.setPrefHeight(180 + 36 * (FileController.Labels.size() - 6));
         }
 
         for (int i = 0; i < 4; i++) {
