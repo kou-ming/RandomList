@@ -39,6 +39,22 @@
     -fx-text-fill: black;
 }
 
+.sublist_button {
+    -fx-background-color: black;
+    -fx-text-fill: #E6E6E6;
+    -fx-font-size: 16px;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-font-weight: bold;
+}
+
+.sublist_button:pressed {
+    -fx-background-color: #E6E6E6;
+    -fx-text-fill: black;
+}
+
+
+
 .list_button {
     -fx-background-color: black;
     -fx-text-fill: #E6E6E6;

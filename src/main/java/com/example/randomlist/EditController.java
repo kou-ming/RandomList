@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,6 +33,9 @@ public class EditController implements Initializable{
 
     @FXML
     private AnchorPane main_pane;
+
+    @FXML
+    private Group Buttons;
 
     @FXML
     private ToggleGroup Editor;
@@ -316,8 +320,12 @@ public class EditController implements Initializable{
 
     //創建子歌單
     @FXML
-    void create_subplaylist(MouseEvent event) {
-        if (bt_only_random.isSelected()){
+    void create_subplaylist(MouseEvent event) throws IOException {
+        int temp_song_amount = Integer.parseInt(txt_song_amount.getText());
+        if (temp_song_amount > songlist.size()){
+            pop_up_scene("指定歌曲數大於\n\t歌曲總數");
+        }
+        else if (bt_only_random.isSelected()){
             int song_amount = Integer.parseInt(txt_song_amount.getText());
             nonrepeat_random_sublist(song_amount);
         }
@@ -631,11 +639,11 @@ public class EditController implements Initializable{
             count_list_time();
         }
         else{
-            no_editor();
+            pop_up_scene("你未選取添加者");
         }
     }
 
-    void no_editor() throws IOException {
+    void pop_up_scene(String message) throws IOException {
         Stage popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.initOwner(Main.primaryStage);
@@ -648,7 +656,7 @@ public class EditController implements Initializable{
         label1.setLayoutY(60);
         label1.setFont(new Font(45));
         label1.getStyleClass().add("error_label");
-        Label label2 = new Label("你未選取添加者");
+        Label label2 = new Label(message);
         label2.setLayoutX(35);
         label2.setLayoutY(130);
         label2.setFont(new Font(45));
@@ -833,6 +841,15 @@ public class EditController implements Initializable{
         else {
             labels_pane.setVisible(true);
         }
+
+        if (!labels_pane.isVisible() && !adder_pane.isVisible()){
+            Buttons.setLayoutX(346);
+            Buttons.setLayoutY(215);
+        }
+        else{
+            Buttons.setLayoutX(346);
+            Buttons.setLayoutY(405);
+        }
     }
 
     @FXML
@@ -843,6 +860,15 @@ public class EditController implements Initializable{
         else{
             adder_pane.setVisible(true);
         }
+
+        if (!labels_pane.isVisible() && !adder_pane.isVisible()){
+            Buttons.setLayoutX(346);
+            Buttons.setLayoutY(230);
+        }
+        else{
+            Buttons.setLayoutX(346);
+            Buttons.setLayoutY(405);
+        }
     }
 
     private ArrayList<String> labels_selected = new ArrayList<>();
@@ -851,9 +877,84 @@ public class EditController implements Initializable{
 
     private ArrayList<Song> full_songlist = new ArrayList<>();
 
+    private void filter_by_adder(){
+        adder_selected.clear();
+        for (javafx.scene.Node node : adder.getChildren()){
+            if (node instanceof CheckBox) {
+                CheckBox current_check_box = (CheckBox) node;
+                if (current_check_box.isSelected()){
+                    adder_selected.add(current_check_box.getText());
+                }
+            }
+        }
+
+        ArrayList<Song> temp = new ArrayList<>();
+        if (adder_selected.size() == 4){
+            for (int j = 0; j < full_songlist.size(); j++) {
+                temp.add(full_songlist.get(j));
+            }
+        }
+        else{
+            for (int j = 0; j < full_songlist.size(); j++) {
+                for (int k = 0; k < adder_selected.size(); k++) {
+                    if (full_songlist.get(j).getOwner().equals(adder_selected.get(k))){
+                        temp.add(full_songlist.get(j));
+                        break;
+                    }
+                }
+            }
+        }
+
+        songlist.clear();
+        for (int j = 0; j < temp.size(); j++) {
+            songlist.add(temp.get(j));
+        }
+    }
+
+    private void filter_by_label() {
+        labels_selected.clear();
+        for (javafx.scene.Node node : labels.getChildren()){
+            if (node instanceof CheckBox) {
+                CheckBox current_check_box = (CheckBox) node;
+                if (current_check_box.isSelected()){
+                    labels_selected.add(current_check_box.getText());
+                    System.out.println("wow");
+                }
+            }
+        }
+
+        ArrayList<Song> temp = new ArrayList<>();
+        if (labels_selected.size() == 0){
+            for (int j = 0; j < songlist.size(); j++) {
+                temp.add(songlist.get(j));
+            }
+        }
+        else{
+            for (int j = 0; j < songlist.size(); j++) {
+                for (int k = 0; k < labels_selected.size(); k++) {
+                    if (songlist.get(j).check_label(labels_selected.get(k))){
+                        temp.add(songlist.get(j));
+                        break;
+                    }
+                }
+            }
+        }
+
+        songlist.clear();
+        for (int j = 0; j < temp.size(); j++) {
+            songlist.add(temp.get(j));
+            System.out.println(songlist.get(j).getName());
+        }
+    }
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //bt_random.setText("隨機" + "\n" + "排序");
+
         for(Song song : songlist){
             ori_songlist.add(song.clone());
+        }
+        for (int i = 0; i < songlist.size(); i++) {
+            full_songlist.add(songlist.get(i));
         }
 
         //初始化表格
@@ -937,37 +1038,8 @@ public class EditController implements Initializable{
             checkBox.setPrefSize(150,36);
 
             checkBox.setOnAction(e -> {
-                labels_selected.clear();
-                for (javafx.scene.Node node : labels.getChildren()){
-                    if (node instanceof CheckBox) {
-                        CheckBox current_check_box = (CheckBox) node;
-                        if (current_check_box.isSelected()){
-                            labels_selected.add(current_check_box.getText());
-                        }
-                    }
-                }
-
-                ArrayList<Song> temp = new ArrayList<>();
-                if (labels_selected.size() == 0){
-                    for (int j = 0; j < full_songlist.size(); j++) {
-                        temp.add(full_songlist.get(j));
-                    }
-                }
-                else{
-                    for (int j = 0; j < full_songlist.size(); j++) {
-                        for (int k = 0; k < labels_selected.size(); k++) {
-                            if (full_songlist.get(j).check_label(labels_selected.get(k))){
-                                temp.add(full_songlist.get(j));
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                songlist.clear();
-                for (int j = 0; j < temp.size(); j++) {
-                    songlist.add(temp.get(j));
-                }
+                filter_by_adder();
+                filter_by_label();
 
                 txt_song_amount.setText(String.valueOf(songlist.size()));
                 sld_song_amount.setMax(songlist.size());
@@ -995,37 +1067,8 @@ public class EditController implements Initializable{
             }
 
             checkBox.setOnAction(e -> {
-                adder_selected.clear();
-                for (javafx.scene.Node node : adder.getChildren()){
-                    if (node instanceof CheckBox) {
-                        CheckBox current_check_box = (CheckBox) node;
-                        if (current_check_box.isSelected()){
-                            adder_selected.add(current_check_box.getText());
-                        }
-                    }
-                }
-
-                ArrayList<Song> temp = new ArrayList<>();
-                if (adder_selected.size() == 4){
-                    for (int j = 0; j < full_songlist.size(); j++) {
-                        temp.add(full_songlist.get(j));
-                    }
-                }
-                else{
-                    for (int j = 0; j < full_songlist.size(); j++) {
-                        for (int k = 0; k < adder_selected.size(); k++) {
-                            if (full_songlist.get(j).getOwner().equals(adder_selected.get(k))){
-                                temp.add(full_songlist.get(j));
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                songlist.clear();
-                for (int j = 0; j < temp.size(); j++) {
-                    songlist.add(temp.get(j));
-                }
+                filter_by_adder();
+                filter_by_label();
 
                 txt_song_amount.setText(String.valueOf(songlist.size()));
                 sld_song_amount.setMax(songlist.size());

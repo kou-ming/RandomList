@@ -30,7 +30,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="468.0" prefHeight="150.0" prefWidth="880.0" styleClass="text-area">
+      <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="468.0" prefHeight="160.0" prefWidth="880.0" styleClass="text-area">
          <font>
             <Font size="14.0" />
          </font></TextArea>
