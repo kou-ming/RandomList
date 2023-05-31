@@ -25,10 +25,7 @@ import javafx.util.Callback;
 
 import java.io.*;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class FileController implements Initializable {
 
@@ -73,6 +70,7 @@ public class FileController implements Initializable {
     static public Map<String, String> User_Map = new HashMap<>();
     static public Map<String, String> User_to_Youtube = new HashMap<>();
 
+    private String now_choose_list = "";
 
     private double scroll_value = 0;
 
@@ -409,7 +407,6 @@ public class FileController implements Initializable {
     void create_listInfo(String list_name) throws IOException {
         list_name = list_name.replace(".txt", "");
         Button songlist_name = new Button(list_name);
-//        songlist_name.getStylesheets().add(String.valueOf(getClass().getResource("file_Scene.css")));
         songlist_name.getStyleClass().add("list_button");
 
         songlist_name.setPrefSize(125, 50);
@@ -417,11 +414,15 @@ public class FileController implements Initializable {
         songlist_name.setOnMouseClicked(event -> {
             if(event.getButton() == MouseButton.SECONDARY){
                 list_buttons.setVisible(true);
+                now_choose_list = songlist_name.getText();
                 System.out.println(scroll_value + " " + SongList_view.getPrefHeight() + " " + scroll_value * (SongList_view.getPrefHeight() - List_Pane.getPrefHeight()));
-                list_buttons.setLayoutX(songlist_name.getLayoutX() + 80);
+                list_buttons.setLayoutX(songlist_name.getLayoutX() + 100);
                 list_buttons.setLayoutY(songlist_name.getLayoutY() + 20 - scroll_value * (SongList_view.getPrefHeight() - List_Pane.getPrefHeight()));
             }
             else{
+                if(!now_choose_list.equals(songlist_name.getText())){
+                    list_buttons.setVisible(false);
+                }
                 System.out.println("Button clicked!");
                 listname = songlist_name.getText();
                 ListName.setText(listname);
@@ -462,6 +463,18 @@ public class FileController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }
+        return false;
+    }
+
+    boolean del_file(String path){
+        File file = new File(path);
+        if (file.delete()) {
+            System.out.println("文件刪除成功！");
+            return true;
+        } else {
+            System.out.println(path);
+            System.out.println("文件刪除失敗！");
         }
         return false;
     }
@@ -593,14 +606,86 @@ public class FileController implements Initializable {
 
 
     @FXML
-    void rename_List(MouseEvent event) {
+    void rename_List(MouseEvent event) throws IOException {
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(Main.primaryStage);
 
+        Label label = new Label("重新命名為：");
+        label.setLayoutX(76);
+        label.setLayoutY(60);
+        label.setFont(new Font(32));
+
+        Pane popupRoot = FXMLLoader.load(getClass().getResource("new_list_popupScene.fxml"));
+        TextField textfield = new TextField();
+        textfield.setPrefWidth(200);
+        VBox.setMargin(textfield, new Insets(100, 0, 0, 0)); // 设置上边距为100
+        textfield.setPrefSize(300, 40);
+
+        Button button = new Button("確定更動");
+        button.setPrefSize(97, 41);
+        button.setLayoutX(132);
+        button.setLayoutY(200);
+
+        button.setOnAction(e -> {
+            String temp_path = File_path + now_choose_list + ".txt";
+            File file = new File(temp_path);
+            File newFile = new File(file.getParent(), textfield.getText() + ".txt");
+            for( List_Info index: ALL_List){
+                System.out.println(index.getName());
+                if(index.getName().equals(now_choose_list + ".txt")){
+                    index.setName(textfield.getText() + ".txt");
+                    file.renameTo(newFile);
+                    create_List();
+                    SongList_view.getChildren().clear();
+                    loadFile();
+                    listname = textfield.getText();
+                    ListName.setText(listname);
+                    break;
+                }
+            }
+            closeWindow(popupStage);
+            list_buttons.setVisible(false);
+        });
+
+        VBox root = new VBox(textfield);
+        root.setLayoutX(40);
+        root.setLayoutY(10);
+
+        popupRoot.getChildren().add(root);
+        popupRoot.getChildren().add(button);
+        popupRoot.getChildren().add(label);
+        Scene popupScene = new Scene(popupRoot, 400, 300);
+        popupStage.setScene(popupScene);
+        popupStage.showAndWait();
     }
 
     @FXML
     void del_Lsit(MouseEvent event) {
+        String temp_path = File_path + now_choose_list + ".txt";
+        if(del_file(temp_path)){
+            for(int i = 0 ; i < ALL_List.size() ; i++){
+                if(ALL_List.get(i).getName().equals(now_choose_list + ".txt")){
+                    ALL_List.remove(i);
+                    listname = "未選取歌單";
+                    ListName.setText(listname);
+                    List.clear();
+                    break;
+                }
+            }
+            create_List();
+        }
+        SongList_view.getChildren().clear();
+        loadFile();
 
+        list_buttons.setVisible(false);
     }
+
+    @FXML
+    void exite_list_pane(MouseEvent event) {
+        list_buttons.setVisible(false);
+    }
+
     //若沒有選取歌單則警告
     void no_choose_list() throws IOException {
         Stage popupStage = new Stage();

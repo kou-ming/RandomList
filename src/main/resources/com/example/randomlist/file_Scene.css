@@ -31,7 +31,7 @@
 }
 
 .button:hover {
-    -fx-background-color: rgb(50, 50, 50); /* 设置鼠标悬停时的背景颜色 */
+    -fx-background-color: rgb(50, 50, 50);
 }
 
 .button:pressed{

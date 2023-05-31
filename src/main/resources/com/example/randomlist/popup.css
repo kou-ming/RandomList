@@ -27,6 +27,15 @@
     -fx-border-radius: 3;
 }
 
+.button:hover {
+    -fx-background-color: rgb(50, 50, 50);
+}
+
+.button:pressed{
+    -fx-background-color: rgb(17, 235, 210);
+    -fx-text-fill: black;
+}
+
 .list_button {
     -fx-background-color: black;
     -fx-text-fill: #E6E6E6;
