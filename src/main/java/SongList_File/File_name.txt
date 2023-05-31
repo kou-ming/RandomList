@@ -1,8 +1,6 @@
-input.txt
 測試用歌單.txt
 final.txt
 OMG.txt
-無敵蛋餅.txt
 temp.txt
 sus.txt
 404.txt

@@ -44,6 +44,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -81,16 +82,6 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TableView fx:id="SongTableView" layoutX="860.0" layoutY="50.0" onMouseClicked="#get_Info" prefHeight="392.0" prefWidth="520.0">
-         <columns>
-            <TableColumn fx:id="SongName" prefWidth="492.6666564941406" resizable="false" text="歌名" />
-         </columns>
-         <styleClass>
-            <String fx:value="column-header" />
-            <String fx:value="scroll-bar" />
-            <String fx:value="table-cell" />
-         </styleClass>
-      </TableView>
       <TextArea fx:id="Song_Info" editable="false" layoutX="665.0" layoutY="467.0" prefHeight="146.0" prefWidth="762.0">
          <font>
             <Font size="14.0" />
@@ -169,26 +160,39 @@
             <Font size="16.0" />
          </font>
       </TextField>
-      <Label layoutX="216.0" layoutY="22.0" prefHeight="30.0" prefWidth="59.0" text="編輯者:">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <RadioButton fx:id="Editor1" layoutX="274.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#bt_editor1" prefHeight="22.0" prefWidth="73.0" text="薛耀智">
-         <toggleGroup>
-            <ToggleGroup fx:id="Editor" />
-         </toggleGroup>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="Editor2" layoutX="358.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#bt_editor2" text="許高銘" toggleGroup="$Editor">
-         <font>
-            <Font size="14.0" />
-         </font></RadioButton>
-      <RadioButton fx:id="Editor3" layoutX="447.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#bt_editor3" text="王文和" toggleGroup="$Editor" />
-      <RadioButton fx:id="Editor4" layoutX="532.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#bt_editor4" text="鍾君逸" toggleGroup="$Editor" />
-      <RadioButton fx:id="bt_only_random" layoutX="199.0" layoutY="85.0" mnemonicParsing="false" onMouseClicked="#only_random" selected="true" text="純隨機">
+      <HBox layoutX="304.0" layoutY="37.0" prefHeight="25.0" prefWidth="511.0">
+         <children>
+            <Label prefHeight="30.0" prefWidth="59.0" text="添加者：">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="Editor1" mnemonicParsing="false" onMouseClicked="#bt_editor1" prefHeight="22.0" prefWidth="73.0" text="薛耀智">
+               <toggleGroup>
+                  <ToggleGroup fx:id="Editor" />
+               </toggleGroup>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="Editor2" mnemonicParsing="false" onMouseClicked="#bt_editor2" text="許高銘" toggleGroup="$Editor">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="Editor3" mnemonicParsing="false" onMouseClicked="#bt_editor3" prefHeight="32.0" prefWidth="79.0" text="王文和" toggleGroup="$Editor">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="Editor4" mnemonicParsing="false" onMouseClicked="#bt_editor4" prefHeight="32.0" prefWidth="79.0" text="鍾君逸" toggleGroup="$Editor">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </HBox>
+      <RadioButton fx:id="bt_only_random" layoutX="216.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#only_random" selected="true" text="純隨機">
          <font>
             <Font size="16.0" />
          </font>

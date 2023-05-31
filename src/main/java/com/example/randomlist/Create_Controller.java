@@ -32,16 +32,6 @@ import java.util.ResourceBundle;
 
 public class Create_Controller implements Initializable {
 
-    @FXML
-    private ToggleGroup Editor;
-
-    @FXML
-    private RadioButton Editor1;
-
-    @FXML
-    private RadioButton Editor2;
-
-
     //第一份歌單(編輯中)
     @FXML
     private TableView<Song> SongTableView;
@@ -127,6 +117,16 @@ public class Create_Controller implements Initializable {
     @FXML
     void bt_editor2(MouseEvent event) {
         editor = "許高銘";
+    }
+
+    @FXML
+    void bt_editor3(MouseEvent event) {
+        editor = "王文和";
+    }
+
+    @FXML
+    void bt_editor4(MouseEvent event) {
+        editor = "鍾君逸";
     }
 
     @FXML
@@ -300,6 +300,10 @@ public class Create_Controller implements Initializable {
                 now_choose_index -= 1;
             }
         }
+        if(now_choose_index >= 0){
+            Song songinfo = first_songlist.get(now_choose_index);
+            display_songinfo(songinfo);
+        }
 
     }
 
@@ -425,6 +429,8 @@ public class Create_Controller implements Initializable {
         }
     }
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fileChooser.setInitialDirectory(new File("C:\\Users\\user\\Downloads"));
+
         //初始化表格
         ListName.setSortable(false);
         ListName.setCellValueFactory(new PropertyValueFactory<>("name"));

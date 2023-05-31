@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,8 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.*;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -161,10 +166,16 @@ public class EditController implements Initializable{
     private Slider sld_song_amount;
 
     @FXML
-    private TableColumn<Song, String> SongName;
+    private TableView<Song> SongTableView;
 
     @FXML
-    private TableView<Song> SongTableView;
+    private TableColumn<Song, String> ListName;
+
+    @FXML
+    private TableColumn<Song, String> WriterName;
+
+    @FXML
+    private TableColumn<Song, Integer> Pref;
 
     @FXML
     private TextArea Song_Info;
@@ -172,7 +183,7 @@ public class EditController implements Initializable{
     public ObservableList<Song> songlist = FileController.List;
     public ArrayList<Song> ori_songlist = new ArrayList<>();
 
-    private String editor;
+    private String editor = "";
 
     private Song songinfo;
 
@@ -595,28 +606,57 @@ public class EditController implements Initializable{
 
     //左鍵點擊按鈕加入歌曲
     @FXML
-    void add_song(MouseEvent event) {
-        if (!txt_add_song_name.getText().equals("") && !txt_add_song_link.getText().equals("")){
-            String song_name = txt_add_song_name.getText();
-            String song_link = txt_add_song_link.getText();
-            String song_artist = txt_add_song_artist.getText();
-            String song_length = txt_add_song_length.getText();
+    void add_song(MouseEvent event) throws IOException {
+        if(!editor.equals("")){
+            if (!txt_add_song_name.getText().equals("") && !txt_add_song_link.getText().equals("")){
+                String song_name = txt_add_song_name.getText();
+                String song_link = txt_add_song_link.getText();
+                String song_artist = txt_add_song_artist.getText();
+                String song_length = txt_add_song_length.getText();
 
-            //songlist.add(new Song(song_name, song_artist, song_length, song_link));
-            Song song = new Song(song_name, song_artist, song_length, song_link);
-            song.setOwner(editor);
-            System.out.println(editor);
-            songlist.add(0, song);
+                //songlist.add(new Song(song_name, song_artist, song_length, song_link));
+                Song song = new Song(song_name, song_artist, song_length, song_link);
+                song.setOwner(editor);
+                System.out.println(editor);
+                songlist.add(0, song);
 
-            txt_add_song_name.setText("");
-            txt_add_song_link.setText("");
-            txt_add_song_artist.setText("");
-            txt_add_song_length.setText("");
+                txt_add_song_name.setText("");
+                txt_add_song_link.setText("");
+                txt_add_song_artist.setText("");
+                txt_add_song_length.setText("");
+            }
+
+            sld_song_amount.setMax(songlist.size());
+            txt_song_amount.setText(String.valueOf(songlist.size()));
+            count_list_time();
         }
+        else{
+            no_editor();
+        }
+    }
 
-        sld_song_amount.setMax(songlist.size());
-        txt_song_amount.setText(String.valueOf(songlist.size()));
-        count_list_time();
+    void no_editor() throws IOException {
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(Main.primaryStage);
+
+        Pane popupRoot = FXMLLoader.load(getClass().getResource("new_list_popupScene.fxml"));
+
+
+        Label label1 = new Label("警告！");
+        label1.setLayoutX(130);
+        label1.setLayoutY(60);
+        label1.setFont(new Font(45));
+        label1.getStyleClass().add("error_label");
+        Label label2 = new Label("你未選取添加者");
+        label2.setLayoutX(35);
+        label2.setLayoutY(130);
+        label2.setFont(new Font(45));
+        label2.getStyleClass().add("error_label");
+        popupRoot.getChildren().addAll(label1, label2);
+        Scene popupScene = new Scene(popupRoot, 400, 300);
+        popupStage.setScene(popupScene);
+        popupStage.showAndWait();
     }
 
     //左鍵點擊按鈕編輯已選取的歌曲資訊
@@ -815,27 +855,49 @@ public class EditController implements Initializable{
         for(Song song : songlist){
             ori_songlist.add(song.clone());
         }
-        for (int i = 0; i < songlist.size(); i++) {
-            full_songlist.add(songlist.get(i));
-        }
-        editor = FileController.editor;
-        if (editor.equals("薛耀智")){
-            Editor1.setSelected(true);
-        }
-        else if (editor.equals("許高銘")){
-            Editor2.setSelected(true);
-        }
-
-        for (int i = 0; i < songlist.size(); i++) {
-            if (songlist.get(i).getOwner().equals("")){
-                songlist.get(i).setOwner(editor);
-            }
-        }
 
         //初始化表格
-        SongName.setSortable(false);
-        SongName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        SongName.setText(FileController.listname);
+        ListName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        WriterName.setCellValueFactory(new PropertyValueFactory<>("owner"));
+        WriterName.setCellFactory(new Callback<TableColumn<Song, String>, TableCell<Song, String>>() {
+            @Override
+            public TableCell<Song, String> call(TableColumn<Song, String> param) {
+                TableCell<Song, String> cell = new TableCell<Song, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setText(null);
+                        } else {
+                            setText(item);
+                        }
+                    }
+                };
+                cell.setAlignment(Pos.CENTER); // 设置单元格内容居中
+                return cell;
+            }
+        });
+
+        Pref.setCellValueFactory(new PropertyValueFactory<>("preference"));
+        Pref.setCellFactory(new Callback<TableColumn<Song, Integer>, TableCell<Song, Integer>>() {
+            @Override
+            public TableCell<Song, Integer> call(TableColumn<Song, Integer> param) {
+                TableCell<Song, Integer> cell = new TableCell<Song, Integer>() {
+                    @Override
+                    protected void updateItem(Integer item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setText(null);
+                        } else {
+                            setText(String.valueOf(item));
+                        }
+                    }
+                };
+                cell.setAlignment(Pos.CENTER); // 设置单元格内容居中
+                return cell;
+            }
+        });
+        ListName.setText(FileController.listname);
         SongTableView.setItems(songlist);
         table_x = (int) SongTableView.getLayoutX();
         table_y = (int) SongTableView.getLayoutY();
