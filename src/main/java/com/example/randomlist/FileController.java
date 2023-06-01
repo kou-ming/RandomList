@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
@@ -50,10 +51,11 @@ public class FileController implements Initializable {
     @FXML
     private VBox list_buttons;
 
-
     @FXML
     private ScrollPane List_Pane;
 
+    @FXML
+    private AnchorPane ALL_List_Pane;
 
     FileChooser fileChooser = new FileChooser();    //建立檔案選擇器
     public String path = "C:";  //預設檔案路徑
@@ -74,6 +76,7 @@ public class FileController implements Initializable {
 
     private double scroll_value = 0;
 
+    private int now_list_amount = 0;
 
 
     static public String listname = "未選取歌單";
@@ -330,7 +333,7 @@ public class FileController implements Initializable {
                 reader = new BufferedReader(new FileReader(file));
                 File_path = file.getAbsolutePath().replace("File_name.txt", "");
                 System.out.println(File_path);
-
+                now_list_amount = 0; //清空清單按鈕數
                 //一次讀一列
                 while((line = reader.readLine()) != null){
 
@@ -409,7 +412,8 @@ public class FileController implements Initializable {
         Button songlist_name = new Button(list_name);
         songlist_name.getStyleClass().add("list_button");
 
-        songlist_name.setPrefSize(125, 50);
+        int button_height = 50;
+        songlist_name.setPrefSize(125, button_height);
 
         songlist_name.setOnMouseClicked(event -> {
             if(event.getButton() == MouseButton.SECONDARY){
@@ -433,13 +437,23 @@ public class FileController implements Initializable {
             }
         });
         System.out.println(songlist_name.getText());
-//        SongList_view.getChildren().
         SongList_view.getChildren().add(songlist_name);
-        int count = 0;
-        for (javafx.scene.Node node : SongList_view.getChildren()) {
-            count++;
+        now_list_amount ++;
+        SongList_view.setPrefHeight(now_list_amount * button_height);
+        //設置scroll Pane的高度動態調整
+        if(SongList_view.getPrefHeight() > ALL_List_Pane.getPrefHeight()){
+            List_Pane.setPrefHeight(ALL_List_Pane.getPrefHeight());
         }
-        SongList_view.setPrefHeight(count * 50);
+        else{
+            List_Pane.setPrefHeight(SongList_view.getPrefHeight() + 3);
+        }
+        //設置scroll Pane的寬度動態調整
+        if(SongList_view.getPrefHeight() > List_Pane.getPrefHeight()){
+            List_Pane.setPrefWidth(145);
+        }
+        else{
+            List_Pane.setPrefWidth(129);
+        }
 
         SongList_view.layout();
     }
