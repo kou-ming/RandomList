@@ -14,9 +14,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1152.0" styleClass="pane" stylesheets="@file_Scene.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.Create_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1285.0" styleClass="pane" stylesheets="@file_Scene.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.randomlist.Create_Controller">
    <children>
-      <TableView fx:id="SongTableView" layoutY="54.0" onMouseClicked="#get_Info" prefHeight="368.0" prefWidth="450.0">
+      <TableView fx:id="SongTableView" layoutX="160.0" layoutY="54.0" onMouseClicked="#get_Info" prefHeight="368.0" prefWidth="450.0">
          <columns>
             <TableColumn fx:id="ListName" maxWidth="300.0" prefWidth="300.0" resizable="false" sortable="false" text="未選取歌單" />
             <TableColumn fx:id="WriterName" maxWidth="80.0" resizable="false" sortable="false" text="添加者" />
@@ -31,7 +31,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TableView fx:id="Other_SongTableView" layoutX="500.0" layoutY="54.0" onMouseClicked="#get_Info_v2" prefHeight="368.0" prefWidth="450.0">
+      <TableView fx:id="Other_SongTableView" layoutX="660.0" layoutY="54.0" onMouseClicked="#get_Info_v2" prefHeight="368.0" prefWidth="450.0">
          <columns>
             <TableColumn fx:id="Other_ListName" maxWidth="300.0" prefWidth="300.0" resizable="false" sortable="false" text="歌名" />
             <TableColumn fx:id="Other_WriterName" maxWidth="80.0" resizable="false" sortable="false" text="添加者" />
@@ -46,12 +46,21 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TextArea fx:id="Song_Info" editable="false" layoutX="26.0" layoutY="468.0" prefHeight="150.0" prefWidth="880.0" styleClass="text-area_v1">
+      <VBox layoutX="610.0" layoutY="180.0" prefHeight="120.0" prefWidth="50.0">
+         <children>
+            <Button fx:id="bt_Add_All" mnemonicParsing="false" onMouseClicked="#add_All" prefHeight="37.0" prefWidth="50.0" styleClass="add_button" text="&lt;&lt;" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
+            <Button fx:id="bt_Add_Some" mnemonicParsing="false" onMouseClicked="#add_Some" prefHeight="37.0" prefWidth="50.0" styleClass="add_button" text="&lt;" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
+            <Button fx:id="bt_Del" mnemonicParsing="false" onMouseClicked="#del" prefHeight="37.0" prefWidth="50.0" styleClass="del_button" text="X" />
+         </children>
+      </VBox>
+      <TextArea fx:id="Song_Info" editable="false" layoutX="60.0" layoutY="464.0" prefHeight="157.0" prefWidth="1069.0" styleClass="text-area_v1">
          <font>
             <Font size="14.0" />
          </font>
       </TextArea>
-      <VBox layoutX="990.0" layoutY="100.0" prefHeight="200.0" prefWidth="160.0">
+      <VBox layoutX="1133.0" layoutY="129.0" prefHeight="217.0" prefWidth="134.0">
          <children>
             <Button fx:id="bt_Open_localList" mnemonicParsing="false" onMouseClicked="#open_localList" prefHeight="50.0" prefWidth="130.0" text="開啟本地歌單" textFill="#d25e5e">
                <font>
@@ -78,7 +87,7 @@
             </Button>
          </children>
       </VBox>
-      <HBox layoutX="500.0" layoutY="13.0" prefHeight="37.0" prefWidth="599.0">
+      <HBox layoutX="660.0" layoutY="14.0" prefHeight="37.0" prefWidth="599.0">
          <children>
             <Label prefHeight="32.0" prefWidth="149.0" text="歌單擁有者/編輯者：" textFill="#d9d9d9">
                <font>
@@ -113,25 +122,16 @@
             </RadioButton>
          </children>
       </HBox>
-      <VBox layoutX="450.0" layoutY="180.0" prefHeight="120.0" prefWidth="50.0">
-         <children>
-            <Button fx:id="bt_Add_All" mnemonicParsing="false" onMouseClicked="#add_All" prefHeight="37.0" prefWidth="50.0" styleClass="add_button" text="&lt;&lt;" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
-            <Button fx:id="bt_Add_Some" mnemonicParsing="false" onMouseClicked="#add_Some" prefHeight="37.0" prefWidth="50.0" styleClass="add_button" text="&lt;" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323232" height="23.0" stroke="#323232" strokeType="INSIDE" styleClass="rectangle" width="15.0" />
-            <Button fx:id="bt_Del" mnemonicParsing="false" onMouseClicked="#del" prefHeight="37.0" prefWidth="50.0" styleClass="del_button" text="X" />
-         </children>
-      </VBox>
-      <Label fx:id="songInfo_label" layoutX="26.0" layoutY="430.0" prefHeight="37.0" prefWidth="108.0" styleClass="songInfo_label_v1" text="詳細資訊">
+      <Label fx:id="songInfo_label" layoutX="60.0" layoutY="422.0" prefHeight="37.0" prefWidth="108.0" styleClass="songInfo_label_v1" text="詳細資訊">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Button fx:id="bt_chscene_main" layoutX="991.0" layoutY="545.0" mnemonicParsing="false" onMouseClicked="#chscene_main" prefHeight="60.0" prefWidth="117.0" text="回首頁">
+      <Button fx:id="bt_chscene_main" layoutX="1149.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#chscene_main" prefHeight="60.0" prefWidth="117.0" text="回首頁">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="bt_save_changes" layoutX="990.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#save_changes" prefHeight="60.0" prefWidth="117.0" text="儲存變更" />
+      <Button fx:id="bt_save_changes" layoutX="1148.0" layoutY="483.0" mnemonicParsing="false" onMouseClicked="#save_changes" prefHeight="60.0" prefWidth="117.0" text="儲存變更" />
    </children>
 </AnchorPane>

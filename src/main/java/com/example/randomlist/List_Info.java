@@ -10,4 +10,7 @@ public class List_Info {
         return List_name;
     }
 
+    public void setName(String List_name){
+        this.List_name = List_name;
+    }
 }
