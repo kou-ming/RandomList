@@ -14,7 +14,7 @@ public class Main extends Application{
         primaryStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("file_Scene.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1285, 648);
-        stage.setTitle("RandomList");
+        stage.setTitle("BREAKDOWN PLAYLIST");
         stage.setScene(scene);
         stage.show();
     }

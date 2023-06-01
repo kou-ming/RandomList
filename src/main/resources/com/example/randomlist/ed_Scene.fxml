@@ -115,15 +115,15 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Group fx:id="Buttons" layoutX="346.0" layoutY="230.0">
+      <Group fx:id="Buttons" layoutX="346.0" layoutY="223.0">
          <children>
-            <TextField fx:id="txt_song_amount" alignment="CENTER" layoutX="193.0" layoutY="1.0" onKeyReleased="#sld_song_amount_change" prefHeight="38.0" prefWidth="52.0">
+            <TextField fx:id="txt_song_amount" alignment="CENTER" layoutX="193.0" layoutY="27.0" onKeyReleased="#sld_song_amount_change" prefHeight="38.0" prefWidth="52.0">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Slider fx:id="sld_song_amount" layoutY="11.0" onKeyReleased="#txt_song_amount_change_key" onMouseReleased="#txt_song_amount_change_mouse" prefHeight="17.0" prefWidth="189.0" value="10.0" />
-            <RadioButton fx:id="bt_only_random" layoutX="44.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#only_random" selected="true" text="純隨機">
+            <Slider fx:id="sld_song_amount" layoutY="37.0" onKeyReleased="#txt_song_amount_change_key" onMouseReleased="#txt_song_amount_change_mouse" prefHeight="17.0" prefWidth="189.0" value="10.0" />
+            <RadioButton fx:id="bt_only_random" layoutX="44.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#only_random" selected="true" text="純隨機">
                <font>
                   <Font size="16.0" />
                </font>
@@ -131,29 +131,30 @@
                   <ToggleGroup fx:id="random_type" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="bt_random_and_preference" layoutX="155.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#random_and_preference" text="偏好加權" toggleGroup="$random_type">
+            <RadioButton fx:id="bt_random_and_preference" layoutX="155.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#random_and_preference" text="偏好加權" toggleGroup="$random_type">
                <font>
                   <Font size="16.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="bt_random_and_owner" layoutX="43.0" layoutY="163.0" mnemonicParsing="false" text="擁有者平分" toggleGroup="$random_type" />
-            <Label layoutX="4.0" layoutY="124.0" text="篩選:">
+            <RadioButton fx:id="bt_random_and_owner" layoutX="43.0" layoutY="189.0" mnemonicParsing="false" text="添加者平分" toggleGroup="$random_type" />
+            <Label layoutX="4.0" layoutY="150.0" text="篩選:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <RadioButton fx:id="bt_random_and_time" layoutX="156.0" layoutY="163.0" mnemonicParsing="false" text="歌單時長" toggleGroup="$random_type" />
-            <TextField fx:id="txt_hour" layoutX="8.0" layoutY="59.0" prefHeight="39.0" prefWidth="38.0" />
-            <Text fill="WHITE" layoutX="55.0" layoutY="80.78125" strokeType="OUTSIDE" strokeWidth="0.0" text="小時" />
-            <TextField fx:id="txt_minute" layoutX="105.0" layoutY="59.0" prefHeight="39.0" prefWidth="38.0" />
-            <Text fill="WHITE" layoutX="151.0" layoutY="80.78125" strokeType="OUTSIDE" strokeWidth="0.0" text="分鐘" />
-            <TextField fx:id="txt_second" layoutX="203.0" layoutY="59.0" prefHeight="39.0" prefWidth="38.0" />
-            <Text fill="WHITE" layoutX="250.0" layoutY="81.78125" strokeType="OUTSIDE" strokeWidth="0.0" text="秒" />
-            <Label layoutX="250.0" prefHeight="40.0" prefWidth="19.0" text="首">
+            <RadioButton fx:id="bt_random_and_time" layoutX="156.0" layoutY="189.0" mnemonicParsing="false" text="歌單時長" toggleGroup="$random_type" />
+            <TextField fx:id="txt_hour" layoutX="6.0" layoutY="85.0" prefHeight="39.0" prefWidth="38.0" />
+            <Text fill="WHITE" layoutX="54.0" layoutY="108.5625" strokeType="OUTSIDE" strokeWidth="0.0" text="小時" />
+            <TextField fx:id="txt_minute" layoutX="105.0" layoutY="85.0" prefHeight="39.0" prefWidth="38.0" />
+            <Text fill="WHITE" layoutX="151.0" layoutY="108.5625" strokeType="OUTSIDE" strokeWidth="0.0" text="分鐘" />
+            <TextField fx:id="txt_second" layoutX="203.0" layoutY="85.0" prefHeight="39.0" prefWidth="38.0" />
+            <Text fill="WHITE" layoutX="250.0" layoutY="109.5625" strokeType="OUTSIDE" strokeWidth="0.0" text="秒" />
+            <Label layoutX="250.0" layoutY="26.0" prefHeight="40.0" prefWidth="19.0" text="首">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
+            <Label layoutX="3.0" layoutY="5.0" text="歌曲數量/歌單長度:" />
          </children>
       </Group>
       <ScrollPane fx:id="labels_pane" layoutX="508.0" layoutY="205.0" prefHeight="182.0" prefWidth="102.0" visible="false">
@@ -162,7 +163,7 @@
          </content>
       </ScrollPane>
       <Button fx:id="bt_open_close_labels" layoutX="508.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#open_close_labels" prefHeight="36.0" prefWidth="102.0" text="標籤列" />
-      <Label layoutX="348.0" layoutY="174.0" text="範圍:" />
+      <Label layoutX="349.0" layoutY="178.0" text="範圍:" />
       <ScrollPane fx:id="adder_pane" layoutX="389.0" layoutY="204.0" prefHeight="182.0" prefWidth="85.0" visible="false">
          <content>
             <VBox fx:id="adder" prefHeight="180.0" prefWidth="83.0" styleClass="pane" />

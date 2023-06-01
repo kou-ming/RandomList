@@ -347,10 +347,12 @@ public class EditController implements Initializable{
         int input_total_second = temp_hour * 3600 + temp_minute * 60 + temp_second;
 
         if (temp_song_amount > songlist.size()){
-            pop_up_scene("指定子歌單歌曲數\n    大於歌曲總數", 25,130);
+            //pop_up_scene("指定子歌單歌曲數\n    大於歌曲總數", 25,130);
+            pop_up_scene("歌沒那麼多啦", 60,130);
         }
         else if(input_total_second > temp_total_second){
-            pop_up_scene("指定子歌單長度\n大於歌曲總長度", 40, 130);
+            //pop_up_scene("指定子歌單長度\n大於歌曲總長度", 40, 130);
+            pop_up_scene("歌單沒那麼長啦", 45,130);
         }
         else if (bt_only_random.isSelected()){
             int song_amount = Integer.parseInt(txt_song_amount.getText());
@@ -373,6 +375,8 @@ public class EditController implements Initializable{
                 x = song_amount / 10 + 1;
                 y = song_amount % 10;
             }
+
+            nonrepeat_random_sublist(songlist.size());
 
             //將不同偏好值的歌分類
             for (int i = 0; i < songlist.size(); i++) {
@@ -719,7 +723,7 @@ public class EditController implements Initializable{
     @FXML
     void edit_song(MouseEvent event) throws IOException {
         if (songinfo == null){
-            pop_up_scene("未選取歌曲", 80, 125);
+            pop_up_scene("沒有選歌是要\n      怎麼改", 60, 125);
         }
         else{
             if (!txt_add_song_name.getText().equals("")){
@@ -897,11 +901,11 @@ public class EditController implements Initializable{
 
         if (!labels_pane.isVisible() && !adder_pane.isVisible()){
             Buttons.setLayoutX(346);
-            Buttons.setLayoutY(215);
+            Buttons.setLayoutY(223);
         }
         else{
             Buttons.setLayoutX(346);
-            Buttons.setLayoutY(413);
+            Buttons.setLayoutY(389);
         }
     }
 
@@ -916,11 +920,11 @@ public class EditController implements Initializable{
 
         if (!labels_pane.isVisible() && !adder_pane.isVisible()){
             Buttons.setLayoutX(346);
-            Buttons.setLayoutY(230);
+            Buttons.setLayoutY(223);
         }
         else{
             Buttons.setLayoutX(346);
-            Buttons.setLayoutY(413);
+            Buttons.setLayoutY(389);
         }
     }
 
