@@ -39,21 +39,51 @@
     -fx-text-fill: black;
 }
 
-.sublist_button {
+.add_song_button {
+    -fx-background-color: rgb(0, 0, 0);
+        -fx-text-fill: rgb(0, 115, 230);
+        -fx-font-size: 16px;
+        /*-fx-font-family: "setofont";*/
+        -fx-font-family: "Iansui094-Regular";
+        -fx-font-weight: bold;
+        -fx-border-color: #0072E3;
+        -fx-border-width: 2px;
+        -fx-background-radius: 3;
+        -fx-border-radius: 3;
+}
+
+.add_song_button:pressed {
+    -fx-background-color: rgb(0, 115, 230);
+        -fx-text-fill: black;
+}
+
+.not_save_button {
     -fx-background-color: black;
-    -fx-text-fill: #E6E6E6;
+    -fx-text-fill: #fa2323;
     -fx-font-size: 16px;
-    -fx-border-color: white;
+    -fx-border-color: #fa2323;
     -fx-border-width: 2px;
     -fx-font-weight: bold;
 }
 
-.sublist_button:pressed {
-    -fx-background-color: #E6E6E6;
+.not_save_button: pressed{
+    -fx-background-color: #fa2323;
     -fx-text-fill: black;
 }
 
+.save_button {
+    -fx-background-color: black;
+    -fx-text-fill: #32f26f;
+    -fx-font-size: 16px;
+    -fx-border-color: #32f26f;
+    -fx-border-width: 2px;
+    -fx-font-weight: bold;
+}
 
+.save_button: pressed{
+    -fx-background-color: #32f26f;
+    -fx-text-fill: black;
+}
 
 .list_button {
     -fx-background-color: black;
@@ -188,7 +218,6 @@
     -fx-background-radius: 5;
     -fx-border-radius: 5;
     -fx-border-width: 5px;
-
 }
 
 .text-area_v1 .content {
@@ -220,6 +249,13 @@
     -fx-background-radius: 50%; /* 圆圈的圆角半径 */
     -fx-border-radius: 50%; /* 圆圈的边框圆角半径 */
     -fx-border-color: rgb(17, 235, 210); /* 圆圈的边框颜色 */
+    -fx-border-width: 3px; /* 圆圈的边框宽度 */
+}
+
+.adder_radio-button .radio {
+    -fx-background-radius: 50%; /* 圆圈的圆角半径 */
+    -fx-border-radius: 50%; /* 圆圈的边框圆角半径 */
+    -fx-border-color: #07c2df; /* 圆圈的边框颜色 */
     -fx-border-width: 3px; /* 圆圈的边框宽度 */
 }
 

@@ -38,6 +38,9 @@ public class EditController implements Initializable{
     private Group Buttons;
 
     @FXML
+    private Group Right_Click;
+
+    @FXML
     private ToggleGroup Editor;
 
     @FXML
@@ -254,7 +257,6 @@ public class EditController implements Initializable{
                 int second_ = Integer.parseInt(time[1]);
                 total_second += minute_ * 60 + second_;
             }
-            //System.out.println(songlist.get(i).getLink());
         }
 
         int hour = total_second / 3600;
@@ -264,6 +266,22 @@ public class EditController implements Initializable{
         txt_hour.setText(String.valueOf(hour));
         txt_minute.setText(String.valueOf(minute));
         txt_second.setText(String.valueOf(second));
+    }
+
+    private int get_list_time(){
+        int total_second = 0;
+        for (int i = 0; i < songlist.size(); i++) {
+            String temp_ = songlist.get(i).getDuration();
+            temp_ = temp_.replaceAll(" ","");
+            String [] time = temp_.split(":");
+            if (time.length == 2){
+                int minute_ = Integer.parseInt(time[0]);
+                int second_ = Integer.parseInt(time[1]);
+                total_second += minute_ * 60 + second_;
+            }
+        }
+
+        return total_second;
     }
 
     @FXML
@@ -322,8 +340,17 @@ public class EditController implements Initializable{
     @FXML
     void create_subplaylist(MouseEvent event) throws IOException {
         int temp_song_amount = Integer.parseInt(txt_song_amount.getText());
+        int temp_total_second = get_list_time();
+        int temp_hour = Integer.parseInt(txt_hour.getText());
+        int temp_minute = Integer.parseInt(txt_minute.getText());
+        int temp_second = Integer.parseInt(txt_second.getText());
+        int input_total_second = temp_hour * 3600 + temp_minute * 60 + temp_second;
+
         if (temp_song_amount > songlist.size()){
-            pop_up_scene("指定歌曲數大於\n\t歌曲總數");
+            pop_up_scene("指定子歌單歌曲數\n    大於歌曲總數", 25,130);
+        }
+        else if(input_total_second > temp_total_second){
+            pop_up_scene("指定子歌單長度\n大於歌曲總長度", 40, 130);
         }
         else if (bt_only_random.isSelected()){
             int song_amount = Integer.parseInt(txt_song_amount.getText());
@@ -612,6 +639,25 @@ public class EditController implements Initializable{
         }
     }
 
+    @FXML
+    void exit_right_click_group(MouseEvent event) {
+        song_buttons.setVisible(false);
+        song_preference_buttons.setVisible(false);
+        song_delete_label_buttons_pane.setVisible(false);
+        song_add_label_buttons_pane.setVisible(false);
+    }
+
+    @FXML
+    void exit_add_label_buttons(MouseEvent event) {
+        song_add_label_buttons_pane.setVisible(false);
+    }
+
+    @FXML
+    void exit_delete_label_buttons(MouseEvent event) {
+        song_delete_label_buttons_pane.setVisible(false);
+    }
+
+
     //左鍵點擊按鈕加入歌曲
     @FXML
     void add_song(MouseEvent event) throws IOException {
@@ -633,32 +679,34 @@ public class EditController implements Initializable{
                 txt_add_song_artist.setText("");
                 txt_add_song_length.setText("");
             }
+            else {
+                pop_up_scene("缺少歌曲名稱\n  或歌曲連結", 60, 125);
+            }
 
             sld_song_amount.setMax(songlist.size());
             txt_song_amount.setText(String.valueOf(songlist.size()));
             count_list_time();
         }
         else{
-            pop_up_scene("你未選取添加者");
+            pop_up_scene("你未選取添加者", 35, 130);
         }
     }
 
-    void pop_up_scene(String message) throws IOException {
+    void pop_up_scene(String message, int x, int y) throws IOException {
         Stage popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.initOwner(Main.primaryStage);
 
         Pane popupRoot = FXMLLoader.load(getClass().getResource("new_list_popupScene.fxml"));
 
-
         Label label1 = new Label("警告！");
-        label1.setLayoutX(130);
+        label1.setLayoutX(135);
         label1.setLayoutY(60);
         label1.setFont(new Font(45));
         label1.getStyleClass().add("error_label");
         Label label2 = new Label(message);
-        label2.setLayoutX(35);
-        label2.setLayoutY(130);
+        label2.setLayoutX(x);
+        label2.setLayoutY(y);
         label2.setFont(new Font(45));
         label2.getStyleClass().add("error_label");
         popupRoot.getChildren().addAll(label1, label2);
@@ -669,22 +717,27 @@ public class EditController implements Initializable{
 
     //左鍵點擊按鈕編輯已選取的歌曲資訊
     @FXML
-    void edit_song(MouseEvent event) {
-        if (!txt_add_song_name.getText().equals("")){
-            String song_name = txt_add_song_name.getText();
-            song_selected.setName(song_name);
+    void edit_song(MouseEvent event) throws IOException {
+        if (songinfo == null){
+            pop_up_scene("未選取歌曲", 80, 125);
         }
-        if (!txt_add_song_link.getText().equals("")){
-            String song_link = txt_add_song_link.getText();
-            song_selected.setLink(song_link);
-        }
-        if (!txt_add_song_artist.getText().equals("")){
-            String song_artist = txt_add_song_artist.getText();
-            song_selected.setChannel(song_artist);
-        }
-        if (!txt_add_song_length.getText().equals("")){
-            String song_length = txt_add_song_length.getText();
-            song_selected.setDuration(song_length);
+        else{
+            if (!txt_add_song_name.getText().equals("")){
+                String song_name = txt_add_song_name.getText();
+                song_selected.setName(song_name);
+            }
+            if (!txt_add_song_link.getText().equals("")){
+                String song_link = txt_add_song_link.getText();
+                song_selected.setLink(song_link);
+            }
+            if (!txt_add_song_artist.getText().equals("")){
+                String song_artist = txt_add_song_artist.getText();
+                song_selected.setChannel(song_artist);
+            }
+            if (!txt_add_song_length.getText().equals("")){
+                String song_length = txt_add_song_length.getText();
+                song_selected.setDuration(song_length);
+            }
         }
 
         count_list_time();
@@ -848,7 +901,7 @@ public class EditController implements Initializable{
         }
         else{
             Buttons.setLayoutX(346);
-            Buttons.setLayoutY(405);
+            Buttons.setLayoutY(413);
         }
     }
 
@@ -867,7 +920,7 @@ public class EditController implements Initializable{
         }
         else{
             Buttons.setLayoutX(346);
-            Buttons.setLayoutY(405);
+            Buttons.setLayoutY(413);
         }
     }
 
@@ -948,8 +1001,6 @@ public class EditController implements Initializable{
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //bt_random.setText("隨機" + "\n" + "排序");
-
         for(Song song : songlist){
             ori_songlist.add(song.clone());
         }
@@ -1047,6 +1098,10 @@ public class EditController implements Initializable{
                 count_list_time();
             });
             labels.getChildren().add(checkBox);
+        }
+
+        if (FileController.Labels.size() > 6){
+            labels.setPrefHeight(180 + 36 * (FileController.Labels.size() - 6));
         }
 
         for (int i = 0; i < 4; i++) {
